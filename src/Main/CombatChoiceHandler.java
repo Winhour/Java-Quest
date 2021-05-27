@@ -54,7 +54,7 @@ public class CombatChoiceHandler implements ActionListener{
                         gm.ui.bgPanel[2].remove(0);
                         gm.ui.skeleFlag = false;
                     }
-                    gm.ui.progressForward();
+                    gm.ui.addInteractMenu();
                 }
                 gm.ui.addPlayerInfo();
                 break;
@@ -91,7 +91,7 @@ public class CombatChoiceHandler implements ActionListener{
                             gm.ui.bgPanel[2].remove(0);
                             gm.ui.skeleFlag = false;
                         }
-                        gm.ui.progressForward();
+                        gm.ui.addInteractMenu();
                     }
                     gm.ui.addPlayerInfo();
                     

@@ -10,6 +10,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
@@ -31,6 +33,14 @@ public class UI {
     GameManager gm;
     
     JFrame window;
+    
+    public JPanel titleNamePanel;
+    public JLabel titleNameLabel;
+    public JPanel startButtonPanel;
+    public JButton startButton;
+    
+    TitleScreenHandler tsHandler = new TitleScreenHandler();
+    
     public JTextArea messageText = new JTextArea();
     public JPanel choiceButtonPanel;
     public JPanel playerInfoPanel;
@@ -38,6 +48,7 @@ public class UI {
     public JPanel bgPanel[] = new JPanel[20];
     public JLabel bgLabel[] = new JLabel[20];
     
+    Font titleFont = new Font("Times New Roman",Font.PLAIN, 100);
     Font normalFont = new Font("Book Antiqua", Font.PLAIN, 36);
     Font playerInfoFont = new Font("Book Antiqua", Font.PLAIN, 24);
     Font smallerFont = new Font("Book Antiqua", Font.PLAIN, 18);
@@ -53,15 +64,17 @@ public class UI {
         
         this.gm = gm;
         
-        createMainField();
+        createTitleScreen();
         
-        generateScreen();
+        //createMainField();
+        
+        //generateScreen();
         
         window.setVisible(true);
         
     }
     
-    public void createMainField(){
+    public void createTitleScreen(){
         
         window = new JFrame();
         window.setSize(1024,808);
@@ -69,7 +82,37 @@ public class UI {
         window.getContentPane().setBackground(Color.BLACK);
         window.setLayout(null);
         
-        messageText = new JTextArea("~Starhome, town of possibilities~");
+        titleNamePanel = new JPanel();
+        titleNamePanel.setBounds(128,128,768,192);
+        titleNamePanel.setBackground(Color.black);
+        titleNameLabel = new JLabel("JAVA QUEST");
+        titleNameLabel.setForeground(Color.white);
+        titleNameLabel.setFont(titleFont);
+        
+        startButtonPanel = new JPanel();
+        startButtonPanel.setBounds(400, 512, 220, 100);
+        startButtonPanel.setBackground(Color.black);
+        startButtonPanel.setForeground(Color.black);
+        
+        startButton = new JButton("START");
+        startButton.setBackground(Color.black);
+        startButton.setForeground(Color.white);
+        startButton.setFont(new Font("Book Antiqua", Font.PLAIN, 44));
+        //startButton.setBorderPainted(false);
+        startButton.setFocusable(false);
+        startButton.addActionListener(tsHandler);
+        
+        titleNamePanel.add(titleNameLabel);
+        startButtonPanel.add(startButton);
+        window.add(startButtonPanel);
+        window.add(titleNamePanel);
+        
+        
+    }
+    
+    public void createMainField(){
+        
+        messageText = new JTextArea("~ Starhome, the town of possibilities looms close in the distance~");
         messageText.setBounds(64,550,896,80);
         messageText.setBackground(Color.BLACK);
         messageText.setForeground(Color.WHITE);
@@ -119,19 +162,25 @@ public class UI {
     }
     
     public void createObjectInteractable(int bgNum, int objx, int objy, int objWidth, int objHeight, String objFileName,
-            String choice1Name, String choice2Name, String choice3Name){
+            String choice1Name, String choice2Name, String choice3Name, String choice1Command, String choice2Command, String choice3Command){
         
         JPopupMenu popMenu = new JPopupMenu();
         
         JMenuItem menuItem[] = new JMenuItem[4];
         
         menuItem[1] = new JMenuItem(choice1Name);
+        menuItem[1].addActionListener(gm.dialogChoiceHandler);
+        menuItem[1].setActionCommand(choice1Command);
         popMenu.add(menuItem[1]);
         
         menuItem[2] = new JMenuItem(choice2Name);
+        menuItem[2].addActionListener(gm.dialogChoiceHandler);
+        menuItem[2].setActionCommand(choice2Command);
         popMenu.add(menuItem[2]);
         
         menuItem[3] = new JMenuItem(choice3Name);
+        menuItem[3].addActionListener(gm.dialogChoiceHandler);
+        menuItem[3].setActionCommand(choice3Command);
         popMenu.add(menuItem[3]);
         
         JLabel objectLabel = new JLabel();
@@ -143,8 +192,10 @@ public class UI {
         objectLabel.addMouseListener(new MouseListener(){
         
 
+            @Override
             public void mouseClicked(MouseEvent e){}
             
+            @Override
             public void mousePressed(MouseEvent e){
             
                 if (SwingUtilities.isRightMouseButton(e)){
@@ -153,10 +204,13 @@ public class UI {
             
             }
             
+            @Override
             public void mouseReleased(MouseEvent e){}
             
+            @Override
             public void mouseEntered(MouseEvent e){}
             
+            @Override
             public void mouseExited(MouseEvent e){}
             
             
@@ -171,8 +225,8 @@ public class UI {
         //SCENE 1
         
         createBackground(1, "/res/village.jpg");
-        createObjectInteractable(1, 40,80,400,400,"/res/priest.png", "Talk", "Interact", "Look");
-        createObjectInteractable(1, 480,80,400,400,"/res/peasant.png", "Talk", "Interact", "Look");
+        createObjectInteractable(1, 40,80,400,400,"/res/priest.png", "Talk", "Interact", "Look", "talk_priest", "interact_priest", "look_priest");
+        createObjectInteractable(1, 480,80,400,400,"/res/peasant.png", "Talk", "Interact", "Look", "talk_peasant", "interact_peasant","look_peasant");
         bgPanel[1].add(bgLabel[1]);
         
         //SCENE 2
@@ -186,6 +240,30 @@ public class UI {
         createBackground(3, "/res/dungeon.jpg");
         createObject(3, 240,60,400,400,"/res/goblin.png");
         bgPanel[3].add(bgLabel[3]);
+        
+        //SCENE 4
+        
+        createBackground(4, "/res/town.jpg");
+        bgPanel[4].add(bgLabel[4]);
+        
+        //SCENE 5
+        
+        createBackground(5, "/res/shop.jpg");
+        bgPanel[5].add(bgLabel[5]);
+        
+        //SCENE 6
+        
+        createBackground(6, "/res/smith.jpg");
+        createObjectInteractable(6,320,70,400,400,"/res/blacksmith.png", "Talk", "Interact", "Look", "talk_smith", "interact_smith", "look_smith");
+        bgPanel[6].add(bgLabel[6]);
+        
+        
+        //SCENE 7
+        
+        createBackground(7, "/res/hall.jpg");
+        createObjectInteractable(7,240,70,400,400,"/res/mayor.png", "Talk", "Interact", "Look", "talk_mayor", "interact_mayor", "look_mayor");
+        bgPanel[7].add(bgLabel[7]);
+        
         
     }
     
@@ -367,7 +445,7 @@ public class UI {
         
     }
     
-     public void addTalkMenu(String ch1, String ch2, String ch3){
+     public void addTalkMenu(String ch1, String ch2, String ch3, String ch1Command, String ch2Command, String ch3Command){
         
         if(choiceButtonPanel != null){
             choiceButtonPanel.setVisible(false);
@@ -382,36 +460,117 @@ public class UI {
         choice1 = new JButton(ch1);
         choice1.setBackground(Color.black);
         choice1.setForeground(Color.white);
-        choice1.setFont(normalFont);
+        choice1.setFont(playerInfoFont);
         choice1.addActionListener(gm.dialogChoiceHandler);
-        choice1.setActionCommand(ch1);
+        choice1.setActionCommand(ch1Command);
         choiceButtonPanel.add(choice1);
         
         choice2 = new JButton(ch2);
         choice2.setBackground(Color.black);
         choice2.setForeground(Color.white);
-        choice2.setFont(normalFont);
+        choice2.setFont(playerInfoFont);
         choice2.addActionListener(gm.dialogChoiceHandler);
-        choice2.setActionCommand(ch2);
+        choice2.setActionCommand(ch2Command);
         choiceButtonPanel.add(choice2);
         
         choice3 = new JButton(ch3);
         choice3.setBackground(Color.black);
         choice3.setForeground(Color.white);
-        choice3.setFont(normalFont);
+        choice3.setFont(playerInfoFont);
         choice3.addActionListener(gm.dialogChoiceHandler);
-        choice3.setActionCommand(ch3);
+        choice3.setActionCommand(ch3Command);
         choiceButtonPanel.add(choice3);
         
         choice4 = new JButton("Nothing");
         choice4.setBackground(Color.black);
         choice4.setForeground(Color.white);
-        choice4.setFont(normalFont);
+        choice4.setFont(playerInfoFont);
         choice4.addActionListener(gm.dialogChoiceHandler);
         choice4.setActionCommand("nothing");
         choiceButtonPanel.add(choice4);
         
     }
+     
+    public void addMoveMenu(String ch1, String ch2, String ch3, String ch1Command, String ch2Command, String ch3Command){
+        
+        if(choiceButtonPanel != null){
+            choiceButtonPanel.setVisible(false);
+            window.remove(choiceButtonPanel);
+        }
+        
+        choiceButtonPanel = new JPanel(new GridLayout(1,4,10,10));
+        choiceButtonPanel.setBounds(64, 640, 896, 100);
+        choiceButtonPanel.setBackground(Color.black);
+        window.add(choiceButtonPanel);
+        
+        choice1 = new JButton(ch1);
+        choice1.setBackground(Color.black);
+        choice1.setForeground(Color.white);
+        choice1.setFont(playerInfoFont);
+        choice1.addActionListener(gm.dialogChoiceHandler);
+        choice1.setActionCommand(ch1Command);
+        choiceButtonPanel.add(choice1);
+        
+        choice2 = new JButton(ch2);
+        choice2.setBackground(Color.black);
+        choice2.setForeground(Color.white);
+        choice2.setFont(playerInfoFont);
+        choice2.addActionListener(gm.dialogChoiceHandler);
+        choice2.setActionCommand(ch2Command);
+        choiceButtonPanel.add(choice2);
+        
+        choice3 = new JButton(ch3);
+        choice3.setBackground(Color.black);
+        choice3.setForeground(Color.white);
+        choice3.setFont(playerInfoFont);
+        choice3.addActionListener(gm.dialogChoiceHandler);
+        choice3.setActionCommand(ch3Command);
+        choiceButtonPanel.add(choice3);
+        
+        choice4 = new JButton("<<<");
+        choice4.setBackground(Color.black);
+        choice4.setForeground(Color.white);
+        choice4.setFont(playerInfoFont);
+        choice4.addActionListener(gm.dialogChoiceHandler);
+        choice4.setActionCommand("nothing");
+        choiceButtonPanel.add(choice4);
+        
+    } 
+    
+    
+    
+    public void addConfirmMenu(String ch1, String ch2, String ch1Command, String ch2Command){
+        
+        if(choiceButtonPanel != null){
+            choiceButtonPanel.setVisible(false);
+            window.remove(choiceButtonPanel);
+        }
+        
+        choiceButtonPanel = new JPanel(new GridLayout(1,2,30,10));
+        choiceButtonPanel.setBounds(164, 640, 696, 100);
+        choiceButtonPanel.setBackground(Color.black);
+        window.add(choiceButtonPanel);
+        
+        choice1 = new JButton(ch1);
+        choice1.setBackground(Color.black);
+        choice1.setForeground(Color.white);
+        choice1.setFont(playerInfoFont);
+        choice1.addActionListener(gm.dialogChoiceHandler);
+        choice1.setActionCommand(ch1Command);
+        choiceButtonPanel.add(choice1);
+        
+        choice2 = new JButton(ch2);
+        choice2.setBackground(Color.black);
+        choice2.setForeground(Color.white);
+        choice2.setFont(playerInfoFont);
+        choice2.addActionListener(gm.dialogChoiceHandler);
+        choice2.setActionCommand(ch2Command);
+        choiceButtonPanel.add(choice2);
+        
+        
+    } 
+    
+    
     
     public void addSpellMenu(){
         
@@ -536,6 +695,27 @@ public class UI {
         choice1.setActionCommand("advance");
         choiceButtonPanel.add(choice1);
         
+    }
+    
+    public class TitleScreenHandler implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+            titleNamePanel.setVisible(false);
+            startButtonPanel.setVisible(false);
+            
+            //window.remove(titleNamePanel);
+            //window.remove(startButtonPanel);
+            
+            createMainField();
+        
+            generateScreen();
+            
+            window.setVisible(true);
+            
+        }
+    
     }
     
 }

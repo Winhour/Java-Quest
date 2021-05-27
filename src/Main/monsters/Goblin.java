@@ -16,6 +16,7 @@ public class Goblin extends Monster{
     int health = 20;
     int exp = 100;
     String name = "Goblin";
+    int gold = 5;
     
     int ATK = 1;
     int DEF = 1;
@@ -82,6 +83,14 @@ public class Goblin extends Monster{
     @Override
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
     }
     
     

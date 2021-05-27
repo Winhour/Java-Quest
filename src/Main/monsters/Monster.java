@@ -15,6 +15,8 @@ public class Monster {
     int exp;
     String name;
     
+    int gold;
+    
     int ATK;
     int DEF;
     int SPD;
