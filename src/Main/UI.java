@@ -60,6 +60,15 @@ public class UI {
     boolean goblinFlag = true;
     boolean skeleFlag = true;
     
+    public JLabel j1x1, j1x2, j1x3, j1x4;
+    public JLabel j2x1, j2x2, j2x3, j2x4;
+    public JLabel j3x1, j3x2, j3x3, j3x4;
+    public JLabel j4x1, j4x2, j4x3, j4x4;
+    public JLabel j1x5, j2x5, j3x5, j4x5;
+    
+    
+    
+    
     public UI(GameManager gm){
         
         this.gm = gm;
@@ -73,6 +82,8 @@ public class UI {
         window.setVisible(true);
         
     }
+    
+     /**********************************************************************************************************************************/
     
     public void createTitleScreen(){
         
@@ -110,6 +121,8 @@ public class UI {
         
     }
     
+     /**********************************************************************************************************************************/
+    
     public void createMainField(){
         
         messageText = new JTextArea("~ Starhome, the town of possibilities looms close in the distance~");
@@ -131,6 +144,8 @@ public class UI {
         
     }
     
+     /**********************************************************************************************************************************/
+    
     public void createBackground(int bgNum, String bgFileName){
         
         bgPanel[bgNum] = new JPanel();
@@ -149,6 +164,8 @@ public class UI {
                 
     }
     
+     /**********************************************************************************************************************************/
+    
     public void createObject(int bgNum, int objx, int objy, int objWidth, int objHeight, String objFileName){
         
         JLabel objectLabel = new JLabel();
@@ -160,6 +177,8 @@ public class UI {
         bgPanel[bgNum].add(objectLabel);
         
     }
+    
+     /**********************************************************************************************************************************/
     
     public void createObjectInteractable(int bgNum, int objx, int objy, int objWidth, int objHeight, String objFileName,
             String choice1Name, String choice2Name, String choice3Name, String choice1Command, String choice2Command, String choice3Command){
@@ -220,52 +239,61 @@ public class UI {
         
     }
     
+     /**********************************************************************************************************************************/
+    
     public void generateScreen(){
         
-        //SCENE 1
+        //SCENE 1   Outskirts
         
         createBackground(1, "/res/village.jpg");
         createObjectInteractable(1, 40,80,400,400,"/res/priest.png", "Talk", "Interact", "Look", "talk_priest", "interact_priest", "look_priest");
         createObjectInteractable(1, 480,80,400,400,"/res/peasant.png", "Talk", "Interact", "Look", "talk_peasant", "interact_peasant","look_peasant");
         bgPanel[1].add(bgLabel[1]);
         
-        //SCENE 2
+        //SCENE 2   Goblin
         
         createBackground(2, "/res/dungeon2.jpg");
         createObject(2, 240,60,400,400,"/res/skeletons.png");
         bgPanel[2].add(bgLabel[2]);
         
-         //SCENE 3
+         //SCENE 3  Skeleton
         
         createBackground(3, "/res/dungeon.jpg");
         createObject(3, 240,60,400,400,"/res/goblin.png");
         bgPanel[3].add(bgLabel[3]);
         
-        //SCENE 4
+        //SCENE 4   Town
         
         createBackground(4, "/res/town.jpg");
         bgPanel[4].add(bgLabel[4]);
         
-        //SCENE 5
+        //SCENE 5   Shop
         
         createBackground(5, "/res/shop.jpg");
         bgPanel[5].add(bgLabel[5]);
         
-        //SCENE 6
+        //SCENE 6   Smith
         
         createBackground(6, "/res/smith.jpg");
         createObjectInteractable(6,320,70,400,400,"/res/blacksmith.png", "Talk", "Interact", "Look", "talk_smith", "interact_smith", "look_smith");
         bgPanel[6].add(bgLabel[6]);
         
         
-        //SCENE 7
+        //SCENE 7   Town Hall
         
         createBackground(7, "/res/hall.jpg");
         createObjectInteractable(7,240,70,400,400,"/res/mayor.png", "Talk", "Interact", "Look", "talk_mayor", "interact_mayor", "look_mayor");
         bgPanel[7].add(bgLabel[7]);
         
         
+        //SCENE 8 Inventory
+        
+        inventoryScreen();
+        
+        
     }
+    
+     /**********************************************************************************************************************************/
     
     public void addPlayerInfo(){
         
@@ -351,6 +379,8 @@ public class UI {
         
     }
     
+     /**********************************************************************************************************************************/
+    
     
     public void addFightMenu(){
         
@@ -397,6 +427,8 @@ public class UI {
         choiceButtonPanel.add(choice4);
         
     }
+    
+     /**********************************************************************************************************************************/
     
     
     public void addInteractMenu(){
@@ -445,6 +477,8 @@ public class UI {
         
     }
     
+     /**********************************************************************************************************************************/
+    
      public void addTalkMenu(String ch1, String ch2, String ch3, String ch1Command, String ch2Command, String ch3Command){
         
         if(choiceButtonPanel != null){
@@ -490,6 +524,8 @@ public class UI {
         choiceButtonPanel.add(choice4);
         
     }
+     
+    /**********************************************************************************************************************************/
      
     public void addMoveMenu(String ch1, String ch2, String ch3, String ch1Command, String ch2Command, String ch3Command){
         
@@ -537,7 +573,7 @@ public class UI {
         
     } 
     
-    
+     /**********************************************************************************************************************************/
     
     public void addConfirmMenu(String ch1, String ch2, String ch1Command, String ch2Command){
         
@@ -570,7 +606,7 @@ public class UI {
         
     } 
     
-    
+     /**********************************************************************************************************************************/
     
     public void addSpellMenu(){
         
@@ -616,6 +652,8 @@ public class UI {
         
     }
     
+     /**********************************************************************************************************************************/
+    
     public void addItemMenu(){
         
         choiceButtonPanel.setVisible(false);
@@ -657,6 +695,1048 @@ public class UI {
         
     }
     
+    /**********************************************************************************************************************************/
+    
+    public void addItemMenuNonFight(){
+        
+        choiceButtonPanel.setVisible(false);
+        window.remove(choiceButtonPanel);
+        
+        choiceButtonPanel = new JPanel(new GridLayout(2,5,10,10));
+        choiceButtonPanel.setBounds(64, 640, 896, 100);
+        choiceButtonPanel.setBackground(Color.black);
+        window.add(choiceButtonPanel);
+        
+        for (int i=0; i<9; i++){
+            if(gm.playerInfo.getItemlist()[i] != null){
+                choice1 = new JButton(gm.playerInfo.getItemlist()[i].getName());
+                choice1.setBackground(Color.black);
+                choice1.setForeground(Color.white);
+                choice1.setFont(smallerFont);
+                choice1.addActionListener(gm.itemChoiceHandler);
+                choice1.setActionCommand(gm.playerInfo.getItemlist()[i].getName()+"nc");
+                choiceButtonPanel.add(choice1);
+            }
+            else {
+                choice1 = new JButton("Empty");
+                choice1.setBackground(Color.black);
+                choice1.setForeground(Color.white);
+                choice1.setFont(smallerFont);
+                choice1.addActionListener(gm.itemChoiceHandler);
+                choice1.setActionCommand("emptync");
+                choiceButtonPanel.add(choice1);
+            }
+        }
+        
+        choice2 = new JButton("<<<");
+        choice2.setBackground(Color.black);
+        choice2.setForeground(Color.white);
+        choice2.setFont(smallerFont);
+        choice2.addActionListener(gm.dialogChoiceHandler);
+        choice2.setActionCommand("nothing");
+        choiceButtonPanel.add(choice2);
+        
+    }
+    
+     /**********************************************************************************************************************************/
+    
+    public void inventoryScreen(){
+        
+        
+        /* 5x4 inventory for weapons, armor, key items and also stats and level on the side, have to figure out how to go back to current scene*/
+        
+        bgPanel[8] = new JPanel();
+        bgPanel[8].setBounds(110,50,800,500);
+        bgPanel[8].setBackground(Color.BLACK);
+        bgPanel[8].setLayout(null);
+        window.add(bgPanel[8]);
+        
+        JPanel inventoryPanel = new JPanel(new GridLayout(5,4,0,0));
+        inventoryPanel.setBounds(0, 0, 400, 500);
+        inventoryPanel.setBackground(Color.blue);
+        
+        ImageIcon objectIcon;
+        JMenuItem menuItem[] = new JMenuItem[2];
+        
+        
+        /* The way these labels get added to the Jpanel makes no sense to me, so this part of the code is a huge mess currently */
+        
+        j1x1 = new JLabel();
+        //j1x1.setBounds(0,0,100,100);
+        
+        JPopupMenu popMenu = new JPopupMenu();
+        
+        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0].addActionListener(gm.weaponChoiceHandler);
+        menuItem[0].setActionCommand("equip_brswrd");
+        popMenu.add(menuItem[0]);
+        
+        menuItem[1] = new JMenuItem("Examine");
+        menuItem[1].addActionListener(gm.weaponChoiceHandler);
+        menuItem[1].setActionCommand("examine_brdswrd");
+        popMenu.add(menuItem[1]);
+        
+        objectIcon = new ImageIcon(getClass().getResource("/res/broadsword.png"));
+        j1x1.setIcon(objectIcon);
+        
+        
+        j1x1.addMouseListener(new MouseListener(){
+        
+
+            @Override
+            public void mouseClicked(MouseEvent e){}
+            
+            @Override
+            public void mousePressed(MouseEvent e){
+            
+                if (SwingUtilities.isRightMouseButton(e)){
+                    popMenu.show(j1x1, e.getX(), e.getY());
+                }
+            
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){}
+            
+            @Override
+            public void mouseEntered(MouseEvent e){}
+            
+            @Override
+            public void mouseExited(MouseEvent e){}
+            
+            
+        });
+        
+        inventoryPanel.add(j1x1);
+                
+        j2x1 = new JLabel();
+        //j3x2.setBounds(0,100,100,100);
+        
+        JPopupMenu popMenu2 = new JPopupMenu();
+        
+        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0].addActionListener(gm.weaponChoiceHandler);
+        menuItem[0].setActionCommand("equip_lthrarm");
+        popMenu2.add(menuItem[0]);
+        
+        menuItem[1] = new JMenuItem("Examine");
+        menuItem[1].addActionListener(gm.weaponChoiceHandler);
+        menuItem[1].setActionCommand("examine_lthrarm");
+        popMenu2.add(menuItem[1]);
+        
+        objectIcon = new ImageIcon(getClass().getResource("/res/leather.png"));
+        j2x1.setIcon(objectIcon);
+        
+        j2x1.addMouseListener(new MouseListener(){
+        
+
+            @Override
+            public void mouseClicked(MouseEvent e){}
+            
+            @Override
+            public void mousePressed(MouseEvent e){
+            
+                if (SwingUtilities.isRightMouseButton(e)){
+                    popMenu2.show(j2x1, e.getX(), e.getY());
+                }
+            
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){}
+            
+            @Override
+            public void mouseEntered(MouseEvent e){}
+            
+            @Override
+            public void mouseExited(MouseEvent e){}
+            
+            
+        });
+        
+        inventoryPanel.add(j2x1);
+        
+        j3x1 = new JLabel();
+        //j3x1.setBounds(0,200,100,100);
+        
+        JPopupMenu popMenu3 = new JPopupMenu();
+        
+        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0].addActionListener(gm.weaponChoiceHandler);
+        menuItem[0].setActionCommand("equip_empty");
+        popMenu3.add(menuItem[0]);
+        
+        menuItem[1] = new JMenuItem("Examine");
+        menuItem[1].addActionListener(gm.weaponChoiceHandler);
+        menuItem[1].setActionCommand("examine_empty");
+        popMenu3.add(menuItem[1]);
+        
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        j3x1.setIcon(objectIcon);
+        
+        j3x1.addMouseListener(new MouseListener(){
+        
+
+            @Override
+            public void mouseClicked(MouseEvent e){}
+            
+            @Override
+            public void mousePressed(MouseEvent e){
+            
+                if (SwingUtilities.isRightMouseButton(e)){
+                    popMenu3.show(j3x1, e.getX(), e.getY());
+                }
+            
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){}
+            
+            @Override
+            public void mouseEntered(MouseEvent e){}
+            
+            @Override
+            public void mouseExited(MouseEvent e){}
+            
+            
+        });
+        
+        inventoryPanel.add(j3x1);
+        
+        
+        
+        j4x1 = new JLabel();
+        //j4x1.setBounds(0,300,100,100);
+        
+        JPopupMenu popMenu4 = new JPopupMenu();
+        
+        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0].addActionListener(gm.weaponChoiceHandler);
+        menuItem[0].setActionCommand("equip_empty");
+        popMenu4.add(menuItem[0]);
+        
+        menuItem[1] = new JMenuItem("Examine");
+        menuItem[1].addActionListener(gm.weaponChoiceHandler);
+        menuItem[1].setActionCommand("examine_empty");
+        popMenu4.add(menuItem[1]);
+        
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        j4x1.setIcon(objectIcon);
+        
+        j4x1.addMouseListener(new MouseListener(){
+        
+
+            @Override
+            public void mouseClicked(MouseEvent e){}
+            
+            @Override
+            public void mousePressed(MouseEvent e){
+            
+                if (SwingUtilities.isRightMouseButton(e)){
+                    popMenu4.show(j4x1, e.getX(), e.getY());
+                }
+            
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){}
+            
+            @Override
+            public void mouseEntered(MouseEvent e){}
+            
+            @Override
+            public void mouseExited(MouseEvent e){}
+            
+            
+        });
+        
+        inventoryPanel.add(j4x1);
+        
+        j1x2 = new JLabel();
+        
+        JPopupMenu popMenu5 = new JPopupMenu();
+        
+        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0].addActionListener(gm.weaponChoiceHandler);
+        menuItem[0].setActionCommand("equip_empty");
+        popMenu5.add(menuItem[0]);
+        
+        menuItem[1] = new JMenuItem("Examine");
+        menuItem[1].addActionListener(gm.weaponChoiceHandler);
+        menuItem[1].setActionCommand("examine_empty");
+        popMenu5.add(menuItem[1]);
+        
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        j1x2.setIcon(objectIcon);
+        
+        j1x2.addMouseListener(new MouseListener(){
+        
+
+            @Override
+            public void mouseClicked(MouseEvent e){}
+            
+            @Override
+            public void mousePressed(MouseEvent e){
+            
+                if (SwingUtilities.isRightMouseButton(e)){
+                    popMenu5.show(j1x2, e.getX(), e.getY());
+                }
+            
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){}
+            
+            @Override
+            public void mouseEntered(MouseEvent e){}
+            
+            @Override
+            public void mouseExited(MouseEvent e){}
+            
+            
+        });
+        
+        inventoryPanel.add(j1x2);
+        
+        j2x2 = new JLabel();
+        //j1x2.setBounds(100,0,100,100);
+        
+        JPopupMenu popMenu6 = new JPopupMenu();
+        
+        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0].addActionListener(gm.weaponChoiceHandler);
+        menuItem[0].setActionCommand("equip_empty");
+        popMenu6.add(menuItem[0]);
+        
+        menuItem[1] = new JMenuItem("Examine");
+        menuItem[1].addActionListener(gm.weaponChoiceHandler);
+        menuItem[1].setActionCommand("examine_empty");
+        popMenu6.add(menuItem[1]);
+        
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        j2x2.setIcon(objectIcon);
+        
+        j2x2.addMouseListener(new MouseListener(){
+        
+
+            @Override
+            public void mouseClicked(MouseEvent e){}
+            
+            @Override
+            public void mousePressed(MouseEvent e){
+            
+                if (SwingUtilities.isRightMouseButton(e)){
+                    popMenu6.show(j2x2, e.getX(), e.getY());
+                }
+            
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){}
+            
+            @Override
+            public void mouseEntered(MouseEvent e){}
+            
+            @Override
+            public void mouseExited(MouseEvent e){}
+            
+            
+        });
+        
+        inventoryPanel.add(j2x2);
+        
+        j3x2 = new JLabel();
+        //j1x2.setBounds(100,0,100,100);
+        
+        JPopupMenu popMenu7 = new JPopupMenu();
+        
+        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0].addActionListener(gm.weaponChoiceHandler);
+        menuItem[0].setActionCommand("equip_empty");
+        popMenu7.add(menuItem[0]);
+        
+        menuItem[1] = new JMenuItem("Examine");
+        menuItem[1].addActionListener(gm.weaponChoiceHandler);
+        menuItem[1].setActionCommand("examine_empty");
+        popMenu7.add(menuItem[1]);
+        
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        j3x2.setIcon(objectIcon);
+        
+        j3x2.addMouseListener(new MouseListener(){
+        
+
+            @Override
+            public void mouseClicked(MouseEvent e){}
+            
+            @Override
+            public void mousePressed(MouseEvent e){
+            
+                if (SwingUtilities.isRightMouseButton(e)){
+                    popMenu7.show(j3x2, e.getX(), e.getY());
+                }
+            
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){}
+            
+            @Override
+            public void mouseEntered(MouseEvent e){}
+            
+            @Override
+            public void mouseExited(MouseEvent e){}
+            
+            
+        });
+        
+        inventoryPanel.add(j3x2);
+        
+        j4x2 = new JLabel();
+        //j1x2.setBounds(100,0,100,100);
+        
+        JPopupMenu popMenu8 = new JPopupMenu();
+        
+        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0].addActionListener(gm.weaponChoiceHandler);
+        menuItem[0].setActionCommand("equip_empty");
+        popMenu8.add(menuItem[0]);
+        
+        menuItem[1] = new JMenuItem("Examine");
+        menuItem[1].addActionListener(gm.weaponChoiceHandler);
+        menuItem[1].setActionCommand("examine_empty");
+        popMenu8.add(menuItem[1]);
+        
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        j4x2.setIcon(objectIcon);
+        
+        j4x2.addMouseListener(new MouseListener(){
+        
+
+            @Override
+            public void mouseClicked(MouseEvent e){}
+            
+            @Override
+            public void mousePressed(MouseEvent e){
+            
+                if (SwingUtilities.isRightMouseButton(e)){
+                    popMenu8.show(j4x2, e.getX(), e.getY());
+                }
+            
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){}
+            
+            @Override
+            public void mouseEntered(MouseEvent e){}
+            
+            @Override
+            public void mouseExited(MouseEvent e){}
+            
+            
+        });
+        
+        inventoryPanel.add(j4x2);
+        
+        
+        j1x3 = new JLabel();
+        //j1x2.setBounds(100,0,100,100);
+        
+        JPopupMenu popMenu9 = new JPopupMenu();
+        
+        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0].addActionListener(gm.weaponChoiceHandler);
+        menuItem[0].setActionCommand("equip_empty");
+        popMenu9.add(menuItem[0]);
+        
+        menuItem[1] = new JMenuItem("Examine");
+        menuItem[1].addActionListener(gm.weaponChoiceHandler);
+        menuItem[1].setActionCommand("examine_empty");
+        popMenu9.add(menuItem[1]);
+        
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        j1x3.setIcon(objectIcon);
+        
+        j1x3.addMouseListener(new MouseListener(){
+        
+
+            @Override
+            public void mouseClicked(MouseEvent e){}
+            
+            @Override
+            public void mousePressed(MouseEvent e){
+            
+                if (SwingUtilities.isRightMouseButton(e)){
+                    popMenu9.show(j1x3, e.getX(), e.getY());
+                }
+            
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){}
+            
+            @Override
+            public void mouseEntered(MouseEvent e){}
+            
+            @Override
+            public void mouseExited(MouseEvent e){}
+            
+            
+        });
+        
+        inventoryPanel.add(j1x3);
+        
+        
+        j2x3 = new JLabel();
+        //j1x2.setBounds(100,0,100,100);
+        
+        JPopupMenu popMenu10 = new JPopupMenu();
+        
+        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0].addActionListener(gm.weaponChoiceHandler);
+        menuItem[0].setActionCommand("equip_empty");
+        popMenu10.add(menuItem[0]);
+        
+        menuItem[1] = new JMenuItem("Examine");
+        menuItem[1].addActionListener(gm.weaponChoiceHandler);
+        menuItem[1].setActionCommand("examine_empty");
+        popMenu10.add(menuItem[1]);
+        
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        j2x3.setIcon(objectIcon);
+        
+        j2x3.addMouseListener(new MouseListener(){
+        
+
+            @Override
+            public void mouseClicked(MouseEvent e){}
+            
+            @Override
+            public void mousePressed(MouseEvent e){
+            
+                if (SwingUtilities.isRightMouseButton(e)){
+                    popMenu10.show(j2x3, e.getX(), e.getY());
+                }
+            
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){}
+            
+            @Override
+            public void mouseEntered(MouseEvent e){}
+            
+            @Override
+            public void mouseExited(MouseEvent e){}
+            
+            
+        });
+        
+        inventoryPanel.add(j2x3);
+        
+        j3x3 = new JLabel();
+        //j1x2.setBounds(100,0,100,100);
+        
+        JPopupMenu popMenu11 = new JPopupMenu();
+        
+        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0].addActionListener(gm.weaponChoiceHandler);
+        menuItem[0].setActionCommand("equip_empty");
+        popMenu11.add(menuItem[0]);
+        
+        menuItem[1] = new JMenuItem("Examine");
+        menuItem[1].addActionListener(gm.weaponChoiceHandler);
+        menuItem[1].setActionCommand("examine_empty");
+        popMenu11.add(menuItem[1]);
+        
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        j3x3.setIcon(objectIcon);
+        
+        j3x3.addMouseListener(new MouseListener(){
+        
+
+            @Override
+            public void mouseClicked(MouseEvent e){}
+            
+            @Override
+            public void mousePressed(MouseEvent e){
+            
+                if (SwingUtilities.isRightMouseButton(e)){
+                    popMenu11.show(j3x3, e.getX(), e.getY());
+                }
+            
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){}
+            
+            @Override
+            public void mouseEntered(MouseEvent e){}
+            
+            @Override
+            public void mouseExited(MouseEvent e){}
+            
+            
+        });
+        
+        inventoryPanel.add(j3x3);
+        
+        j4x3 = new JLabel();
+        //j1x2.setBounds(100,0,100,100);
+        
+        JPopupMenu popMenu12 = new JPopupMenu();
+        
+        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0].addActionListener(gm.weaponChoiceHandler);
+        menuItem[0].setActionCommand("equip_empty");
+        popMenu12.add(menuItem[0]);
+        
+        menuItem[1] = new JMenuItem("Examine");
+        menuItem[1].addActionListener(gm.weaponChoiceHandler);
+        menuItem[1].setActionCommand("examine_empty");
+        popMenu12.add(menuItem[1]);
+        
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        j4x3.setIcon(objectIcon);
+        
+        j4x3.addMouseListener(new MouseListener(){
+        
+
+            @Override
+            public void mouseClicked(MouseEvent e){}
+            
+            @Override
+            public void mousePressed(MouseEvent e){
+            
+                if (SwingUtilities.isRightMouseButton(e)){
+                    popMenu12.show(j4x3, e.getX(), e.getY());
+                }
+            
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){}
+            
+            @Override
+            public void mouseEntered(MouseEvent e){}
+            
+            @Override
+            public void mouseExited(MouseEvent e){}
+            
+            
+        });
+        
+        inventoryPanel.add(j4x3);
+        
+        
+        j1x4 = new JLabel();
+        //j1x2.setBounds(100,0,100,100);
+        
+        JPopupMenu popMenu13 = new JPopupMenu();
+        
+        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0].addActionListener(gm.weaponChoiceHandler);
+        menuItem[0].setActionCommand("equip_empty");
+        popMenu13.add(menuItem[0]);
+        
+        menuItem[1] = new JMenuItem("Examine");
+        menuItem[1].addActionListener(gm.weaponChoiceHandler);
+        menuItem[1].setActionCommand("examine_empty");
+        popMenu13.add(menuItem[1]);
+        
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        j1x4.setIcon(objectIcon);
+        
+        j1x4.addMouseListener(new MouseListener(){
+        
+
+            @Override
+            public void mouseClicked(MouseEvent e){}
+            
+            @Override
+            public void mousePressed(MouseEvent e){
+            
+                if (SwingUtilities.isRightMouseButton(e)){
+                    popMenu13.show(j1x4, e.getX(), e.getY());
+                }
+            
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){}
+            
+            @Override
+            public void mouseEntered(MouseEvent e){}
+            
+            @Override
+            public void mouseExited(MouseEvent e){}
+            
+            
+        });
+        
+        inventoryPanel.add(j1x4);
+        
+        
+        j2x4 = new JLabel();
+        //j1x2.setBounds(100,0,100,100);
+        
+        JPopupMenu popMenu14 = new JPopupMenu();
+        
+        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0].addActionListener(gm.weaponChoiceHandler);
+        menuItem[0].setActionCommand("equip_empty");
+        popMenu14.add(menuItem[0]);
+        
+        menuItem[1] = new JMenuItem("Examine");
+        menuItem[1].addActionListener(gm.weaponChoiceHandler);
+        menuItem[1].setActionCommand("examine_empty");
+        popMenu14.add(menuItem[1]);
+        
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        j2x4.setIcon(objectIcon);
+        
+        j2x4.addMouseListener(new MouseListener(){
+        
+
+            @Override
+            public void mouseClicked(MouseEvent e){}
+            
+            @Override
+            public void mousePressed(MouseEvent e){
+            
+                if (SwingUtilities.isRightMouseButton(e)){
+                    popMenu14.show(j2x4, e.getX(), e.getY());
+                }
+            
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){}
+            
+            @Override
+            public void mouseEntered(MouseEvent e){}
+            
+            @Override
+            public void mouseExited(MouseEvent e){}
+            
+            
+        });
+        
+        inventoryPanel.add(j2x4);
+        
+        j3x4 = new JLabel();
+        //j1x2.setBounds(100,0,100,100);
+        
+        JPopupMenu popMenu15 = new JPopupMenu();
+        
+        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0].addActionListener(gm.weaponChoiceHandler);
+        menuItem[0].setActionCommand("equip_empty");
+        popMenu15.add(menuItem[0]);
+        
+        menuItem[1] = new JMenuItem("Examine");
+        menuItem[1].addActionListener(gm.weaponChoiceHandler);
+        menuItem[1].setActionCommand("examine_empty");
+        popMenu15.add(menuItem[1]);
+        
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        j3x4.setIcon(objectIcon);
+        
+        j3x4.addMouseListener(new MouseListener(){
+        
+
+            @Override
+            public void mouseClicked(MouseEvent e){}
+            
+            @Override
+            public void mousePressed(MouseEvent e){
+            
+                if (SwingUtilities.isRightMouseButton(e)){
+                    popMenu15.show(j3x4, e.getX(), e.getY());
+                }
+            
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){}
+            
+            @Override
+            public void mouseEntered(MouseEvent e){}
+            
+            @Override
+            public void mouseExited(MouseEvent e){}
+            
+            
+        });
+        
+        inventoryPanel.add(j3x4);
+        
+        
+        j4x4 = new JLabel();
+        //j1x2.setBounds(100,0,100,100);
+        
+        JPopupMenu popMenu16 = new JPopupMenu();
+        
+        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0].addActionListener(gm.weaponChoiceHandler);
+        menuItem[0].setActionCommand("equip_empty");
+        popMenu16.add(menuItem[0]);
+        
+        menuItem[1] = new JMenuItem("Examine");
+        menuItem[1].addActionListener(gm.weaponChoiceHandler);
+        menuItem[1].setActionCommand("examine_empty");
+        popMenu16.add(menuItem[1]);
+        
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        j4x4.setIcon(objectIcon);
+        
+        j4x4.addMouseListener(new MouseListener(){
+        
+
+            @Override
+            public void mouseClicked(MouseEvent e){}
+            
+            @Override
+            public void mousePressed(MouseEvent e){
+            
+                if (SwingUtilities.isRightMouseButton(e)){
+                    popMenu16.show(j4x4, e.getX(), e.getY());
+                }
+            
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){}
+            
+            @Override
+            public void mouseEntered(MouseEvent e){}
+            
+            @Override
+            public void mouseExited(MouseEvent e){}
+            
+            
+        });
+        
+        inventoryPanel.add(j4x4);
+        
+        j1x5 = new JLabel();
+        //j1x2.setBounds(100,0,100,100);
+        
+        JPopupMenu popMenu17 = new JPopupMenu();
+        
+        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0].addActionListener(gm.weaponChoiceHandler);
+        menuItem[0].setActionCommand("equip_empty");
+        popMenu17.add(menuItem[0]);
+        
+        menuItem[1] = new JMenuItem("Examine");
+        menuItem[1].addActionListener(gm.weaponChoiceHandler);
+        menuItem[1].setActionCommand("examine_empty");
+        popMenu17.add(menuItem[1]);
+        
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        j1x5.setIcon(objectIcon);
+        
+        j1x5.addMouseListener(new MouseListener(){
+        
+
+            @Override
+            public void mouseClicked(MouseEvent e){}
+            
+            @Override
+            public void mousePressed(MouseEvent e){
+            
+                if (SwingUtilities.isRightMouseButton(e)){
+                    popMenu17.show(j1x5, e.getX(), e.getY());
+                }
+            
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){}
+            
+            @Override
+            public void mouseEntered(MouseEvent e){}
+            
+            @Override
+            public void mouseExited(MouseEvent e){}
+            
+            
+        });
+        
+        inventoryPanel.add(j1x5);
+        
+        j2x5 = new JLabel();
+        //j1x2.setBounds(100,0,100,100);
+        
+        JPopupMenu popMenu18 = new JPopupMenu();
+        
+        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0].addActionListener(gm.weaponChoiceHandler);
+        menuItem[0].setActionCommand("equip_empty");
+        popMenu18.add(menuItem[0]);
+        
+        menuItem[1] = new JMenuItem("Examine");
+        menuItem[1].addActionListener(gm.weaponChoiceHandler);
+        menuItem[1].setActionCommand("examine_empty");
+        popMenu18.add(menuItem[1]);
+        
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        j2x5.setIcon(objectIcon);
+        
+        j2x5.addMouseListener(new MouseListener(){
+        
+
+            @Override
+            public void mouseClicked(MouseEvent e){}
+            
+            @Override
+            public void mousePressed(MouseEvent e){
+            
+                if (SwingUtilities.isRightMouseButton(e)){
+                    popMenu18.show(j2x5, e.getX(), e.getY());
+                }
+            
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){}
+            
+            @Override
+            public void mouseEntered(MouseEvent e){}
+            
+            @Override
+            public void mouseExited(MouseEvent e){}
+            
+            
+        });
+        
+        inventoryPanel.add(j2x5);
+        
+        j3x5 = new JLabel();
+        //j1x2.setBounds(100,0,100,100);
+        
+        JPopupMenu popMenu19 = new JPopupMenu();
+        
+        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0].addActionListener(gm.weaponChoiceHandler);
+        menuItem[0].setActionCommand("equip_empty");
+        popMenu19.add(menuItem[0]);
+        
+        menuItem[1] = new JMenuItem("Examine");
+        menuItem[1].addActionListener(gm.weaponChoiceHandler);
+        menuItem[1].setActionCommand("examine_empty");
+        popMenu19.add(menuItem[1]);
+        
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        j3x5.setIcon(objectIcon);
+        
+        j3x5.addMouseListener(new MouseListener(){
+        
+
+            @Override
+            public void mouseClicked(MouseEvent e){}
+            
+            @Override
+            public void mousePressed(MouseEvent e){
+            
+                if (SwingUtilities.isRightMouseButton(e)){
+                    popMenu19.show(j3x5, e.getX(), e.getY());
+                }
+            
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){}
+            
+            @Override
+            public void mouseEntered(MouseEvent e){}
+            
+            @Override
+            public void mouseExited(MouseEvent e){}
+            
+            
+        });
+        
+        inventoryPanel.add(j3x5);
+        
+        j4x5 = new JLabel();
+        //j1x2.setBounds(100,0,100,100);
+        
+        JPopupMenu popMenu20 = new JPopupMenu();
+        
+        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0].addActionListener(gm.weaponChoiceHandler);
+        menuItem[0].setActionCommand("equip_empty");
+        popMenu20.add(menuItem[0]);
+        
+        menuItem[1] = new JMenuItem("Examine");
+        menuItem[1].addActionListener(gm.weaponChoiceHandler);
+        menuItem[1].setActionCommand("examine_empty");
+        popMenu20.add(menuItem[1]);
+        
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        j4x5.setIcon(objectIcon);
+        
+        j4x5.addMouseListener(new MouseListener(){
+        
+
+            @Override
+            public void mouseClicked(MouseEvent e){}
+            
+            @Override
+            public void mousePressed(MouseEvent e){
+            
+                if (SwingUtilities.isRightMouseButton(e)){
+                    popMenu20.show(j4x5, e.getX(), e.getY());
+                }
+            
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){}
+            
+            @Override
+            public void mouseEntered(MouseEvent e){}
+            
+            @Override
+            public void mouseExited(MouseEvent e){}
+            
+            
+        });
+        
+        inventoryPanel.add(j4x5);
+        
+        
+        
+        
+        
+        
+        JTextArea statsText = new JTextArea("   \nLevel 1\n"
+                + "Hero: You\nATK:50\n");
+        statsText.setBounds(500,0,300,500);
+        statsText.setBackground(Color.DARK_GRAY);
+        statsText.setForeground(Color.WHITE);
+        statsText.setEditable(false);
+        statsText.setLineWrap(true);
+        statsText.setWrapStyleWord(true);
+        statsText.setFont(new Font("Book Antiqua", Font.PLAIN, 26));
+        
+        
+        bgPanel[8].add(inventoryPanel);
+        bgPanel[8].add(statsText);
+        
+
+        
+        
+        
+        
+    }
+    
+
+    /**********************************************************************************************************************************/
+    
     public void goBack(){
         
         choiceButtonPanel.setVisible(false);
@@ -676,6 +1756,8 @@ public class UI {
         choiceButtonPanel.add(choice1);
         
     }
+    
+     /**********************************************************************************************************************************/
     
     public void progressForward(){
         
@@ -697,6 +1779,8 @@ public class UI {
         
     }
     
+     /**********************************************************************************************************************************/
+    
     public class TitleScreenHandler implements ActionListener{
 
         @Override
@@ -717,5 +1801,38 @@ public class UI {
         }
     
     }
+    
+     /**********************************************************************************************************************************/
+    
+    public void rememberCurrentScene(){
+        
+        if (bgPanel[1].isVisible()) currentScene = 1;
+        else if (bgPanel[2].isVisible()) currentScene = 2;
+        else if (bgPanel[3].isVisible()) currentScene = 3;
+        else if (bgPanel[4].isVisible()) currentScene = 4;
+        else if (bgPanel[5].isVisible()) currentScene = 5;
+        else if (bgPanel[6].isVisible()) currentScene = 6;
+        else if (bgPanel[7].isVisible()) currentScene = 7;
+        
+    }
+    
+    /**********************************************************************************************************************************/
+    
+    public void restoreScene(){
+        
+        if (currentScene == 1) gm.sceneChanger.showScreen1();
+        if (currentScene == 2) gm.sceneChanger.showScreen2();
+        if (currentScene == 3) gm.sceneChanger.showScreen3();
+        if (currentScene == 4) gm.sceneChanger.showScreen4();
+        if (currentScene == 5) gm.sceneChanger.showScreen5();
+        if (currentScene == 6) gm.sceneChanger.showScreen6();
+        if (currentScene == 7) gm.sceneChanger.showScreen7();
+        
+        
+    }
+    
+    /**********************************************************************************************************************************/
+    
+  
     
 }

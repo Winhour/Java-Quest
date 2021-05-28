@@ -35,6 +35,7 @@ public class GameManager {
     CombatChoiceHandler combatChoiceHandler = new CombatChoiceHandler(this);
     ItemChoiceHandler itemChoiceHandler = new ItemChoiceHandler(this);
     DialogChoiceHandler dialogChoiceHandler = new DialogChoiceHandler(this);
+    WeaponChoiceHandler weaponChoiceHandler = new WeaponChoiceHandler(this);
     UI ui = new UI(this);
     SceneChanger sceneChanger = new SceneChanger(this);
     

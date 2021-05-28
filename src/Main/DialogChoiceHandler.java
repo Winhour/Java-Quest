@@ -12,7 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import jdk.nashorn.internal.ir.BreakableNode;
 
 /**
  *
@@ -57,12 +56,38 @@ public class DialogChoiceHandler implements ActionListener{
                 else if (gm.ui.bgPanel[7].isVisible()){
                     gm.ui.messageText.setText("Wonder what they did to piss off that Demon Lord so much.");
                 }
+                else if (gm.ui.bgPanel[8].isVisible()){
+                    gm.ui.messageText.setText("How am I able to carry all this stuff?");
+                }
                 else {
                     gm.ui.messageText.setText("How in nine hells did I end up here?");
                 }
                 gm.ui.messageText.setForeground(Color.yellow);
                 break;
                 
+            
+            case "item":
+                gm.ui.messageText.setText("Choose your item:");
+                gm.ui.addItemMenuNonFight();
+                break;
+                
+            case "inventory":
+                gm.ui.rememberCurrentScene();
+                gm.sceneChanger.showScreen8();
+                gm.ui.messageText.setText("Let's see what we're working with here.");
+                gm.ui.messageText.setForeground(Color.yellow);
+                gm.ui.addInteractMenu();
+                
+                gm.ui.choice4.setText("<<<");
+                gm.ui.choice4.setActionCommand("restore_scene");
+                break;
+                
+            case "restore_scene":
+                
+                gm.ui.restoreScene();
+                gm.ui.addInteractMenu();
+                
+                break;
                 
                 
                 
@@ -583,9 +608,19 @@ public class DialogChoiceHandler implements ActionListener{
 
                 break;
                 
+            case "look_mayor":
+                
+                gm.ui.messageText.setText("\"Well, hello there\"");
+                gm.ui.messageText.setForeground(Color.yellow);
+
+                break;
                 
             case "nothing":
                 gm.ui.addInteractMenu();
+                if (gm.ui.bgPanel[8].isVisible()){
+                    gm.ui.choice4.setText("<<<");
+                    gm.ui.choice4.setActionCommand("restore_scene");
+                }
                 gm.ui.messageText.setText("What shall I do next?"); 
                 gm.ui.messageText.setForeground(Color.yellow);
                 break;

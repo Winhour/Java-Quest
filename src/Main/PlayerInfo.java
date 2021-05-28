@@ -17,7 +17,7 @@ public class PlayerInfo {
     public int health = 100;
     public int mana = 20;
     public String weapon = "Broadsword";
-    public String armor = "Leather cloak";
+    public String armor = "Leather Armor";
     public int level = 1;
     public int maxhealth = 100 + (level-1)*20;
     public int exp = 0;

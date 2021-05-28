@@ -63,6 +63,31 @@ public class ItemChoiceHandler implements ActionListener{
                 gm.ui.addFightMenu();
                 break;
                 
+            case "S Potionnc":
+                
+                if (gm.playerInfo.getHealth() == gm.playerInfo.getMaxhealth()){
+                    gm.ui.messageText.setText("Your health is full!");
+                }
+                else {
+                
+                    gm.playerInfo.setHealth(gm.playerInfo.getHealth()+10);
+
+                    if (gm.playerInfo.getHealth() > gm.playerInfo.getMaxhealth()) gm.playerInfo.setHealth(gm.playerInfo.getMaxhealth());
+                    
+                    gm.ui.messageText.setText(gm.potion.getEffectMessage());
+
+                    for (int i=8;i>=0;i--){
+                        if (gm.itemlist[i] != null && gm.itemlist[i].getName().equals("S Potion")){
+                            gm.itemlist[i] = null;
+                            break;
+                        }
+                    }
+
+                    gm.ui.addPlayerInfo();
+                }
+                gm.ui.addInteractMenu();
+                break;   
+                
             case "M Potion":
                 
                 damageRoll2 = rand.nextInt(3);
@@ -91,6 +116,31 @@ public class ItemChoiceHandler implements ActionListener{
                 }
                 gm.ui.addFightMenu();
                 break;
+                
+            case "M Potionnc":
+                
+                if (gm.playerInfo.getHealth() == gm.playerInfo.getMaxhealth()){
+                    gm.ui.messageText.setText("Your health is full!");
+                }
+                else {
+                
+                    gm.playerInfo.setHealth(gm.playerInfo.getHealth()+25);
+
+                    if (gm.playerInfo.getHealth() > gm.playerInfo.getMaxhealth()) gm.playerInfo.setHealth(gm.playerInfo.getMaxhealth());
+
+                    gm.ui.messageText.setText(gm.potion3.getEffectMessage()); 
+
+                    for (int i=8;i>=0;i--){
+                        if (gm.itemlist[i] != null && gm.itemlist[i].getName().equals("M Potion")){
+                            gm.itemlist[i] = null;
+                            break;
+                        }
+                    }
+
+                    gm.ui.addPlayerInfo();
+                }
+                gm.ui.addInteractMenu();
+                break;    
                 
             case "S Elixir":
                 
@@ -121,11 +171,40 @@ public class ItemChoiceHandler implements ActionListener{
                 gm.ui.addFightMenu();
                 break;
                 
+            case "S Elixirnc":
+                
+                if (gm.playerInfo.getMana() == gm.playerInfo.getMaxmana()){
+                    gm.ui.messageText.setText("Your mana is full!");
+                }
+                else {
+                
+                    gm.playerInfo.setMana(gm.playerInfo.getMana()+10);
+
+                    if (gm.playerInfo.getMana() > gm.playerInfo.getMaxmana()) gm.playerInfo.setMana(gm.playerInfo.getMaxmana());
+
+                    gm.ui.messageText.setText(gm.elixir.getEffectMessage()); 
+
+                    for (int i=8;i>=0;i--){
+                        if (gm.itemlist[i] != null && gm.itemlist[i].getName().equals("S Elixir")){
+                            gm.itemlist[i] = null;
+                            break;
+                        }
+                    }
+
+                    gm.ui.addPlayerInfo();
+                }
+                gm.ui.addInteractMenu();
+                break;    
+                
             case "empty":
                 gm.ui.messageText.setText("It's unlikely this empty space will be too much help..."); 
                 gm.ui.addFightMenu();
                 break;
             
+            case "emptync":
+                gm.ui.messageText.setText("As nice it would be if something was in this space, alas it is not."); 
+                gm.ui.addInteractMenu();
+                break;    
         }
         
     }
