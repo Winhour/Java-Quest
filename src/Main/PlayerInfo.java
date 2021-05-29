@@ -6,6 +6,9 @@
 package Main;
 
 import items.GameItem;
+import weapons.Broadsword;
+import weapons.Leather_Armor;
+import weapons.Weapon;
 
 
 /**
@@ -16,18 +19,21 @@ public class PlayerInfo {
     
     public int health = 100;
     public int mana = 20;
-    public String weapon = "Broadsword";
-    public String armor = "Leather Armor";
+    public Weapon weapon = new Broadsword();
+    public Weapon armor = new Leather_Armor();
     public int level = 1;
     public int maxhealth = 100 + (level-1)*20;
     public int exp = 0;
     public int nextlevelexp = 100 + (level-1)*40;
-    public int cash = 50;
+    public int cash = 90;
     
     public int ATK = 5;
-    public int DEF = 0;
+    public int DEF = 1;
     public int MAG = 0;
     public int SPD = 5;
+    
+    public int modifiedATK = ATK + weapon.getModifier();
+    public int modfifiedDEF = DEF + armor.getModifier();
 
     public int maxmana = 20 + MAG*5;
     
@@ -41,19 +47,19 @@ public class PlayerInfo {
         this.health = health;
     }
 
-    public String getWeapon() {
+    public Weapon getWeapon() {
         return weapon;
     }
 
-    public void setWeapon(String weapon) {
+    public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
 
-    public String getArmor() {
+    public Weapon getArmor() {
         return armor;
     }
 
-    public void setArmor(String armor) {
+    public void setArmor(Weapon armor) {
         this.armor = armor;
     }
 
@@ -152,6 +158,25 @@ public class PlayerInfo {
     public void setCash(int cash) {
         this.cash = cash;
     }
+
+    public int getModifiedATK() {
+        return modifiedATK;
+    }
+
+    public int getModfifiedDEF() {
+        return modfifiedDEF;
+    }
+
+    public void setModifiedATK(int modifiedATK) {
+        this.modifiedATK = modifiedATK;
+    }
+
+    public void setModfifiedDEF(int modfifiedDEF) {
+        this.modfifiedDEF = modfifiedDEF;
+    }
+    
+    
+    
     
     
 

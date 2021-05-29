@@ -10,8 +10,14 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -59,6 +65,12 @@ public class DialogChoiceHandler implements ActionListener{
                 else if (gm.ui.bgPanel[8].isVisible()){
                     gm.ui.messageText.setText("How am I able to carry all this stuff?");
                 }
+                else if (gm.ui.bgPanel[9].isVisible()){
+                    gm.ui.messageText.setText("This must be the Dungeon.");
+                }
+                else if (gm.ui.bgPanel[10].isVisible()){
+                    gm.ui.messageText.setText("Hope I never have to fight a Bear again.");
+                }
                 else {
                     gm.ui.messageText.setText("How in nine hells did I end up here?");
                 }
@@ -86,6 +98,8 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 gm.ui.restoreScene();
                 gm.ui.addInteractMenu();
+                gm.ui.messageText.setText("What shall I do next?");
+                gm.ui.messageText.setForeground(Color.yellow);
                 
                 break;
                 
@@ -93,13 +107,13 @@ public class DialogChoiceHandler implements ActionListener{
                 
             case "move":
                 if (gm.ui.bgPanel[1].isVisible()){
-                    gm.ui.addMoveMenu("Town", "Item Shop", "Dungeon", "move_twn2", "move_ishop", "move_gobdun");
+                    gm.ui.addMoveMenu("Town", "Item Shop", "Dungeon", "move_twn2", "move_ishop", "move_dunent");
                 }
                 else if (gm.ui.bgPanel[2].isVisible()){
                     gm.ui.addMoveMenu("Outskirts", "Sideroom", "Wooden Door", "move_twn", "move_side", "move_treas1");
                 }
                 else if (gm.ui.bgPanel[3].isVisible()){
-                    gm.ui.addMoveMenu("Outskirts", "Sideroom", "Wooden Door", "move_twn", "move_side", "move_treas1");
+                    gm.ui.addMoveMenu("Entrance", "Sideroom", "Wooden Door", "move_dunent", "move_side", "move_treas1");
                 }
                 else if (gm.ui.bgPanel[4].isVisible()){
                     gm.ui.addMoveMenu("Outskirts", "Smith", "Town Hall", "move_twn", "move_smith", "move_twnhall");
@@ -112,6 +126,12 @@ public class DialogChoiceHandler implements ActionListener{
                 }
                 else if (gm.ui.bgPanel[7].isVisible()){
                     gm.ui.addMoveMenu("Town", "", "", "move_twn2", "", "");
+                }
+                else if (gm.ui.bgPanel[9].isVisible()){
+                    gm.ui.addMoveMenu("Outskirts", "Woods", "Inside", "move_twn", "move_woods", "move_gobdun");
+                }
+                else if (gm.ui.bgPanel[10].isVisible()){
+                    gm.ui.addMoveMenu("Entrance", "", "", "move_dunent", "", "");
                 }
                 else {
                     gm.ui.addMoveMenu("Town", "Item Shop", "Dungeon", "move_twn2", "move_ishop", "move_gobdun");
@@ -156,12 +176,24 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setText("There is a pleasant atmosphere in the hall.");
                 gm.ui.messageText.setForeground(Color.white);
                 gm.ui.addInteractMenu();
-                break;       
+                break;    
+                
+            case "move_dunent":
+                gm.sceneChanger.showScreen9();
+                gm.ui.messageText.setText("You arrive at the entrance to the Dungeon.");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addInteractMenu();
+                break;     
+                
+            case "move_woods":
+                gm.sceneChanger.showScreen10();
+                gm.ui.messageText.setText("You hear sounds of nature all around.");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addInteractMenu();
+                break;      
             
             case "move_gobdun":
-                /*gm.ui.currentScene = 1;
-                gm.ui.nextScene = 3;
-                gm.sceneChanger.showScreenNext(gm.ui.currentScene, gm.ui.nextScene);*/
+                gm.ui.rememberCurrentScene();
                 gm.sceneChanger.showScreen3();
                 if(gm.ui.goblinFlag){
                     gm.ui.messageText.setText("A goblin appears!"); 
@@ -185,7 +217,13 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.addTalkMenu("Demon Lord", "Town", "Himself", "dl_peasant", "town_info", "peasant_info");
                 gm.ui.messageText.setText("Ask about: ");
                 gm.ui.messageText.setForeground(Color.white);
-                break;    
+                break;   
+                
+            case "talk_smith":
+                gm.ui.addTalkMenu("Demon Lord", "Town", "Tips", "dl_smith", "smith_info", "tips_smith");
+                gm.ui.messageText.setText("Ask about: ");
+                gm.ui.messageText.setForeground(Color.white);
+                break;      
                 
                 
                 
@@ -590,6 +628,153 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 break;
                 
+                
+            /* Buying things from the Smith */    
+                
+            case "interact_smith":
+                
+                gm.ui.messageText.setText("\"What are you looking for, adventurer?\"");
+                gm.ui.messageText.setForeground(Color.yellow);
+                gm.ui.addSmithBuyMenu();
+                
+                break;
+                
+                
+                
+                
+            case "buy_axe":   
+                gm.ui.messageText.setText("\"Ah, a splendid choice. Is this what you want?\" \n(\"War Axe\" +5 ATK    Cost: 40 Gold)");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addConfirmMenu("Gimme!", "Nope", "bought_axe", "nothing");
+                break;
+                
+            case "bought_axe":
+                if (gm.playerInfo.getCash() >= 40){
+                    gm.playerInfo.setCash(gm.playerInfo.getCash()-40);
+                    gm.ui.addPlayerInfo();
+                    gm.ui.messageText.setText("\"Now that I got this shiny new Axe, I should try it out on something. Or someone.\"");
+                    gm.ui.messageText.setForeground(Color.yellow);
+                    gm.ui.j1x2.setIcon(new ImageIcon(getClass().getResource("/res/war_axe.png")));
+
+                    JMenuItem menuItem[] = new JMenuItem[2];
+
+                    JPopupMenu popMenu = new JPopupMenu();
+
+                    menuItem[0] = new JMenuItem("Equip");
+                    menuItem[0].addActionListener(gm.weaponChoiceHandler);
+                    menuItem[0].setActionCommand("equip_waraxe");
+                    popMenu.add(menuItem[0]);
+
+                    menuItem[1] = new JMenuItem("Examine");
+                    menuItem[1].addActionListener(gm.weaponChoiceHandler);
+                    menuItem[1].setActionCommand("examine_waraxe");
+                    popMenu.add(menuItem[1]);
+
+                    gm.ui.j1x2.addMouseListener(new MouseListener(){
+
+
+                        @Override
+                        public void mouseClicked(MouseEvent e){}
+
+                        @Override
+                        public void mousePressed(MouseEvent e){
+
+                            if (SwingUtilities.isRightMouseButton(e)){
+                                popMenu.show(gm.ui.j1x2, e.getX(), e.getY());
+                            }
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e){}
+
+                        @Override
+                        public void mouseEntered(MouseEvent e){}
+
+                        @Override
+                        public void mouseExited(MouseEvent e){}
+
+
+                    });
+                }
+                else {
+                    gm.ui.messageText.setText("\"Come back, when you have sufficient gold, adventurer.\"");
+                    gm.ui.messageText.setForeground(Color.white);
+                }
+                
+                
+                gm.ui.addInteractMenu();
+                
+                break;
+                
+                
+                
+                
+             case "buy_sarmor":
+                gm.ui.messageText.setText("\"Everyone's buying this plate these days. Decided?\" \n(\"Soldier Armor\" +4 DEF    Cost: 40 Gold)");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addConfirmMenu("Gimme!", "Nope", "bought_sarmor", "nothing");
+                break;
+                
+             case "bought_sarmor":    
+                 if (gm.playerInfo.getCash() >= 40){
+                    gm.playerInfo.setCash(gm.playerInfo.getCash()-40);
+                    gm.ui.addPlayerInfo();
+                    gm.ui.messageText.setText("\"Better safe than sorry. I should equip this as soon as possible.\"");
+                    gm.ui.messageText.setForeground(Color.yellow);
+                    gm.ui.j2x2.setIcon(new ImageIcon(getClass().getResource("/res/soldier_armor.png")));
+
+                    JMenuItem menuItem[] = new JMenuItem[2];
+
+                    JPopupMenu popMenu = new JPopupMenu();
+
+                    menuItem[0] = new JMenuItem("Equip");
+                    menuItem[0].addActionListener(gm.weaponChoiceHandler);
+                    menuItem[0].setActionCommand("equip_sldarm");
+                    popMenu.add(menuItem[0]);
+
+                    menuItem[1] = new JMenuItem("Examine");
+                    menuItem[1].addActionListener(gm.weaponChoiceHandler);
+                    menuItem[1].setActionCommand("examine_sldarm");
+                    popMenu.add(menuItem[1]);
+
+                    gm.ui.j2x2.addMouseListener(new MouseListener(){
+
+
+                        @Override
+                        public void mouseClicked(MouseEvent e){}
+
+                        @Override
+                        public void mousePressed(MouseEvent e){
+
+                            if (SwingUtilities.isRightMouseButton(e)){
+                                popMenu.show(gm.ui.j2x2, e.getX(), e.getY());
+                            }
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e){}
+
+                        @Override
+                        public void mouseEntered(MouseEvent e){}
+
+                        @Override
+                        public void mouseExited(MouseEvent e){}
+
+
+                    });
+                }
+                else {
+                    gm.ui.messageText.setText("\"Come back, when you have sufficient gold, adventurer.\"");
+                    gm.ui.messageText.setForeground(Color.white);
+                }
+                
+                
+                gm.ui.addInteractMenu();
+                
+                break;
+                
             /* Priest look */  
                 
             case "look_priest":   
@@ -607,6 +792,13 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setForeground(Color.yellow);
 
                 break;
+                
+            case "look_smith":
+                
+                gm.ui.messageText.setText("\"Armor crafting seems like his strong suit\"");
+                gm.ui.messageText.setForeground(Color.yellow);
+
+                break;    
                 
             case "look_mayor":
                 

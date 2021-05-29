@@ -6,6 +6,7 @@
 package Main;
 
 import Main.monsters.Skeletons;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
@@ -35,7 +36,7 @@ public class CombatChoiceHandler implements ActionListener{
         switch (yourChoice){
             case "fight":
                 
-                int damageRoll = rand.nextInt(gm.playerInfo.getATK()+1);
+                int damageRoll = rand.nextInt(gm.playerInfo.getModifiedATK()+1);
                 damageRoll2 = rand.nextInt(gm.monster.getATK()+1);
                 
                 gm.monster.setHealth(gm.monster.getHealth()-damageRoll);
@@ -43,7 +44,9 @@ public class CombatChoiceHandler implements ActionListener{
                     gm.playerInfo.setHealth(gm.playerInfo.getHealth()-damageRoll2);
                     gm.ui.messageText.setText("You slashed at the " + gm.monster.getName() + "! It took " + damageRoll + " damage\n It attacks back! You took " + damageRoll2 + " damage");
                 } else {
-                    gm.ui.messageText.setText("The " + gm.monster.getName() + " was defeated!\n You gain " + gm.monster.getExp() + "exp");
+                    gm.ui.messageText.setText("The " + gm.monster.getName() + " was defeated!\n You gain " + gm.monster.getExp() + "exp and " + gm.monster.getGold() + "gold.");
+                    gm.playerInfo.setCash(gm.playerInfo.getCash()+gm.monster.getGold());
+                    
                     if (gm.monster.getName().equals("Goblin") && gm.ui.goblinFlag){
                     //gm.ui.messageText.setText("testg");
                     gm.ui.bgPanel[3].remove(0);
@@ -103,16 +106,24 @@ public class CombatChoiceHandler implements ActionListener{
 
             case "spell":
                 gm.ui.messageText.setText("Choose your spell:"); 
+                gm.ui.messageText.setForeground(Color.white);
                 gm.ui.addSpellMenu();
                 break;
+                
             case "item":
                 gm.ui.messageText.setText("Choose your item:");
+                gm.ui.messageText.setForeground(Color.white);
                 gm.ui.addItemMenu();
                 break;
+                
             case "run":
                 gm.ui.messageText.setText("Got away safely!"); 
-                gm.ui.goBack();
+                gm.ui.messageText.setForeground(Color.white);
+                //gm.ui.goBack();
+                gm.ui.restoreScene();
+                gm.ui.addInteractMenu();
                 break; 
+                
             case "goback":
                 gm.ui.messageText.setText("The " + gm.monster.getName() + " approaches cautiously...");
                 gm.ui.addFightMenu();

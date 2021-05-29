@@ -68,6 +68,16 @@ public class Monster {
     public void setSPD(int SPD) {
         this.SPD = SPD;
     }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
+    }
+    
+    
     
     
     

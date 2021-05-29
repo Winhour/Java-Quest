@@ -54,6 +54,8 @@ public class SceneChanger {
         gm.ui.bgPanel[6].setVisible(false);
         gm.ui.bgPanel[7].setVisible(false);
         gm.ui.bgPanel[8].setVisible(false);
+        gm.ui.bgPanel[9].setVisible(false);
+        gm.ui.bgPanel[10].setVisible(false);
 
     }
     
@@ -67,6 +69,8 @@ public class SceneChanger {
         gm.ui.bgPanel[6].setVisible(false);
         gm.ui.bgPanel[7].setVisible(false);
         gm.ui.bgPanel[8].setVisible(false);
+        gm.ui.bgPanel[9].setVisible(false);
+        gm.ui.bgPanel[10].setVisible(false);
     }
     
     public void showScreen3(){
@@ -78,6 +82,8 @@ public class SceneChanger {
         gm.ui.bgPanel[6].setVisible(false);
         gm.ui.bgPanel[7].setVisible(false);
         gm.ui.bgPanel[8].setVisible(false);
+        gm.ui.bgPanel[9].setVisible(false);
+        gm.ui.bgPanel[10].setVisible(false);
     }
     
     public void showScreen4(){
@@ -89,6 +95,8 @@ public class SceneChanger {
         gm.ui.bgPanel[6].setVisible(false);
         gm.ui.bgPanel[7].setVisible(false);
         gm.ui.bgPanel[8].setVisible(false);
+        gm.ui.bgPanel[9].setVisible(false);
+        gm.ui.bgPanel[10].setVisible(false);
     }
     
     public void showScreen5(){
@@ -100,6 +108,8 @@ public class SceneChanger {
         gm.ui.bgPanel[6].setVisible(false);
         gm.ui.bgPanel[7].setVisible(false);
         gm.ui.bgPanel[8].setVisible(false);
+        gm.ui.bgPanel[9].setVisible(false);
+        gm.ui.bgPanel[10].setVisible(false);
     }
     
     public void showScreen6(){
@@ -111,6 +121,8 @@ public class SceneChanger {
         gm.ui.bgPanel[6].setVisible(true);
         gm.ui.bgPanel[7].setVisible(false);
         gm.ui.bgPanel[8].setVisible(false);
+        gm.ui.bgPanel[9].setVisible(false);
+        gm.ui.bgPanel[10].setVisible(false);
     }
     
     public void showScreen7(){
@@ -122,6 +134,8 @@ public class SceneChanger {
         gm.ui.bgPanel[6].setVisible(false);
         gm.ui.bgPanel[7].setVisible(true);
         gm.ui.bgPanel[8].setVisible(false);
+        gm.ui.bgPanel[9].setVisible(false);
+        gm.ui.bgPanel[10].setVisible(false);
     }
     
     public void showScreen8(){
@@ -133,6 +147,35 @@ public class SceneChanger {
         gm.ui.bgPanel[6].setVisible(false);
         gm.ui.bgPanel[7].setVisible(false);
         gm.ui.bgPanel[8].setVisible(true);
+        gm.ui.statsText.setVisible(true);
+        gm.ui.bgPanel[9].setVisible(false);
+        gm.ui.bgPanel[10].setVisible(false);
+    }
+    
+    public void showScreen9(){
+        gm.ui.bgPanel[1].setVisible(false);
+        gm.ui.bgPanel[2].setVisible(false);
+        gm.ui.bgPanel[3].setVisible(false);
+        gm.ui.bgPanel[4].setVisible(false);
+        gm.ui.bgPanel[5].setVisible(false);
+        gm.ui.bgPanel[6].setVisible(false);
+        gm.ui.bgPanel[7].setVisible(false);
+        gm.ui.bgPanel[8].setVisible(false);
+        gm.ui.bgPanel[9].setVisible(true);
+        gm.ui.bgPanel[10].setVisible(false);
+    }
+    
+    public void showScreen10(){
+        gm.ui.bgPanel[1].setVisible(false);
+        gm.ui.bgPanel[2].setVisible(false);
+        gm.ui.bgPanel[3].setVisible(false);
+        gm.ui.bgPanel[4].setVisible(false);
+        gm.ui.bgPanel[5].setVisible(false);
+        gm.ui.bgPanel[6].setVisible(false);
+        gm.ui.bgPanel[7].setVisible(false);
+        gm.ui.bgPanel[8].setVisible(false);
+        gm.ui.bgPanel[9].setVisible(false);
+        gm.ui.bgPanel[10].setVisible(true);
     }
     
 }

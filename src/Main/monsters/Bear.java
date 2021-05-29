@@ -5,24 +5,22 @@
  */
 package Main.monsters;
 
-import Main.monsters.Monster;
-
 /**
  *
  * @author Marcin
  */
-public class Goblin extends Monster{
-
-    int health = 30;
-    int exp = 100;
-    String name = "Goblin";
-    int gold = 10;
+public class Bear extends Monster {
     
-    int ATK = 2;
-    int DEF = 1;
-    int SPD = 3;
+    int health = 200;
+    int exp = 300;
+    String name = "Bear";
+    int gold = 0;
+    
+    int ATK = 10;
+    int DEF = 4;
+    int SPD = 4;
 
-    public Goblin() {
+    public Bear() {
     }
 
     @Override
@@ -92,11 +90,5 @@ public class Goblin extends Monster{
     public void setGold(int gold) {
         this.gold = gold;
     }
-    
-    
-    
-    
-    
-    
     
 }

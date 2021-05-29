@@ -47,6 +47,7 @@ public class UI {
     public JButton choice1, choice2, choice3, choice4;
     public JPanel bgPanel[] = new JPanel[20];
     public JLabel bgLabel[] = new JLabel[20];
+    public JTextArea statsText;
     
     Font titleFont = new Font("Times New Roman",Font.PLAIN, 100);
     Font normalFont = new Font("Book Antiqua", Font.PLAIN, 36);
@@ -286,9 +287,24 @@ public class UI {
         bgPanel[7].add(bgLabel[7]);
         
         
-        //SCENE 8 Inventory
+        //SCENE 8   Inventory
         
         inventoryScreen();
+        statsText.setVisible(false);
+        
+        //SCENE 9   Dungeon Entrance
+        
+        createBackground(9, "/res/dungeon_entrance.jpg");
+        createObjectInteractable(9,20,70,400,400,"/res/hunter.png", "Talk", "Interact", "Look", "talk_hunter", "interact_hunter", "look_hunter");
+        bgPanel[9].add(bgLabel[9]);
+        
+        //SCENE 10  Woods
+        
+        createBackground(10, "/res/woods.jpg");
+        createObject(10, 210,30,463,500,"/res/bear.png");
+        bgPanel[10].add(bgLabel[10]);
+        
+        
         
         
     }
@@ -347,7 +363,7 @@ public class UI {
         wpnLabel.setFont(playerInfoFont);
         wpnLabel.setBackground(Color.black);
         wpnLabel.setForeground(Color.white);
-        wpnLabel.setText(gm.playerInfo.getWeapon() + "   ");
+        wpnLabel.setText(gm.playerInfo.getWeapon().getName() + "   ");
         playerInfoPanel.add(wpnLabel);
         
         JLabel armor = new JLabel();
@@ -360,7 +376,7 @@ public class UI {
         armLabel.setFont(playerInfoFont);
         armLabel.setBackground(Color.black);
         armLabel.setForeground(Color.white);
-        armLabel.setText(gm.playerInfo.getArmor() + "   ");
+        armLabel.setText(gm.playerInfo.getArmor().getName() + "   ");
         playerInfoPanel.add(armLabel);
         
         JLabel cash = new JLabel();
@@ -740,11 +756,57 @@ public class UI {
     
      /**********************************************************************************************************************************/
     
+    
+    public void addSmithBuyMenu(){
+        
+        choiceButtonPanel.setVisible(false);
+        window.remove(choiceButtonPanel);
+        
+        choiceButtonPanel = new JPanel(new GridLayout(1,4,10,10));
+        choiceButtonPanel.setBounds(64, 640, 896, 100);
+        choiceButtonPanel.setBackground(Color.black);
+        window.add(choiceButtonPanel);
+        
+        choice1 = new JButton("War Axe");
+        choice1.setBackground(Color.black);
+        choice1.setForeground(Color.white);
+        choice1.setFont(playerInfoFont);
+        choice1.addActionListener(gm.dialogChoiceHandler);
+        choice1.setActionCommand("buy_axe");
+        choiceButtonPanel.add(choice1);
+        
+        choice2 = new JButton("Soldier Armor");
+        choice2.setBackground(Color.black);
+        choice2.setForeground(Color.white);
+        choice2.setFont(playerInfoFont);
+        choice2.addActionListener(gm.dialogChoiceHandler);
+        choice2.setActionCommand("buy_sarmor");
+        choiceButtonPanel.add(choice2);
+        
+        choice3 = new JButton("Strength Amulet");
+        choice3.setBackground(Color.black);
+        choice3.setForeground(Color.white);
+        choice3.setFont(playerInfoFont);
+        choice3.addActionListener(gm.dialogChoiceHandler);
+        choice3.setActionCommand("buy_amulet");
+        choiceButtonPanel.add(choice3);
+        
+        choice4 = new JButton("<<<");
+        choice4.setBackground(Color.black);
+        choice4.setForeground(Color.white);
+        choice4.setFont(playerInfoFont);
+        choice4.addActionListener(gm.dialogChoiceHandler);
+        choice4.setActionCommand("nothing");
+        choiceButtonPanel.add(choice4);
+        
+    }
+    
+    
+    /**********************************************************************************************************************************/
+    
     public void inventoryScreen(){
         
-        
-        /* 5x4 inventory for weapons, armor, key items and also stats and level on the side, have to figure out how to go back to current scene*/
-        
+
         bgPanel[8] = new JPanel();
         bgPanel[8].setBounds(110,50,800,500);
         bgPanel[8].setBackground(Color.BLACK);
@@ -768,7 +830,7 @@ public class UI {
         
         menuItem[0] = new JMenuItem("Equip");
         menuItem[0].addActionListener(gm.weaponChoiceHandler);
-        menuItem[0].setActionCommand("equip_brswrd");
+        menuItem[0].setActionCommand("equip_brdswrd");
         popMenu.add(menuItem[0]);
         
         menuItem[1] = new JMenuItem("Examine");
@@ -779,6 +841,7 @@ public class UI {
         objectIcon = new ImageIcon(getClass().getResource("/res/broadsword.png"));
         j1x1.setIcon(objectIcon);
         
+        //MouseListener ml;
         
         j1x1.addMouseListener(new MouseListener(){
         
@@ -861,17 +924,12 @@ public class UI {
         
         JPopupMenu popMenu3 = new JPopupMenu();
         
-        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0] = new JMenuItem("Examine");
         menuItem[0].addActionListener(gm.weaponChoiceHandler);
-        menuItem[0].setActionCommand("equip_empty");
+        menuItem[0].setActionCommand("examine_empty");
         popMenu3.add(menuItem[0]);
         
-        menuItem[1] = new JMenuItem("Examine");
-        menuItem[1].addActionListener(gm.weaponChoiceHandler);
-        menuItem[1].setActionCommand("examine_empty");
-        popMenu3.add(menuItem[1]);
-        
-        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty2.png"));
         j3x1.setIcon(objectIcon);
         
         j3x1.addMouseListener(new MouseListener(){
@@ -910,17 +968,12 @@ public class UI {
         
         JPopupMenu popMenu4 = new JPopupMenu();
         
-        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0] = new JMenuItem("Examine");
         menuItem[0].addActionListener(gm.weaponChoiceHandler);
-        menuItem[0].setActionCommand("equip_empty");
+        menuItem[0].setActionCommand("examine_empty");
         popMenu4.add(menuItem[0]);
         
-        menuItem[1] = new JMenuItem("Examine");
-        menuItem[1].addActionListener(gm.weaponChoiceHandler);
-        menuItem[1].setActionCommand("examine_empty");
-        popMenu4.add(menuItem[1]);
-        
-        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty2.png"));
         j4x1.setIcon(objectIcon);
         
         j4x1.addMouseListener(new MouseListener(){
@@ -1050,17 +1103,12 @@ public class UI {
         
         JPopupMenu popMenu7 = new JPopupMenu();
         
-        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0] = new JMenuItem("Examine");
         menuItem[0].addActionListener(gm.weaponChoiceHandler);
-        menuItem[0].setActionCommand("equip_empty");
+        menuItem[0].setActionCommand("examine_empty");
         popMenu7.add(menuItem[0]);
         
-        menuItem[1] = new JMenuItem("Examine");
-        menuItem[1].addActionListener(gm.weaponChoiceHandler);
-        menuItem[1].setActionCommand("examine_empty");
-        popMenu7.add(menuItem[1]);
-        
-        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty2.png"));
         j3x2.setIcon(objectIcon);
         
         j3x2.addMouseListener(new MouseListener(){
@@ -1097,17 +1145,12 @@ public class UI {
         
         JPopupMenu popMenu8 = new JPopupMenu();
         
-        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0] = new JMenuItem("Examine");
         menuItem[0].addActionListener(gm.weaponChoiceHandler);
-        menuItem[0].setActionCommand("equip_empty");
+        menuItem[0].setActionCommand("examine_empty");
         popMenu8.add(menuItem[0]);
         
-        menuItem[1] = new JMenuItem("Examine");
-        menuItem[1].addActionListener(gm.weaponChoiceHandler);
-        menuItem[1].setActionCommand("examine_empty");
-        popMenu8.add(menuItem[1]);
-        
-        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty2.png"));
         j4x2.setIcon(objectIcon);
         
         j4x2.addMouseListener(new MouseListener(){
@@ -1240,17 +1283,12 @@ public class UI {
         
         JPopupMenu popMenu11 = new JPopupMenu();
         
-        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0] = new JMenuItem("Examine");
         menuItem[0].addActionListener(gm.weaponChoiceHandler);
-        menuItem[0].setActionCommand("equip_empty");
+        menuItem[0].setActionCommand("examine_empty");
         popMenu11.add(menuItem[0]);
         
-        menuItem[1] = new JMenuItem("Examine");
-        menuItem[1].addActionListener(gm.weaponChoiceHandler);
-        menuItem[1].setActionCommand("examine_empty");
-        popMenu11.add(menuItem[1]);
-        
-        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty2.png"));
         j3x3.setIcon(objectIcon);
         
         j3x3.addMouseListener(new MouseListener(){
@@ -1287,17 +1325,12 @@ public class UI {
         
         JPopupMenu popMenu12 = new JPopupMenu();
         
-        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0] = new JMenuItem("Examine");
         menuItem[0].addActionListener(gm.weaponChoiceHandler);
-        menuItem[0].setActionCommand("equip_empty");
+        menuItem[0].setActionCommand("examine_empty");
         popMenu12.add(menuItem[0]);
         
-        menuItem[1] = new JMenuItem("Examine");
-        menuItem[1].addActionListener(gm.weaponChoiceHandler);
-        menuItem[1].setActionCommand("examine_empty");
-        popMenu12.add(menuItem[1]);
-        
-        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty2.png"));
         j4x3.setIcon(objectIcon);
         
         j4x3.addMouseListener(new MouseListener(){
@@ -1430,17 +1463,12 @@ public class UI {
         
         JPopupMenu popMenu15 = new JPopupMenu();
         
-        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0] = new JMenuItem("Examine");
         menuItem[0].addActionListener(gm.weaponChoiceHandler);
-        menuItem[0].setActionCommand("equip_empty");
+        menuItem[0].setActionCommand("examine_empty");
         popMenu15.add(menuItem[0]);
         
-        menuItem[1] = new JMenuItem("Examine");
-        menuItem[1].addActionListener(gm.weaponChoiceHandler);
-        menuItem[1].setActionCommand("examine_empty");
-        popMenu15.add(menuItem[1]);
-        
-        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty2.png"));
         j3x4.setIcon(objectIcon);
         
         j3x4.addMouseListener(new MouseListener(){
@@ -1478,17 +1506,12 @@ public class UI {
         
         JPopupMenu popMenu16 = new JPopupMenu();
         
-        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0] = new JMenuItem("Examine");
         menuItem[0].addActionListener(gm.weaponChoiceHandler);
-        menuItem[0].setActionCommand("equip_empty");
+        menuItem[0].setActionCommand("examine_empty");
         popMenu16.add(menuItem[0]);
         
-        menuItem[1] = new JMenuItem("Examine");
-        menuItem[1].addActionListener(gm.weaponChoiceHandler);
-        menuItem[1].setActionCommand("examine_empty");
-        popMenu16.add(menuItem[1]);
-        
-        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty2.png"));
         j4x4.setIcon(objectIcon);
         
         j4x4.addMouseListener(new MouseListener(){
@@ -1619,17 +1642,12 @@ public class UI {
         
         JPopupMenu popMenu19 = new JPopupMenu();
         
-        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0] = new JMenuItem("Examine");
         menuItem[0].addActionListener(gm.weaponChoiceHandler);
-        menuItem[0].setActionCommand("equip_empty");
+        menuItem[0].setActionCommand("examine_empty");
         popMenu19.add(menuItem[0]);
         
-        menuItem[1] = new JMenuItem("Examine");
-        menuItem[1].addActionListener(gm.weaponChoiceHandler);
-        menuItem[1].setActionCommand("examine_empty");
-        popMenu19.add(menuItem[1]);
-        
-        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty2.png"));
         j3x5.setIcon(objectIcon);
         
         j3x5.addMouseListener(new MouseListener(){
@@ -1666,17 +1684,12 @@ public class UI {
         
         JPopupMenu popMenu20 = new JPopupMenu();
         
-        menuItem[0] = new JMenuItem("Equip");
+        menuItem[0] = new JMenuItem("Examine");
         menuItem[0].addActionListener(gm.weaponChoiceHandler);
-        menuItem[0].setActionCommand("equip_empty");
+        menuItem[0].setActionCommand("examine_empty");
         popMenu20.add(menuItem[0]);
         
-        menuItem[1] = new JMenuItem("Examine");
-        menuItem[1].addActionListener(gm.weaponChoiceHandler);
-        menuItem[1].setActionCommand("examine_empty");
-        popMenu20.add(menuItem[1]);
-        
-        objectIcon = new ImageIcon(getClass().getResource("/res/empty.png"));
+        objectIcon = new ImageIcon(getClass().getResource("/res/empty2.png"));
         j4x5.setIcon(objectIcon);
         
         j4x5.addMouseListener(new MouseListener(){
@@ -1713,19 +1726,8 @@ public class UI {
         
         
         
-        JTextArea statsText = new JTextArea("   \nLevel 1\n"
-                + "Hero: You\nATK:50\n");
-        statsText.setBounds(500,0,300,500);
-        statsText.setBackground(Color.DARK_GRAY);
-        statsText.setForeground(Color.WHITE);
-        statsText.setEditable(false);
-        statsText.setLineWrap(true);
-        statsText.setWrapStyleWord(true);
-        statsText.setFont(new Font("Book Antiqua", Font.PLAIN, 26));
-        
-        
         bgPanel[8].add(inventoryPanel);
-        bgPanel[8].add(statsText);
+        makeStatsText();
         
 
         
@@ -1735,6 +1737,32 @@ public class UI {
     }
     
 
+    /**********************************************************************************************************************************/
+    
+    public void makeStatsText(){
+        
+        
+        if(statsText != null){
+            statsText.setVisible(false);
+            bgPanel[8].remove(statsText);
+            window.remove(statsText);
+        }
+        
+        statsText = new JTextArea("   \nClass: Adventurer\n"
+                + "Level: " + gm.playerInfo.getLevel() + "\n\n" + "ATK: " + gm.playerInfo.getModifiedATK() + " (" + gm.playerInfo.getATK()+ ")\n" +
+                "DEF: " + gm.playerInfo.getModfifiedDEF() + " (" + gm.playerInfo.getDEF()+ ")\n");
+        statsText.setBounds(500,0,300,500);
+        statsText.setBackground(Color.DARK_GRAY);
+        statsText.setForeground(Color.WHITE);
+        statsText.setEditable(false);
+        statsText.setLineWrap(true);
+        statsText.setWrapStyleWord(true);
+        statsText.setFont(new Font("Book Antiqua", Font.PLAIN, 26));
+        
+        bgPanel[8].add(statsText);
+        
+    }
+    
     /**********************************************************************************************************************************/
     
     public void goBack(){
@@ -1813,6 +1841,8 @@ public class UI {
         else if (bgPanel[5].isVisible()) currentScene = 5;
         else if (bgPanel[6].isVisible()) currentScene = 6;
         else if (bgPanel[7].isVisible()) currentScene = 7;
+        else if (bgPanel[9].isVisible()) currentScene = 9;
+        else if (bgPanel[10].isVisible()) currentScene = 10;
         
     }
     
@@ -1827,6 +1857,8 @@ public class UI {
         if (currentScene == 5) gm.sceneChanger.showScreen5();
         if (currentScene == 6) gm.sceneChanger.showScreen6();
         if (currentScene == 7) gm.sceneChanger.showScreen7();
+        if (currentScene == 9) gm.sceneChanger.showScreen9();
+        if (currentScene == 10) gm.sceneChanger.showScreen10();
         
         
     }
