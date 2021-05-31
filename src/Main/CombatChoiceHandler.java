@@ -160,6 +160,7 @@ public class CombatChoiceHandler implements ActionListener{
                         gm.ui.addFightMenu();
                     } else {
                         gm.ui.messageText.setText("The " + gm.monster.getName() + " was defeated!\n You gain " + gm.monster.getExp() + "exp");
+                        gm.music.stop();
                         if (gm.monster.getName().equals("Goblin") && gm.ui.goblinFlag){
                             //gm.ui.messageText.setText("testg");
                             gm.ui.bgPanel[3].remove(0);
