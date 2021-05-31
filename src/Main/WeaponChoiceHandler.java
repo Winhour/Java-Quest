@@ -109,6 +109,11 @@ public class WeaponChoiceHandler implements ActionListener {
                 gm.ui.messageText.setForeground(Color.white);
                 break;
                 
+            case "examine_ore"  :
+                gm.ui.messageText.setText("A majestic ore glinting with the shine of moonlight");
+                gm.ui.messageText.setForeground(Color.white);
+                break;    
+                
             
         }
                 

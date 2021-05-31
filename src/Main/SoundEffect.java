@@ -48,5 +48,33 @@ public class SoundEffect {
         
     }
     
+    public void play_low(){
+        
+        clip.setFramePosition(0);
+        FloatControl gainControl = 
+        (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(-25.0f);
+        clip.start();
+        
+    }
+    
+    public void play_nog(){
+        
+        clip.setFramePosition(0);
+        clip.start();
+        
+    }
+    
+    public void loop(){
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+    }
+    
+    public void stop(){
+        
+        clip.stop();
+        clip.close();
+        
+    }
+    
     
 }

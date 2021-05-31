@@ -117,7 +117,7 @@ public class DialogChoiceHandler implements ActionListener{
                     gm.ui.addMoveMenu("Town", "Item Shop", "Dungeon", "move_twn2", "move_ishop", "move_dunent");
                 }
                 else if (gm.ui.bgPanel[2].isVisible()){
-                    gm.ui.addMoveMenu("Stairway", "Sideroom", "Metal Door", "move_treas1", "move_side2", "move_treas2");
+                    gm.ui.addMoveMenu("Stairway", "Mine", "Metal Door", "move_treas1", "move_mine", "move_treas2");
                 }
                 else if (gm.ui.bgPanel[3].isVisible()){
                     gm.ui.addMoveMenu("Entrance", "Sideroom", "Wooden Door", "move_dunent", "move_side", "move_treas1");
@@ -135,13 +135,22 @@ public class DialogChoiceHandler implements ActionListener{
                     gm.ui.addMoveMenu("Town", "", "", "move_twn2", "", "");
                 }
                 else if (gm.ui.bgPanel[9].isVisible()){
-                    gm.ui.addMoveMenu("Outskirts", "Woods", "Inside", "move_twn", "move_woods", "move_gobdun");
+                    gm.ui.addMoveMenu("Outskirts", "Woods", "Inside", "move_twn_back", "move_woods", "move_gobdun");
                 }
                 else if (gm.ui.bgPanel[10].isVisible()){
                     gm.ui.addMoveMenu("Entrance", "", "", "move_dunent", "", "");
                 }
                 else if (gm.ui.bgPanel[11].isVisible()){
                     gm.ui.addMoveMenu("Wooden Door", "Stairway", "Chapel", "move_gobdun", "move_skedun", "move_chapel");
+                }
+                else if (gm.ui.bgPanel[12].isVisible()){
+                    gm.ui.addMoveMenu("Path", "", "", "move_gobdun", "", "");
+                }
+                else if (gm.ui.bgPanel[13].isVisible()){
+                    gm.ui.addMoveMenu("Hallway", "", "", "move_treas1", "", "");
+                }
+                else if (gm.ui.bgPanel[14].isVisible()){
+                    gm.ui.addMoveMenu("Catacombs", "", "", "move_skedun", "", "");
                 }
                 else {
                     gm.ui.addMoveMenu("Town", "Item Shop", "Dungeon", "move_twn2", "move_ishop", "move_gobdun");
@@ -153,6 +162,17 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 
             case "move_twn":
+                gm.sceneChanger.showScreen1();
+                gm.ui.messageText.setText("I think I'm ready to set off.");
+                gm.ui.messageText.setForeground(Color.yellow);
+                gm.ui.addInteractMenu();
+                break;
+                
+            case "move_twn_back":
+                gm.music.stop();
+                gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_one.wav");
+                gm.music.play_low();
+                gm.music.loop();
                 gm.sceneChanger.showScreen1();
                 gm.ui.messageText.setText("Back here again...");
                 gm.ui.messageText.setForeground(Color.yellow);
@@ -200,6 +220,9 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.sceneChanger.showScreen10();
                 if(gm.ui.bearFlag){
                     gm.monster = new Bear();
+                    gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/Fight.wav");
+                    gm.music.play_low();
+                    gm.music.loop();
                     gm.ui.messageText.setText("You come across an enraged bear!"); 
                     gm.ui.messageText.setForeground(Color.white);
                     gm.ui.addFightMenu();
@@ -217,17 +240,50 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setForeground(Color.white);
                 gm.ui.addInteractMenu();
                 break; 
+                
+            case "move_side":
+                gm.sceneChanger.showScreen12();
+                gm.ui.messageText.setText("There is nothing of interest here (yet)");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addInteractMenu();
+                break;     
+                
+            case "move_chapel":
+                gm.sceneChanger.showScreen13();
+                gm.ui.messageText.setText("[There will be an NPC here]");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addInteractMenu();
+                break;      
+                
+            case "move_mine":
+                gm.sceneChanger.showScreen14();
+                gm.ui.messageText.setText("You find an abandoned mine.");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addInteractMenu();
+                break; 
+                
+            case "move_treas2":
+                gm.ui.messageText.setText("Not yet implemented.");
+                gm.ui.messageText.setForeground(Color.white);
+                break;
             
             case "move_gobdun":
                 gm.ui.rememberCurrentScene();
+                
                 gm.sceneChanger.showScreen3();
                 if(gm.ui.goblinFlag){
                     gm.monster = new Goblin();
+                    gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/Fight.wav");
+                    gm.music.play_low();
+                    gm.music.loop();
                     gm.ui.messageText.setText("A goblin appears!"); 
                     gm.ui.messageText.setForeground(Color.white);
                     gm.ui.addFightMenu();
                 }
                 else {
+                    gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_adventure.wav");
+                    gm.music.play_low();
+                    gm.music.loop();
                     gm.ui.messageText.setText("Hopefully I don't run into more of these annoying things."); 
                     gm.ui.messageText.setForeground(Color.yellow);
                     gm.ui.addInteractMenu();
@@ -239,11 +295,17 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.sceneChanger.showScreen2();
                 if(gm.ui.skeleFlag){
                     gm.monster = new Skeletons();
+                    gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/Fight.wav");
+                    gm.music.play_low();
+                    gm.music.loop();
                     gm.ui.messageText.setText("The dead burst out from their tombs!"); 
                     gm.ui.messageText.setForeground(Color.white);
                     gm.ui.addFightMenu();
                 }
                 else {
+                    gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_adventure.wav");
+                    gm.music.play_low();
+                    gm.music.loop();
                     gm.ui.messageText.setText("I wonder what's in that room..."); 
                     gm.ui.messageText.setForeground(Color.yellow);
                     gm.ui.addInteractMenu();
@@ -278,6 +340,11 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setForeground(Color.white);
                 break;    
                 
+            case "talk_mayor":
+                gm.ui.addTalkMenu("Topic 1", "Topic 2", "Topic 3", "nothing", "nothing", "nothing");
+                gm.ui.messageText.setText("Ask about: ");
+                gm.ui.messageText.setForeground(Color.white);
+                break;   
                 
                 
                 
@@ -641,7 +708,7 @@ public class DialogChoiceHandler implements ActionListener{
                 break;    
                 
                 
-            /* Asking the Huner about Dungeon */    
+            /* Asking the Hunter about Dungeon */    
                 
             case "dungeon_info":
                 
@@ -664,6 +731,226 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                 break; 
                 
+            /* Asking the Hunter about Hunting */     
+                
+            case "hunting_talk":
+                
+                gm.ui.messageText.setText("\"I need you to bring me a bear pelt\"");        
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choiceButtonPanel.setVisible(false);
+                gm.ui.window.remove(gm.ui.choiceButtonPanel);
+        
+                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
+                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
+                gm.ui.choiceButtonPanel.setBackground(Color.black);
+                gm.ui.window.add(gm.ui.choiceButtonPanel);
+        
+                gm.ui.choice1 = new JButton("Continue");
+                gm.ui.choice1.setBackground(Color.black);
+                gm.ui.choice1.setForeground(Color.white);
+                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
+                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
+                gm.ui.choice1.setActionCommand("nothing");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;     
+                
+            /* Asking the Hunter about Woods */     
+                
+            case "woods_info":
+                
+                gm.ui.messageText.setText("\"These woods are very cool etc.\"");        
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choiceButtonPanel.setVisible(false);
+                gm.ui.window.remove(gm.ui.choiceButtonPanel);
+        
+                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
+                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
+                gm.ui.choiceButtonPanel.setBackground(Color.black);
+                gm.ui.window.add(gm.ui.choiceButtonPanel);
+        
+                gm.ui.choice1 = new JButton("Continue");
+                gm.ui.choice1.setBackground(Color.black);
+                gm.ui.choice1.setForeground(Color.white);
+                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
+                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
+                gm.ui.choice1.setActionCommand("nothing");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;    
+                
+                
+            /* Asking Smith about the Demon Lord */    
+                
+            case "dl_smith":
+                
+                gm.ui.messageText.setText("\"The Demon Lord is immune to attacks from normal weapons\"");        
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choiceButtonPanel.setVisible(false);
+                gm.ui.window.remove(gm.ui.choiceButtonPanel);
+        
+                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
+                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
+                gm.ui.choiceButtonPanel.setBackground(Color.black);
+                gm.ui.window.add(gm.ui.choiceButtonPanel);
+        
+                gm.ui.choice1 = new JButton("Continue");
+                gm.ui.choice1.setBackground(Color.black);
+                gm.ui.choice1.setForeground(Color.white);
+                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
+                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
+                gm.ui.choice1.setActionCommand("dl_smith2");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;        
+                
+            case "dl_smith2":    
+                
+                gm.ui.messageText.setText("\"You need a special blade created from a magical ore to harm him\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("dl_smith3");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;       
+                
+            case "dl_smith3":    
+                
+                gm.ui.messageText.setText("\"Should you bring one to me, I will be able to create such a weapon\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("dl_smith4");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;     
+                
+            case "dl_smith4":    
+                
+                gm.ui.messageText.setText("\"So, you need me to find you a rock?\"");
+                gm.ui.messageText.setForeground(Color.yellow);
+                gm.ui.choice1.setActionCommand("dl_smith5");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;      
+                
+            case "dl_smith5":    
+                
+                gm.ui.messageText.setText("\"There might be a fitting one somewhere in the dungeon\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("dl_smith6");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;       
+                
+            case "dl_smith6":    
+                
+                gm.ui.messageText.setText("\"Don't face the Demon Lord without the right weapon, understood?\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("nothing");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;       
+                
+            
+            /* Asking Smith about the Town */     
+                
+            case "smith_info":
+                
+                gm.ui.messageText.setText("\"Starhome used to be a huge city, a pride of this kingdom\"");        
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choiceButtonPanel.setVisible(false);
+                gm.ui.window.remove(gm.ui.choiceButtonPanel);
+        
+                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
+                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
+                gm.ui.choiceButtonPanel.setBackground(Color.black);
+                gm.ui.window.add(gm.ui.choiceButtonPanel);
+        
+                gm.ui.choice1 = new JButton("Continue");
+                gm.ui.choice1.setBackground(Color.black);
+                gm.ui.choice1.setForeground(Color.white);
+                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
+                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
+                gm.ui.choice1.setActionCommand("smith_info2");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;    
+                
+            case "smith_info2":    
+                
+                gm.ui.messageText.setText("\"Recently though, the people started to flee to the capitol...\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("smith_info3");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;     
+                
+            case "smith_info3":    
+                
+                gm.ui.messageText.setText("\"It was due to Demon Lord's attacks of course.\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("smith_info4");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;     
+                
+            case "smith_info4":    
+                
+                gm.ui.messageText.setText("\"If some hero doesn't stop all this monster business soon...\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("smith_info5");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;      
+                
+            case "smith_info5":    
+                
+                gm.ui.messageText.setText("\"I fear this town will get overran\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("smith_info6");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;      
+                
+            case "smith_info6":    
+                
+                gm.ui.messageText.setText("\"I won't let that happen\"");
+                gm.ui.messageText.setForeground(Color.yellow);
+                gm.ui.choice1.setActionCommand("nothing");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;       
+                
+            /* Asking the Smith for tips */    
+                
+            case "tips_smith":
+                
+                gm.ui.messageText.setText("\"I sold one of my finest swords recently to Klethys the Hunter\"");        
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choiceButtonPanel.setVisible(false);
+                gm.ui.window.remove(gm.ui.choiceButtonPanel);
+        
+                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
+                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
+                gm.ui.choiceButtonPanel.setBackground(Color.black);
+                gm.ui.window.add(gm.ui.choiceButtonPanel);
+        
+                gm.ui.choice1 = new JButton("Continue");
+                gm.ui.choice1.setBackground(Color.black);
+                gm.ui.choice1.setForeground(Color.white);
+                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
+                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
+                gm.ui.choice1.setActionCommand("tips_smith2");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;          
+                
+            case "tips_smith2":    
+                
+                gm.ui.messageText.setText("\"He often stalks his prey in the Woods close to the Dungeon\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("tips_smith3");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;      
+                
+            case "tips_smith3":    
+                
+                gm.ui.messageText.setText("\"Maybe hed'd be willing to trade if you help him out?\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("tips_smith4");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;     
+                
+             case "tips_smith4":    
+                
+                gm.ui.messageText.setText("\"I'll think about it\"");
+                gm.ui.messageText.setForeground(Color.yellow);
+                gm.ui.choice1.setActionCommand("nothing");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;   
                 
             /* Priest interact */    
                 
@@ -678,7 +965,9 @@ public class DialogChoiceHandler implements ActionListener{
             case "priest_heal":
                 
                 if (gm.playerInfo.getCash() >= 20){
-                
+                    
+                    se.setFile(System.getProperty("user.dir") + "/src/res/sound/heal_sound_s.wav");
+                    se.play_nog();
                     gm.ui.messageText.setText("You feel a refreshing magic surging through you!\n Fully recovered HP and Mana.");
                     gm.playerInfo.setCash(gm.playerInfo.getCash()-20);
                     gm.playerInfo.setHealth(gm.playerInfo.getMaxhealth());
@@ -710,9 +999,18 @@ public class DialogChoiceHandler implements ActionListener{
                 
             case "interact_smith":
                 
-                gm.ui.messageText.setText("\"What are you looking for, adventurer?\"");
-                gm.ui.messageText.setForeground(Color.yellow);
-                gm.ui.addSmithBuyMenu();
+                if (gm.ui.moonoreFlag){
+                    
+                    gm.ui.messageText.setText("\"You found the moon ore? Splendid, adventurer.\"");  
+                    gm.ui.messageText.setForeground(Color.white);
+                    
+                } else {
+                
+                    gm.ui.messageText.setText("\"What are you looking for, adventurer?\"");
+                    gm.ui.messageText.setForeground(Color.yellow);
+                    gm.ui.addSmithBuyMenu();
+                
+                }
                 
                 break;
                 
@@ -870,6 +1168,13 @@ public class DialogChoiceHandler implements ActionListener{
 
                 break;
                 
+            case "interact_mayor":
+                
+                gm.ui.messageText.setText("\"[Some kind of interaction here]\"");
+                gm.ui.messageText.setForeground(Color.yellow);
+
+                break;
+                
                 
             /* Priest look */  
                 
@@ -926,6 +1231,79 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.addPlayerInfo();
 
                 break;
+                
+            case "examine_shelf":
+                gm.ui.messageText.setText("You notice bookshelves filled with eastern picture books named \"Single Peace\"");
+                gm.ui.messageText.setForeground(Color.white);
+                
+                break;
+                
+            case "interact_shelf":
+                
+                /* Let's make it infinite for now */
+                
+                gm.ui.messageText.setText("You found 10 gold!");
+                gm.playerInfo.setCash(gm.playerInfo.getCash()+10);
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addPlayerInfo();
+
+                break;    
+                
+            case "examine_ore":
+                gm.ui.messageText.setText("A majestic ore glinting with the shine of moonlight");
+                gm.ui.messageText.setForeground(Color.white);
+                
+                break;
+                
+            case "grab_ore":
+                
+                gm.ui.bgPanel[14].remove(0);
+                
+                gm.ui.messageText.setText("You acquired [MOON ORE]");
+                gm.ui.messageText.setForeground(Color.white);
+                
+                gm.ui.j4x2.setIcon(new ImageIcon(getClass().getResource("/res/ore_item.png")));
+
+                        JMenuItem menuItem[] = new JMenuItem[2];
+
+                        JPopupMenu popMenu = new JPopupMenu();
+
+                        menuItem[0] = new JMenuItem("Examine");
+                        menuItem[0].addActionListener(gm.weaponChoiceHandler);
+                        menuItem[0].setActionCommand("examine_ore");
+                        popMenu.add(menuItem[0]);
+
+                        gm.ui.j4x2.addMouseListener(new MouseListener(){
+
+
+                            @Override
+                            public void mouseClicked(MouseEvent e){}
+
+                            @Override
+                            public void mousePressed(MouseEvent e){
+
+                                if (SwingUtilities.isRightMouseButton(e)){
+                                    popMenu.show(gm.ui.j4x2, e.getX(), e.getY());
+                                }
+
+                            }
+
+                            @Override
+                            public void mouseReleased(MouseEvent e){}
+
+                            @Override
+                            public void mouseEntered(MouseEvent e){}
+
+                            @Override
+                            public void mouseExited(MouseEvent e){}
+
+
+                        });
+                        
+                    gm.ui.moonoreFlag = true;
+                     
+                    break;    
+
                 
             case "nothing":
                 gm.ui.addInteractMenu();

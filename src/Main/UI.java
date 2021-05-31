@@ -5,9 +5,7 @@
  */
 package Main;
 
-import Main.monsters.Goblin;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -62,6 +60,7 @@ public class UI {
     boolean skeleFlag = true;
     boolean bearFlag = true;
     boolean bearpeltFlag = false;
+    boolean moonoreFlag = false;
     
     public JLabel j1x1, j1x2, j1x3, j1x4;
     public JLabel j2x1, j2x2, j2x3, j2x4;
@@ -273,6 +272,7 @@ public class UI {
         //SCENE 5   Shop
         
         createBackground(5, "/res/shop.jpg");
+        createObjectInteractable(5,270,180,100,100,"/res/blank.png", "Examine", "Interact", "", "examine_shelf", "interact_shelf", "nothing");
         bgPanel[5].add(bgLabel[5]);
         
         //SCENE 6   Smith
@@ -311,6 +311,22 @@ public class UI {
         createBackground(11, "/res/dungeon_hallway.jpg");
         createObjectInteractable(11, 210,170,300,300,"/res/chest.png","Open","Examine","","open_chest","examine_chest","nothing");
         bgPanel[11].add(bgLabel[11]);
+        
+        //SCENE 12  Dungeon Sideroom
+        
+        createBackground(12, "/res/side_room.jpg");
+        bgPanel[12].add(bgLabel[12]);
+        
+        //SCENE 13  Dungeon Chapel
+        
+        createBackground(13, "/res/chapel.jpg");
+        bgPanel[13].add(bgLabel[13]);
+
+        //SCENE 14  Dungeon Mine
+        
+        createBackground(14, "/res/mine.jpg");
+        createObjectInteractable(14, 520,270,150,100,"/res/ore.png","Grab","Examine","","grab_ore","examine_ore","nothing");
+        bgPanel[14].add(bgLabel[14]);
         
         
         
@@ -1833,6 +1849,9 @@ public class UI {
             
             window.setVisible(true);
             
+            gm.music.play_low();
+            gm.music.loop();
+            
         }
     
     }
@@ -1851,6 +1870,9 @@ public class UI {
         else if (bgPanel[9].isVisible()) currentScene = 9;
         else if (bgPanel[10].isVisible()) currentScene = 10;
         else if (bgPanel[11].isVisible()) currentScene = 11;
+        else if (bgPanel[12].isVisible()) currentScene = 12;
+        else if (bgPanel[13].isVisible()) currentScene = 13;
+        else if (bgPanel[14].isVisible()) currentScene = 14;
         
     }
     
@@ -1868,6 +1890,9 @@ public class UI {
         if (currentScene == 9) gm.sceneChanger.showScreen9();
         if (currentScene == 10) gm.sceneChanger.showScreen10();
         if (currentScene == 11) gm.sceneChanger.showScreen11();
+        if (currentScene == 12) gm.sceneChanger.showScreen12();
+        if (currentScene == 13) gm.sceneChanger.showScreen13();
+        if (currentScene == 14) gm.sceneChanger.showScreen14();
         
         
     }

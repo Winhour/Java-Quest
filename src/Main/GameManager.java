@@ -39,6 +39,9 @@ public class GameManager {
     UI ui = new UI(this);
     SceneChanger sceneChanger = new SceneChanger(this);
     
+    SoundEffect music = new SoundEffect();
+    
+    
     public static void main(String[] args) {
         
         new GameManager();
@@ -57,6 +60,10 @@ public class GameManager {
         itemlist[7] = null;
         itemlist[8] = null;
         playerInfo.setItemlist(itemlist);
+        
+        music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_one.wav");
+        
+        /* https://wingless-seraph.net/en/material-music_battle.html for music */
                
     }
     

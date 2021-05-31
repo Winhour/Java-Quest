@@ -17,6 +17,7 @@ import java.util.Random;
 public class ItemChoiceHandler implements ActionListener{
     
     GameManager gm;
+    SoundEffect se = new SoundEffect();
     Random rand = new Random();
     
     public ItemChoiceHandler(GameManager gm){
@@ -42,6 +43,9 @@ public class ItemChoiceHandler implements ActionListener{
                     gm.ui.messageText.setText("Your health is full!");
                 }
                 else {
+                    
+                    //se.setFile(System.getProperty("user.dir") + "/src/res/sound/heal_sound.wav");
+                    //se.play();
                 
                     gm.playerInfo.setHealth(gm.playerInfo.getHealth()+10);
 
@@ -69,6 +73,9 @@ public class ItemChoiceHandler implements ActionListener{
                     gm.ui.messageText.setText("Your health is full!");
                 }
                 else {
+                    
+                    //se.setFile(System.getProperty("user.dir") + "/src/res/sound/heal_sound.wav");
+                    //se.play();
                 
                     gm.playerInfo.setHealth(gm.playerInfo.getHealth()+10);
 
@@ -96,6 +103,9 @@ public class ItemChoiceHandler implements ActionListener{
                     gm.ui.messageText.setText("Your health is full!");
                 }
                 else {
+                    
+                    //se.setFile(System.getProperty("user.dir") + "/src/res/sound/heal_sound.wav");
+                    //se.play();
                 
                     gm.playerInfo.setHealth(gm.playerInfo.getHealth()+25);
 
@@ -123,6 +133,9 @@ public class ItemChoiceHandler implements ActionListener{
                     gm.ui.messageText.setText("Your health is full!");
                 }
                 else {
+                    
+                    //se.setFile(System.getProperty("user.dir") + "/src/res/sound/heal_sound.wav");
+                    //se.play();
                 
                     gm.playerInfo.setHealth(gm.playerInfo.getHealth()+25);
 

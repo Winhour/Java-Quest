@@ -54,18 +54,29 @@ public class CombatChoiceHandler implements ActionListener{
                     gm.ui.messageText.setText("You slashed at the " + gm.monster.getName() + "! It took " + damageRoll + " damage\n It attacks back! You took " + damageRoll2 + " damage");
                 } else {
                     se.play();
+                    gm.music.stop();
                     gm.ui.messageText.setText("The " + gm.monster.getName() + " was defeated!\n You gain " + gm.monster.getExp() + "exp and " + gm.monster.getGold() + "gold.");
                     gm.playerInfo.setCash(gm.playerInfo.getCash()+gm.monster.getGold());
                     
                     if (gm.monster.getName().equals("Goblin") && gm.ui.goblinFlag){
                     //gm.ui.messageText.setText("testg");
-                    gm.ui.bgPanel[3].remove(0);
-                    gm.ui.goblinFlag = false;
+                        gm.ui.bgPanel[3].remove(0);
+                        gm.ui.goblinFlag = false;
+
+                        gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_adventure.wav");
+                        gm.music.play_low();
+                        gm.music.loop();
+                    
                     }
                     if (gm.monster.getName().equals("Skeletons") && gm.ui.skeleFlag){
                         //gm.ui.messageText.setText("tests");
                         gm.ui.bgPanel[2].remove(0);
                         gm.ui.skeleFlag = false;
+                        
+                        gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_adventure.wav");
+                        gm.music.play_low();
+                        gm.music.loop();
+                    
                     }
                     if (gm.monster.getName().equals("Bear") && gm.ui.bearFlag){
                         //gm.ui.messageText.setText("tests");
@@ -73,6 +84,10 @@ public class CombatChoiceHandler implements ActionListener{
                         
                         gm.ui.messageText.setText("The " + gm.monster.getName() + " was defeated!\n You got [BEAR PELT]");
                         
+                        gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_tavern.wav");
+                        gm.music.play_low();
+                        gm.music.loop();
+
                         gm.ui.j3x2.setIcon(new ImageIcon(getClass().getResource("/res/bear_pelt.png")));
 
                         JMenuItem menuItem[] = new JMenuItem[2];
@@ -149,17 +164,29 @@ public class CombatChoiceHandler implements ActionListener{
                             //gm.ui.messageText.setText("testg");
                             gm.ui.bgPanel[3].remove(0);
                             gm.ui.goblinFlag = false;
+                            
+                            gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_adventure.wav");
+                            gm.music.play_low();
+                            gm.music.loop();
                         }
                         if (gm.monster.getName().equals("Skeletons") && gm.ui.skeleFlag){
                             //gm.ui.messageText.setText("tests");
                             gm.ui.bgPanel[2].remove(0);
                             gm.ui.skeleFlag = false;
+                            
+                            gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_adventure.wav");
+                            gm.music.play_low();
+                            gm.music.loop();
                         }
                         if (gm.monster.getName().equals("Bear") && gm.ui.bearFlag){
                         //gm.ui.messageText.setText("tests");
                         gm.ui.bgPanel[10].remove(0);
                         
                         gm.ui.messageText.setText("The " + gm.monster.getName() + " was defeated!\n You got [BEAR PELT]");
+                        
+                        gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_tavern.wav");
+                        gm.music.play_low();
+                        gm.music.loop();
                         
                         gm.ui.j3x2.setIcon(new ImageIcon(getClass().getResource("/res/bear_pelt.png")));
 

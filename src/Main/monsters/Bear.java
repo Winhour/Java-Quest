@@ -16,7 +16,7 @@ public class Bear extends Monster {
     String name = "Bear";
     int gold = 0;
     
-    int ATK = 10;
+    int ATK = 8;
     int DEF = 4;
     int SPD = 4;
 
