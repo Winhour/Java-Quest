@@ -11,7 +11,7 @@ package Main.monsters;
  */
 public class Bear extends Monster {
     
-    int health = 200;
+    int health = 150;
     int exp = 300;
     String name = "Bear";
     int gold = 0;

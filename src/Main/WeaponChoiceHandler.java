@@ -103,7 +103,11 @@ public class WeaponChoiceHandler implements ActionListener {
                 gm.ui.addPlayerInfo();
                 gm.ui.makeStatsText();
                 break;         
-                
+             
+            case "examine_bpelt"  :
+                gm.ui.messageText.setText("A lage pelt of Bear skin and fur");
+                gm.ui.messageText.setForeground(Color.white);
+                break;
                 
             
         }

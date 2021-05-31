@@ -5,6 +5,9 @@
  */
 package Main;
 
+import Main.monsters.Bear;
+import Main.monsters.Goblin;
+import Main.monsters.Skeletons;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -26,6 +29,7 @@ import javax.swing.SwingUtilities;
 public class DialogChoiceHandler implements ActionListener{
     
     GameManager gm;
+    SoundEffect se = new SoundEffect();
     
     public DialogChoiceHandler(GameManager gm){
         
@@ -71,6 +75,9 @@ public class DialogChoiceHandler implements ActionListener{
                 else if (gm.ui.bgPanel[10].isVisible()){
                     gm.ui.messageText.setText("Hope I never have to fight a Bear again.");
                 }
+                else if (gm.ui.bgPanel[11].isVisible()){
+                    gm.ui.messageText.setText("Let's press on forward.");
+                }
                 else {
                     gm.ui.messageText.setText("How in nine hells did I end up here?");
                 }
@@ -110,7 +117,7 @@ public class DialogChoiceHandler implements ActionListener{
                     gm.ui.addMoveMenu("Town", "Item Shop", "Dungeon", "move_twn2", "move_ishop", "move_dunent");
                 }
                 else if (gm.ui.bgPanel[2].isVisible()){
-                    gm.ui.addMoveMenu("Outskirts", "Sideroom", "Wooden Door", "move_twn", "move_side", "move_treas1");
+                    gm.ui.addMoveMenu("Stairway", "Sideroom", "Metal Door", "move_treas1", "move_side2", "move_treas2");
                 }
                 else if (gm.ui.bgPanel[3].isVisible()){
                     gm.ui.addMoveMenu("Entrance", "Sideroom", "Wooden Door", "move_dunent", "move_side", "move_treas1");
@@ -132,6 +139,9 @@ public class DialogChoiceHandler implements ActionListener{
                 }
                 else if (gm.ui.bgPanel[10].isVisible()){
                     gm.ui.addMoveMenu("Entrance", "", "", "move_dunent", "", "");
+                }
+                else if (gm.ui.bgPanel[11].isVisible()){
+                    gm.ui.addMoveMenu("Wooden Door", "Stairway", "Chapel", "move_gobdun", "move_skedun", "move_chapel");
                 }
                 else {
                     gm.ui.addMoveMenu("Town", "Item Shop", "Dungeon", "move_twn2", "move_ishop", "move_gobdun");
@@ -186,16 +196,33 @@ public class DialogChoiceHandler implements ActionListener{
                 break;     
                 
             case "move_woods":
+                gm.ui.rememberCurrentScene();
                 gm.sceneChanger.showScreen10();
-                gm.ui.messageText.setText("You hear sounds of nature all around.");
+                if(gm.ui.bearFlag){
+                    gm.monster = new Bear();
+                    gm.ui.messageText.setText("You come across an enraged bear!"); 
+                    gm.ui.messageText.setForeground(Color.white);
+                    gm.ui.addFightMenu();
+                }
+                else {
+                    gm.ui.messageText.setText("You hear sounds of nature all around.");
+                    gm.ui.messageText.setForeground(Color.white);
+                    gm.ui.addInteractMenu();
+                }
+                break;      
+                
+            case "move_treas1" :
+                gm.sceneChanger.showScreen11();
+                gm.ui.messageText.setText("You progress further down into the dungeon.");
                 gm.ui.messageText.setForeground(Color.white);
                 gm.ui.addInteractMenu();
-                break;      
+                break; 
             
             case "move_gobdun":
                 gm.ui.rememberCurrentScene();
                 gm.sceneChanger.showScreen3();
                 if(gm.ui.goblinFlag){
+                    gm.monster = new Goblin();
                     gm.ui.messageText.setText("A goblin appears!"); 
                     gm.ui.messageText.setForeground(Color.white);
                     gm.ui.addFightMenu();
@@ -206,6 +233,26 @@ public class DialogChoiceHandler implements ActionListener{
                     gm.ui.addInteractMenu();
                 }
                 break;
+                
+            case "move_skedun":
+                gm.ui.rememberCurrentScene();
+                gm.sceneChanger.showScreen2();
+                if(gm.ui.skeleFlag){
+                    gm.monster = new Skeletons();
+                    gm.ui.messageText.setText("The dead burst out from their tombs!"); 
+                    gm.ui.messageText.setForeground(Color.white);
+                    gm.ui.addFightMenu();
+                }
+                else {
+                    gm.ui.messageText.setText("I wonder what's in that room..."); 
+                    gm.ui.messageText.setForeground(Color.yellow);
+                    gm.ui.addInteractMenu();
+                }
+                break;    
+                
+                
+                
+                
                 
             case "talk_priest":
                 gm.ui.addTalkMenu("Demon Lord", "Religion", "Tips", "dl_priest", "religion", "tips_priest");
@@ -223,7 +270,13 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.addTalkMenu("Demon Lord", "Town", "Tips", "dl_smith", "smith_info", "tips_smith");
                 gm.ui.messageText.setText("Ask about: ");
                 gm.ui.messageText.setForeground(Color.white);
-                break;      
+                break;    
+                
+            case "talk_hunter":
+                gm.ui.addTalkMenu("Dungeon", "Hunting", "Woods", "dungeon_info", "hunting_talk", "woods_info");
+                gm.ui.messageText.setText("Ask about: ");
+                gm.ui.messageText.setForeground(Color.white);
+                break;    
                 
                 
                 
@@ -588,6 +641,30 @@ public class DialogChoiceHandler implements ActionListener{
                 break;    
                 
                 
+            /* Asking the Huner about Dungeon */    
+                
+            case "dungeon_info":
+                
+                gm.ui.messageText.setText("\"Interested in the dungeon, huh?\"");        
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choiceButtonPanel.setVisible(false);
+                gm.ui.window.remove(gm.ui.choiceButtonPanel);
+        
+                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
+                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
+                gm.ui.choiceButtonPanel.setBackground(Color.black);
+                gm.ui.window.add(gm.ui.choiceButtonPanel);
+        
+                gm.ui.choice1 = new JButton("Continue");
+                gm.ui.choice1.setBackground(Color.black);
+                gm.ui.choice1.setForeground(Color.white);
+                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
+                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
+                gm.ui.choice1.setActionCommand("nothing");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break; 
+                
+                
             /* Priest interact */    
                 
             case "interact_priest":
@@ -650,6 +727,8 @@ public class DialogChoiceHandler implements ActionListener{
                 
             case "bought_axe":
                 if (gm.playerInfo.getCash() >= 40){
+                    se.setFile(System.getProperty("user.dir") + "/src/res/sound/coin_sound.wav");
+                    se.play();
                     gm.playerInfo.setCash(gm.playerInfo.getCash()-40);
                     gm.ui.addPlayerInfo();
                     gm.ui.messageText.setText("\"Now that I got this shiny new Axe, I should try it out on something. Or someone.\"");
@@ -718,6 +797,8 @@ public class DialogChoiceHandler implements ActionListener{
                 
              case "bought_sarmor":    
                  if (gm.playerInfo.getCash() >= 40){
+                    se.setFile(System.getProperty("user.dir") + "/src/res/sound/coin_sound.wav");
+                    se.play();
                     gm.playerInfo.setCash(gm.playerInfo.getCash()-40);
                     gm.ui.addPlayerInfo();
                     gm.ui.messageText.setText("\"Better safe than sorry. I should equip this as soon as possible.\"");
@@ -775,6 +856,21 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 break;
                 
+            /* Hunter interact */    
+                
+            case "interact_hunter":    
+                
+                if (!gm.ui.bearpeltFlag){
+                    gm.ui.messageText.setText("\"Maybe if I had something this guy wants, he would give me a decent reward.\"");
+                    gm.ui.messageText.setForeground(Color.yellow);
+                } else {
+                    gm.ui.messageText.setText("\"You have a bear pelt? I'll give you a nice a reward if you're willing to part with it.\"");
+                    gm.ui.messageText.setForeground(Color.white);
+                }
+
+                break;
+                
+                
             /* Priest look */  
                 
             case "look_priest":   
@@ -804,6 +900,30 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 gm.ui.messageText.setText("\"Well, hello there\"");
                 gm.ui.messageText.setForeground(Color.yellow);
+
+                break;
+                
+            case "look_hunter":
+                
+                gm.ui.messageText.setText("\"Wonder what he's hunting\"");
+                gm.ui.messageText.setForeground(Color.yellow);
+
+                break;    
+                
+            case "examine_chest":
+                
+                gm.ui.messageText.setText("It's a wooden chest, doesn't seem like a trap and can be opened without a key");
+                gm.ui.messageText.setForeground(Color.white);
+
+                break;
+                
+            case "open_chest":
+                
+                gm.ui.messageText.setText("You found 50 gold!");
+                gm.playerInfo.setCash(gm.playerInfo.getCash()+50);
+                gm.ui.bgPanel[11].remove(0);
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addPlayerInfo();
 
                 break;
                 

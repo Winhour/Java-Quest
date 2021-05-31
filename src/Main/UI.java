@@ -60,6 +60,8 @@ public class UI {
     
     boolean goblinFlag = true;
     boolean skeleFlag = true;
+    boolean bearFlag = true;
+    boolean bearpeltFlag = false;
     
     public JLabel j1x1, j1x2, j1x3, j1x4;
     public JLabel j2x1, j2x2, j2x3, j2x4;
@@ -304,6 +306,11 @@ public class UI {
         createObject(10, 210,30,463,500,"/res/bear.png");
         bgPanel[10].add(bgLabel[10]);
         
+        //SCENE 11  Dungeon Hallway
+        
+        createBackground(11, "/res/dungeon_hallway.jpg");
+        createObjectInteractable(11, 210,170,300,300,"/res/chest.png","Open","Examine","","open_chest","examine_chest","nothing");
+        bgPanel[11].add(bgLabel[11]);
         
         
         
@@ -1843,6 +1850,7 @@ public class UI {
         else if (bgPanel[7].isVisible()) currentScene = 7;
         else if (bgPanel[9].isVisible()) currentScene = 9;
         else if (bgPanel[10].isVisible()) currentScene = 10;
+        else if (bgPanel[11].isVisible()) currentScene = 11;
         
     }
     
@@ -1859,6 +1867,7 @@ public class UI {
         if (currentScene == 7) gm.sceneChanger.showScreen7();
         if (currentScene == 9) gm.sceneChanger.showScreen9();
         if (currentScene == 10) gm.sceneChanger.showScreen10();
+        if (currentScene == 11) gm.sceneChanger.showScreen11();
         
         
     }

@@ -9,7 +9,13 @@ import Main.monsters.Skeletons;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Random;
+import javax.swing.ImageIcon;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
 
 
 /**
@@ -19,6 +25,7 @@ import java.util.Random;
 public class CombatChoiceHandler implements ActionListener{
     
     GameManager gm;
+    SoundEffect se = new SoundEffect();
     Random rand = new Random();
     
     public CombatChoiceHandler(GameManager gm){
@@ -38,12 +45,15 @@ public class CombatChoiceHandler implements ActionListener{
                 
                 int damageRoll = rand.nextInt(gm.playerInfo.getModifiedATK()+1);
                 damageRoll2 = rand.nextInt(gm.monster.getATK()+1);
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/sword_swing.wav");
                 
                 gm.monster.setHealth(gm.monster.getHealth()-damageRoll);
                 if(gm.monster.getHealth()>0){
+                    se.play();
                     gm.playerInfo.setHealth(gm.playerInfo.getHealth()-damageRoll2);
                     gm.ui.messageText.setText("You slashed at the " + gm.monster.getName() + "! It took " + damageRoll + " damage\n It attacks back! You took " + damageRoll2 + " damage");
                 } else {
+                    se.play();
                     gm.ui.messageText.setText("The " + gm.monster.getName() + " was defeated!\n You gain " + gm.monster.getExp() + "exp and " + gm.monster.getGold() + "gold.");
                     gm.playerInfo.setCash(gm.playerInfo.getCash()+gm.monster.getGold());
                     
@@ -56,6 +66,54 @@ public class CombatChoiceHandler implements ActionListener{
                         //gm.ui.messageText.setText("tests");
                         gm.ui.bgPanel[2].remove(0);
                         gm.ui.skeleFlag = false;
+                    }
+                    if (gm.monster.getName().equals("Bear") && gm.ui.bearFlag){
+                        //gm.ui.messageText.setText("tests");
+                        gm.ui.bgPanel[10].remove(0);
+                        
+                        gm.ui.messageText.setText("The " + gm.monster.getName() + " was defeated!\n You got [BEAR PELT]");
+                        
+                        gm.ui.j3x2.setIcon(new ImageIcon(getClass().getResource("/res/bear_pelt.png")));
+
+                        JMenuItem menuItem[] = new JMenuItem[2];
+
+                        JPopupMenu popMenu = new JPopupMenu();
+
+                        menuItem[0] = new JMenuItem("Examine");
+                        menuItem[0].addActionListener(gm.weaponChoiceHandler);
+                        menuItem[0].setActionCommand("examine_bpelt");
+                        popMenu.add(menuItem[0]);
+
+                        gm.ui.j3x2.addMouseListener(new MouseListener(){
+
+
+                            @Override
+                            public void mouseClicked(MouseEvent e){}
+
+                            @Override
+                            public void mousePressed(MouseEvent e){
+
+                                if (SwingUtilities.isRightMouseButton(e)){
+                                    popMenu.show(gm.ui.j3x2, e.getX(), e.getY());
+                                }
+
+                            }
+
+                            @Override
+                            public void mouseReleased(MouseEvent e){}
+
+                            @Override
+                            public void mouseEntered(MouseEvent e){}
+
+                            @Override
+                            public void mouseExited(MouseEvent e){}
+
+
+                        });
+
+                                
+                        gm.ui.bearFlag = false;
+                        gm.ui.bearpeltFlag = true;
                     }
                     gm.ui.addInteractMenu();
                 }
@@ -72,6 +130,9 @@ public class CombatChoiceHandler implements ActionListener{
                 }
                 
                 else {
+                    
+                    se.setFile(System.getProperty("user.dir") + "/src/res/sound/fireball.wav");
+                    se.play();
                 
                     gm.playerInfo.setMana(gm.playerInfo.getMana()-6);
                     int firedamage = 20+gm.playerInfo.getMAG();
@@ -94,6 +155,54 @@ public class CombatChoiceHandler implements ActionListener{
                             gm.ui.bgPanel[2].remove(0);
                             gm.ui.skeleFlag = false;
                         }
+                        if (gm.monster.getName().equals("Bear") && gm.ui.bearFlag){
+                        //gm.ui.messageText.setText("tests");
+                        gm.ui.bgPanel[10].remove(0);
+                        
+                        gm.ui.messageText.setText("The " + gm.monster.getName() + " was defeated!\n You got [BEAR PELT]");
+                        
+                        gm.ui.j3x2.setIcon(new ImageIcon(getClass().getResource("/res/bear_pelt.png")));
+
+                        JMenuItem menuItem[] = new JMenuItem[2];
+
+                        JPopupMenu popMenu = new JPopupMenu();
+
+                        menuItem[0] = new JMenuItem("Examine");
+                        menuItem[0].addActionListener(gm.weaponChoiceHandler);
+                        menuItem[0].setActionCommand("examine_bpelt");
+                        popMenu.add(menuItem[0]);
+
+                        gm.ui.j3x2.addMouseListener(new MouseListener(){
+
+
+                            @Override
+                            public void mouseClicked(MouseEvent e){}
+
+                            @Override
+                            public void mousePressed(MouseEvent e){
+
+                                if (SwingUtilities.isRightMouseButton(e)){
+                                    popMenu.show(gm.ui.j3x2, e.getX(), e.getY());
+                                }
+
+                            }
+
+                            @Override
+                            public void mouseReleased(MouseEvent e){}
+
+                            @Override
+                            public void mouseEntered(MouseEvent e){}
+
+                            @Override
+                            public void mouseExited(MouseEvent e){}
+
+
+                        });
+
+                                
+                        gm.ui.bearFlag = false;
+                        gm.ui.bearpeltFlag = true;
+                    }
                         gm.ui.addInteractMenu();
                     }
                     gm.ui.addPlayerInfo();
