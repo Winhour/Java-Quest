@@ -11,12 +11,12 @@ package Main.monsters;
  */
 public class Bear extends Monster {
     
-    int health = 150;
+    int health = 160;
     int exp = 300;
     String name = "Bear";
     int gold = 0;
     
-    int ATK = 8;
+    int ATK = 12;
     int DEF = 4;
     int SPD = 4;
 

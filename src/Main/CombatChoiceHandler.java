@@ -43,19 +43,21 @@ public class CombatChoiceHandler implements ActionListener{
         switch (yourChoice){
             case "fight":
                 
-                int damageRoll = rand.nextInt(gm.playerInfo.getModifiedATK()+1);
-                damageRoll2 = rand.nextInt(gm.monster.getATK()+1);
+                int damageRoll = gm.playerInfo.getATK() + rand.nextInt(gm.playerInfo.getModifiedATK()+1);
+                damageRoll2 = (gm.monster.getATK()/2) + rand.nextInt(gm.monster.getATK()+1);
                 se.setFile(System.getProperty("user.dir") + "/src/res/sound/sword_swing.wav");
                 
-                gm.monster.setHealth(gm.monster.getHealth()-damageRoll);
+                gm.monster.setHealth(gm.monster.getHealth()+gm.monster.getDEF()-damageRoll);
                 if(gm.monster.getHealth()>0){
                     se.play();
-                    gm.playerInfo.setHealth(gm.playerInfo.getHealth()-damageRoll2);
-                    gm.ui.messageText.setText("You slashed at the " + gm.monster.getName() + "! It took " + damageRoll + " damage\n It attacks back! You took " + damageRoll2 + " damage");
+                    if ((gm.playerInfo.getModfifiedDEF()-damageRoll2)<0){
+                        gm.playerInfo.setHealth(gm.playerInfo.getHealth()+gm.playerInfo.getModfifiedDEF()-damageRoll2);
+                    }
+                    gm.ui.messageText.setText("You slashed at the " + gm.monster.getName() + "! It took " + (damageRoll-gm.monster.getDEF()) + " damage\n It attacks back! You took " + (damageRoll2-gm.playerInfo.getModfifiedDEF()) + " damage");
                 } else {
                     se.play();
                     gm.music.stop();
-                    gm.ui.messageText.setText("The " + gm.monster.getName() + " was defeated!\n You gain " + gm.monster.getExp() + "exp and " + gm.monster.getGold() + "gold.");
+                    gm.ui.messageText.setText("The " + gm.monster.getName() + " was defeated!\n You gain " + gm.monster.getExp() + " exp and " + gm.monster.getGold() + " gold.");
                     gm.playerInfo.setCash(gm.playerInfo.getCash()+gm.monster.getGold());
                     
                     if (gm.monster.getName().equals("Goblin") && gm.ui.goblinFlag){
@@ -150,7 +152,7 @@ public class CombatChoiceHandler implements ActionListener{
                     se.play();
                 
                     gm.playerInfo.setMana(gm.playerInfo.getMana()-6);
-                    int firedamage = 20+gm.playerInfo.getMAG();
+                    int firedamage = 25+gm.playerInfo.getMAG();
                     damageRoll2 = rand.nextInt(gm.monster.getATK()+1);
 
                     gm.monster.setHealth(gm.monster.getHealth()-firedamage);

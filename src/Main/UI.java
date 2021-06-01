@@ -315,6 +315,7 @@ public class UI {
         //SCENE 12  Dungeon Sideroom
         
         createBackground(12, "/res/side_room.jpg");
+        createObjectInteractable(12,580,310,80,80,"/res/blank.png", "Examine", "Interact", "", "examine_secsid", "interact_secsid", "nothing");
         bgPanel[12].add(bgLabel[12]);
         
         //SCENE 13  Dungeon Chapel

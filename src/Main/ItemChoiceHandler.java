@@ -155,6 +155,68 @@ public class ItemChoiceHandler implements ActionListener{
                 gm.ui.addInteractMenu();
                 break;    
                 
+                
+            case "L Potion":
+                
+                damageRoll2 = rand.nextInt(3);
+                
+                if (gm.playerInfo.getHealth() == gm.playerInfo.getMaxhealth()){
+                    gm.ui.messageText.setText("Your health is full!");
+                }
+                else {
+                    
+                    //se.setFile(System.getProperty("user.dir") + "/src/res/sound/heal_sound.wav");
+                    //se.play();
+                
+                    gm.playerInfo.setHealth(gm.playerInfo.getHealth()+60);
+
+                    if (gm.playerInfo.getHealth() > gm.playerInfo.getMaxhealth()) gm.playerInfo.setHealth(gm.playerInfo.getMaxhealth());
+                    
+                    gm.playerInfo.setHealth(gm.playerInfo.getHealth()-damageRoll2);
+
+                    gm.ui.messageText.setText("You recovered 60 health!" + "\n" + "The " + gm.monster.getName() + " attacks you for " + damageRoll2); 
+
+                    for (int i=8;i>=0;i--){
+                        if (gm.itemlist[i] != null && gm.itemlist[i].getName().equals("L Potion")){
+                            gm.itemlist[i] = null;
+                            break;
+                        }
+                    }
+
+                    gm.ui.addPlayerInfo();
+                }
+                gm.ui.addFightMenu();
+                break;
+                
+            case "L Potionnc":
+                
+                if (gm.playerInfo.getHealth() == gm.playerInfo.getMaxhealth()){
+                    gm.ui.messageText.setText("Your health is full!");
+                }
+                else {
+                    
+                    //se.setFile(System.getProperty("user.dir") + "/src/res/sound/heal_sound.wav");
+                    //se.play();
+                
+                    gm.playerInfo.setHealth(gm.playerInfo.getHealth()+60);
+
+                    if (gm.playerInfo.getHealth() > gm.playerInfo.getMaxhealth()) gm.playerInfo.setHealth(gm.playerInfo.getMaxhealth());
+                    
+                    gm.ui.messageText.setText("You recovered 60 health!");
+
+                    for (int i=8;i>=0;i--){
+                        if (gm.itemlist[i] != null && gm.itemlist[i].getName().equals("L Potion")){
+                            gm.itemlist[i] = null;
+                            break;
+                        }
+                    }
+
+                    gm.ui.addPlayerInfo();
+                }
+                gm.ui.addInteractMenu();
+                break;       
+                
+                
             case "S Elixir":
                 
                 damageRoll2 = rand.nextInt(3);

@@ -11,13 +11,13 @@ package Main.monsters;
  */
 public class Skeletons extends Monster {
     
-    int health = 50;
+    int health = 60;
     int exp = 200;
     String name = "Skeletons";
     int gold = 30;
     
-    int ATK = 6;
-    int DEF = 0;
+    int ATK = 12;
+    int DEF = 1;
     int SPD = 2;
 
     public Skeletons() {

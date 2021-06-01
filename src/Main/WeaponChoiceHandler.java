@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import weapons.Broadsword;
+import weapons.Demonsbane;
+import weapons.Katana;
 import weapons.Leather_Armor;
 import weapons.Soldier_Armor;
 import weapons.War_Axe;
@@ -102,10 +104,40 @@ public class WeaponChoiceHandler implements ActionListener {
                 
                 gm.ui.addPlayerInfo();
                 gm.ui.makeStatsText();
+                break;       
+                
+            case "examine_katana":
+                gm.ui.messageText.setText("Glorious eastern steel, folded hundreds of times\n(ATK + 12)");
+                gm.ui.messageText.setForeground(Color.white);
+                break;    
+                
+            case "equip_katana"  :
+                gm.ui.messageText.setText("Equipped <KATANA>!");
+                gm.ui.messageText.setForeground(Color.LIGHT_GRAY);
+                gm.playerInfo.setWeapon(new Katana());
+                gm.playerInfo.setModifiedATK(gm.playerInfo.getATK()+gm.playerInfo.getWeapon().getModifier());
+                
+                gm.ui.addPlayerInfo();
+                gm.ui.makeStatsText();
+                break;      
+                
+            case "examine_demon":
+                gm.ui.messageText.setText("Sword infused with magic, can harm demonic entities\n(ATK + 10)");
+                gm.ui.messageText.setForeground(Color.white);
+                break;    
+                
+            case "equip_demon"  :
+                gm.ui.messageText.setText("Equipped <DEMONSBANE>!");
+                gm.ui.messageText.setForeground(Color.LIGHT_GRAY);
+                gm.playerInfo.setWeapon(new Demonsbane());
+                gm.playerInfo.setModifiedATK(gm.playerInfo.getATK()+gm.playerInfo.getWeapon().getModifier());
+                
+                gm.ui.addPlayerInfo();
+                gm.ui.makeStatsText();
                 break;         
              
             case "examine_bpelt"  :
-                gm.ui.messageText.setText("A lage pelt of Bear skin and fur");
+                gm.ui.messageText.setText("A large pelt of Bear skin and fur");
                 gm.ui.messageText.setForeground(Color.white);
                 break;
                 

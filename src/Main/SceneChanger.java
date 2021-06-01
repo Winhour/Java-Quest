@@ -248,8 +248,6 @@ public class SceneChanger {
         se.setFile(System.getProperty("user.dir") + "/src/res/sound/move.wav");
         se.play();
         
-        gm.music.stop();
-        
         gm.ui.bgPanel[1].setVisible(false);
         gm.ui.bgPanel[2].setVisible(false);
         gm.ui.bgPanel[3].setVisible(false);

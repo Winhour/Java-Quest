@@ -8,6 +8,7 @@ package Main;
 import Main.monsters.Bear;
 import Main.monsters.Goblin;
 import Main.monsters.Skeletons;
+import items.LargeHealthPotion;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -77,6 +78,15 @@ public class DialogChoiceHandler implements ActionListener{
                 }
                 else if (gm.ui.bgPanel[11].isVisible()){
                     gm.ui.messageText.setText("Let's press on forward.");
+                }
+                else if (gm.ui.bgPanel[12].isVisible()){
+                    gm.ui.messageText.setText("A dead end?");
+                }
+                else if (gm.ui.bgPanel[13].isVisible()){
+                    gm.ui.messageText.setText("Kind of creepy...");
+                }
+                else if (gm.ui.bgPanel[14].isVisible()){
+                    gm.ui.messageText.setText("What were they mining here? And who did exactly?");
                 }
                 else {
                     gm.ui.messageText.setText("How in nine hells did I end up here?");
@@ -220,6 +230,7 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.sceneChanger.showScreen10();
                 if(gm.ui.bearFlag){
                     gm.monster = new Bear();
+                    gm.music.stop();
                     gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/Fight.wav");
                     gm.music.play_low();
                     gm.music.loop();
@@ -228,6 +239,10 @@ public class DialogChoiceHandler implements ActionListener{
                     gm.ui.addFightMenu();
                 }
                 else {
+                    gm.music.stop();
+                    gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_tavern.wav");
+                    gm.music.play_low();
+                    gm.music.loop();
                     gm.ui.messageText.setText("You hear sounds of nature all around.");
                     gm.ui.messageText.setForeground(Color.white);
                     gm.ui.addInteractMenu();
@@ -243,7 +258,7 @@ public class DialogChoiceHandler implements ActionListener{
                 
             case "move_side":
                 gm.sceneChanger.showScreen12();
-                gm.ui.messageText.setText("There is nothing of interest here (yet)");
+                gm.ui.messageText.setText("There is nothing of interest here (or is there?)");
                 gm.ui.messageText.setForeground(Color.white);
                 gm.ui.addInteractMenu();
                 break;     
@@ -341,7 +356,7 @@ public class DialogChoiceHandler implements ActionListener{
                 break;    
                 
             case "talk_mayor":
-                gm.ui.addTalkMenu("Topic 1", "Topic 2", "Topic 3", "nothing", "nothing", "nothing");
+                gm.ui.addTalkMenu("Demon Lord", "Quest", "Town", "nothing", "nothing", "nothing");
                 gm.ui.messageText.setText("Ask about: ");
                 gm.ui.messageText.setForeground(Color.white);
                 break;   
@@ -727,15 +742,47 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.choice1.setForeground(Color.white);
                 gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
                 gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
-                gm.ui.choice1.setActionCommand("nothing");
+                gm.ui.choice1.setActionCommand("dungeon_info2");
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                 break; 
+                
+            case "dungeon_info2":
+                
+                gm.ui.messageText.setText("\"I don't really go inside myself, not enough room for a bowman like me\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("dungeon_info3");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;        
+                
+            case "dungeon_info3":
+                
+                gm.ui.messageText.setText("\"I've seen too many good men go against the Demon Lord and never come out\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("dungeon_info4");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;      
+                
+            case "dungeon_info4":
+                
+                gm.ui.messageText.setText("\"I prefer to hang around here and pick off stray goblins, I could use the exp you see\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("dungeon_info5");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;     
+                
+            case "dungeon_info5":
+                
+                gm.ui.messageText.setText("\"...\"");
+                gm.ui.messageText.setForeground(Color.yellow);
+                gm.ui.choice1.setActionCommand("nothing");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;         
                 
             /* Asking the Hunter about Hunting */     
                 
             case "hunting_talk":
                 
-                gm.ui.messageText.setText("\"I need you to bring me a bear pelt\"");        
+                gm.ui.messageText.setText("\"My lord sent me out here to get him a bear pelt\"");        
                 gm.ui.messageText.setForeground(Color.white);
                 gm.ui.choiceButtonPanel.setVisible(false);
                 gm.ui.window.remove(gm.ui.choiceButtonPanel);
@@ -750,15 +797,55 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.choice1.setForeground(Color.white);
                 gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
                 gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
-                gm.ui.choice1.setActionCommand("nothing");
+                gm.ui.choice1.setActionCommand("hunting_talk2");
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                 break;     
+                
+            case "hunting_talk2":
+                
+                gm.ui.messageText.setText("\"Klethys, he says, your archery skills are unmatched in the realm\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("hunting_talk3");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;         
+                
+            case "hunting_talk3":
+                
+                gm.ui.messageText.setText("\"The thing is... Bears are dangerous creatures, they close the distance to you in an instant\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("hunting_talk4");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;      
+                
+            case "hunting_talk4":
+                
+                gm.ui.messageText.setText("\"I would prefer not to put myself in the harm's way if possible\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("hunting_talk5");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;     
+                
+            case "hunting_talk5":
+                
+                gm.ui.messageText.setText("\"Tell you what, if you can get me a bear hide, I'll give you this nice sword in return\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("hunting_talk6");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;       
+                
+            case "hunting_talk6":
+                
+                gm.ui.messageText.setText("\"Deal.\"");
+                gm.ui.messageText.setForeground(Color.yellow);
+                gm.ui.choice1.setActionCommand("nothing");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;          
                 
             /* Asking the Hunter about Woods */     
                 
             case "woods_info":
                 
-                gm.ui.messageText.setText("\"These woods are very cool etc.\"");        
+                gm.ui.messageText.setText("\"These woods are really nice, no?\"");        
                 gm.ui.messageText.setForeground(Color.white);
                 gm.ui.choiceButtonPanel.setVisible(false);
                 gm.ui.window.remove(gm.ui.choiceButtonPanel);
@@ -773,9 +860,41 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.choice1.setForeground(Color.white);
                 gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
                 gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
-                gm.ui.choice1.setActionCommand("nothing");
+                gm.ui.choice1.setActionCommand("woods_info2");
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                 break;    
+                
+            case "woods_info2":
+                
+                gm.ui.messageText.setText("\"As far as woods go, sure.\"");
+                gm.ui.messageText.setForeground(Color.yellow);
+                gm.ui.choice1.setActionCommand("woods_info3");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;     
+                
+            case "woods_info3":
+                
+                gm.ui.messageText.setText("\"There's a lot of good game around these parts: deer, foxes...\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("woods_info4");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;         
+                
+            case "woods_info4":
+                
+                gm.ui.messageText.setText("\"But the bears seem more dangerous lately.\n It might be demonic influence...\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("woods_info5");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;       
+                
+            case "woods_info5":
+                
+                gm.ui.messageText.setText("\"I knew there's some catch to your deal.\"");
+                gm.ui.messageText.setForeground(Color.yellow);
+                gm.ui.choice1.setActionCommand("nothing");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;      
                 
                 
             /* Asking Smith about the Demon Lord */    
@@ -1001,8 +1120,23 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 if (gm.ui.moonoreFlag){
                     
-                    gm.ui.messageText.setText("\"You found the moon ore? Splendid, adventurer.\"");  
+                    gm.ui.messageText.setText("\"You found the moon ore? Splendid, adventurer.\"");         
                     gm.ui.messageText.setForeground(Color.white);
+                    gm.ui.choiceButtonPanel.setVisible(false);
+                    gm.ui.window.remove(gm.ui.choiceButtonPanel);
+
+                    gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
+                    gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
+                    gm.ui.choiceButtonPanel.setBackground(Color.black);
+                    gm.ui.window.add(gm.ui.choiceButtonPanel);
+
+                    gm.ui.choice1 = new JButton("Continue");
+                    gm.ui.choice1.setBackground(Color.black);
+                    gm.ui.choice1.setForeground(Color.white);
+                    gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
+                    gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
+                    gm.ui.choice1.setActionCommand("event_demonsbane");
+                    gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                     
                 } else {
                 
@@ -1013,6 +1147,85 @@ public class DialogChoiceHandler implements ActionListener{
                 }
                 
                 break;
+                
+            case "event_demonsbane":
+                
+                gm.ui.messageText.setText("\"Just give me a second here.\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("event_demonsbane2");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;      
+                
+            case "event_demonsbane2":
+                
+                gm.ui.messageText.setText("\"...\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("event_demonsbane3");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;      
+                
+            case "event_demonsbane3":
+                
+                gm.ui.messageText.setText("\"Here you go, my masterpiece is finished.\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("event_demonsbane4");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                break;     
+                
+            case "event_demonsbane4":
+                
+                gm.ui.messageText.setText("\"Received [DEMONSBANE]!\"");
+                gm.ui.messageText.setForeground(Color.white);
+                
+                gm.ui.j1x4.setIcon(new ImageIcon(getClass().getResource("/res/demonsbane.png")));
+
+                    JMenuItem menuItem[] = new JMenuItem[2];
+
+                    JPopupMenu popMenu = new JPopupMenu();
+
+                    menuItem[0] = new JMenuItem("Equip");
+                    menuItem[0].addActionListener(gm.weaponChoiceHandler);
+                    menuItem[0].setActionCommand("equip_demon");
+                    popMenu.add(menuItem[0]);
+
+                    menuItem[1] = new JMenuItem("Examine");
+                    menuItem[1].addActionListener(gm.weaponChoiceHandler);
+                    menuItem[1].setActionCommand("examine_demon");
+                    popMenu.add(menuItem[1]);
+
+                    gm.ui.j1x4.addMouseListener(new MouseListener(){
+
+
+                        @Override
+                        public void mouseClicked(MouseEvent e){}
+
+                        @Override
+                        public void mousePressed(MouseEvent e){
+
+                            if (SwingUtilities.isRightMouseButton(e)){
+                                popMenu.show(gm.ui.j1x4, e.getX(), e.getY());
+                            }
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e){}
+
+                        @Override
+                        public void mouseEntered(MouseEvent e){}
+
+                        @Override
+                        public void mouseExited(MouseEvent e){}
+
+
+                    });
+                    
+                gm.ui.moonoreFlag = false;
+                
+                gm.ui.choice1.setActionCommand("nothing");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                break;         
                 
                 
                 
@@ -1033,19 +1246,19 @@ public class DialogChoiceHandler implements ActionListener{
                     gm.ui.messageText.setForeground(Color.yellow);
                     gm.ui.j1x2.setIcon(new ImageIcon(getClass().getResource("/res/war_axe.png")));
 
-                    JMenuItem menuItem[] = new JMenuItem[2];
+                    JMenuItem menuItem2[] = new JMenuItem[2];
 
-                    JPopupMenu popMenu = new JPopupMenu();
+                    JPopupMenu popMenu2 = new JPopupMenu();
 
-                    menuItem[0] = new JMenuItem("Equip");
-                    menuItem[0].addActionListener(gm.weaponChoiceHandler);
-                    menuItem[0].setActionCommand("equip_waraxe");
-                    popMenu.add(menuItem[0]);
+                    menuItem2[0] = new JMenuItem("Equip");
+                    menuItem2[0].addActionListener(gm.weaponChoiceHandler);
+                    menuItem2[0].setActionCommand("equip_waraxe");
+                    popMenu2.add(menuItem2[0]);
 
-                    menuItem[1] = new JMenuItem("Examine");
-                    menuItem[1].addActionListener(gm.weaponChoiceHandler);
-                    menuItem[1].setActionCommand("examine_waraxe");
-                    popMenu.add(menuItem[1]);
+                    menuItem2[1] = new JMenuItem("Examine");
+                    menuItem2[1].addActionListener(gm.weaponChoiceHandler);
+                    menuItem2[1].setActionCommand("examine_waraxe");
+                    popMenu2.add(menuItem2[1]);
 
                     gm.ui.j1x2.addMouseListener(new MouseListener(){
 
@@ -1057,7 +1270,7 @@ public class DialogChoiceHandler implements ActionListener{
                         public void mousePressed(MouseEvent e){
 
                             if (SwingUtilities.isRightMouseButton(e)){
-                                popMenu.show(gm.ui.j1x2, e.getX(), e.getY());
+                                popMenu2.show(gm.ui.j1x2, e.getX(), e.getY());
                             }
 
                         }
@@ -1103,19 +1316,19 @@ public class DialogChoiceHandler implements ActionListener{
                     gm.ui.messageText.setForeground(Color.yellow);
                     gm.ui.j2x2.setIcon(new ImageIcon(getClass().getResource("/res/soldier_armor.png")));
 
-                    JMenuItem menuItem[] = new JMenuItem[2];
+                    JMenuItem menuItem3[] = new JMenuItem[2];
 
-                    JPopupMenu popMenu = new JPopupMenu();
+                    JPopupMenu popMenu3 = new JPopupMenu();
 
-                    menuItem[0] = new JMenuItem("Equip");
-                    menuItem[0].addActionListener(gm.weaponChoiceHandler);
-                    menuItem[0].setActionCommand("equip_sldarm");
-                    popMenu.add(menuItem[0]);
+                    menuItem3[0] = new JMenuItem("Equip");
+                    menuItem3[0].addActionListener(gm.weaponChoiceHandler);
+                    menuItem3[0].setActionCommand("equip_sldarm");
+                    popMenu3.add(menuItem3[0]);
 
-                    menuItem[1] = new JMenuItem("Examine");
-                    menuItem[1].addActionListener(gm.weaponChoiceHandler);
-                    menuItem[1].setActionCommand("examine_sldarm");
-                    popMenu.add(menuItem[1]);
+                    menuItem3[1] = new JMenuItem("Examine");
+                    menuItem3[1].addActionListener(gm.weaponChoiceHandler);
+                    menuItem3[1].setActionCommand("examine_sldarm");
+                    popMenu3.add(menuItem3[1]);
 
                     gm.ui.j2x2.addMouseListener(new MouseListener(){
 
@@ -1127,7 +1340,7 @@ public class DialogChoiceHandler implements ActionListener{
                         public void mousePressed(MouseEvent e){
 
                             if (SwingUtilities.isRightMouseButton(e)){
-                                popMenu.show(gm.ui.j2x2, e.getX(), e.getY());
+                                popMenu3.show(gm.ui.j2x2, e.getX(), e.getY());
                             }
 
                         }
@@ -1164,9 +1377,104 @@ public class DialogChoiceHandler implements ActionListener{
                 } else {
                     gm.ui.messageText.setText("\"You have a bear pelt? I'll give you a nice a reward if you're willing to part with it.\"");
                     gm.ui.messageText.setForeground(Color.white);
+                    gm.ui.addConfirmMenu("Deal", "No Deal", "katana_trade", "nothing");
+                    
                 }
 
                 break;
+                
+            case "katana_trade":
+                
+                gm.ui.bearpeltFlag = false;
+                
+                gm.ui.j3x2.setIcon(new ImageIcon(getClass().getResource("/res/empty2.png")));
+
+                    JPopupMenu popMenu5 = new JPopupMenu();
+                    
+                    JMenuItem menuItem5[] = new JMenuItem[2];
+        
+                    menuItem5[0] = new JMenuItem("Examine");
+                    menuItem5[0].addActionListener(gm.weaponChoiceHandler);
+                    menuItem5[0].setActionCommand("examine_empty");
+                    popMenu5.add(menuItem5[0]);
+        
+                    gm.ui.j3x2.addMouseListener(new MouseListener(){
+
+
+                        @Override
+                        public void mouseClicked(MouseEvent e){}
+
+                        @Override
+                        public void mousePressed(MouseEvent e){
+
+                            if (SwingUtilities.isRightMouseButton(e)){
+                                popMenu5.show(gm.ui.j3x2, e.getX(), e.getY());
+                            }
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e){}
+
+                        @Override
+                        public void mouseEntered(MouseEvent e){}
+
+                        @Override
+                        public void mouseExited(MouseEvent e){}
+
+
+                    });
+                    
+                gm.ui.j1x3.setIcon(new ImageIcon(getClass().getResource("/res/katana.png")));    
+                    
+                    JPopupMenu popMenu6 = new JPopupMenu();
+                    
+                    menuItem5[0] = new JMenuItem("Equip");
+                    menuItem5[0].addActionListener(gm.weaponChoiceHandler);
+                    menuItem5[0].setActionCommand("equip_katana");
+                    popMenu6.add(menuItem5[0]);
+                    
+                    menuItem5[1] = new JMenuItem("Examine");
+                    menuItem5[1].addActionListener(gm.weaponChoiceHandler);
+                    menuItem5[1].setActionCommand("examine_katana");
+                    popMenu6.add(menuItem5[1]);
+        
+                    gm.ui.j1x3.addMouseListener(new MouseListener(){
+
+
+                        @Override
+                        public void mouseClicked(MouseEvent e){}
+
+                        @Override
+                        public void mousePressed(MouseEvent e){
+
+                            if (SwingUtilities.isRightMouseButton(e)){
+                                popMenu6.show(gm.ui.j1x3, e.getX(), e.getY());
+                            }
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e){}
+
+                        @Override
+                        public void mouseEntered(MouseEvent e){}
+
+                        @Override
+                        public void mouseExited(MouseEvent e){}
+
+
+                    });
+                    
+                gm.ui.messageText.setText("You got [KATANA].\nGlorious eastern steel (+12 ATK)");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addInteractMenu();
+                
+                
+                
+                break;
+                
+            /* Mayor interact */    
                 
             case "interact_mayor":
                 
@@ -1264,14 +1572,14 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 gm.ui.j4x2.setIcon(new ImageIcon(getClass().getResource("/res/ore_item.png")));
 
-                        JMenuItem menuItem[] = new JMenuItem[2];
+                        JMenuItem menuItem4[] = new JMenuItem[2];
 
-                        JPopupMenu popMenu = new JPopupMenu();
+                        JPopupMenu popMenu4 = new JPopupMenu();
 
-                        menuItem[0] = new JMenuItem("Examine");
-                        menuItem[0].addActionListener(gm.weaponChoiceHandler);
-                        menuItem[0].setActionCommand("examine_ore");
-                        popMenu.add(menuItem[0]);
+                        menuItem4[0] = new JMenuItem("Examine");
+                        menuItem4[0].addActionListener(gm.weaponChoiceHandler);
+                        menuItem4[0].setActionCommand("examine_ore");
+                        popMenu4.add(menuItem4[0]);
 
                         gm.ui.j4x2.addMouseListener(new MouseListener(){
 
@@ -1283,7 +1591,7 @@ public class DialogChoiceHandler implements ActionListener{
                             public void mousePressed(MouseEvent e){
 
                                 if (SwingUtilities.isRightMouseButton(e)){
-                                    popMenu.show(gm.ui.j4x2, e.getX(), e.getY());
+                                    popMenu4.show(gm.ui.j4x2, e.getX(), e.getY());
                                 }
 
                             }
@@ -1303,7 +1611,24 @@ public class DialogChoiceHandler implements ActionListener{
                     gm.ui.moonoreFlag = true;
                      
                     break;    
-
+                    
+                    
+            case "examine_secsid":
+                
+                gm.ui.messageText.setText("You notice a vial hiding inside a crevice");
+                gm.ui.messageText.setForeground(Color.white);
+                
+                break;
+                
+            case "interact_secsid":
+                
+                gm.ui.messageText.setText("You found a [LARGE HEALTH POTION]");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.itemlist[4]= new LargeHealthPotion();
+                gm.ui.bgPanel[12].remove(0);
+                
+                
+                break;
                 
             case "nothing":
                 gm.ui.addInteractMenu();
