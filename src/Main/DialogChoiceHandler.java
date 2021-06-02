@@ -397,6 +397,10 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
                 gm.ui.choice1.setActionCommand("dl_priest2");
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
+                se.play();
+                
                 break;
             
             case "dl_priest2":
@@ -404,6 +408,10 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setForeground(Color.white);
                 gm.ui.choice1.setActionCommand("dl_priest3");
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
+                se.play();
+                
                 break;  
                 
             case "dl_priest3":
@@ -411,6 +419,10 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setForeground(Color.white);
                 gm.ui.choice1.setActionCommand("dl_priest4");
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
+                se.play();
+                
                 break;    
                 
             case "dl_priest4":
@@ -418,6 +430,10 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setForeground(Color.white);
                 gm.ui.choice1.setActionCommand("dl_priest5");
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
+                se.play();
+                
                 break;      
                 
             case "dl_priest5":
@@ -425,6 +441,10 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setForeground(Color.yellow);
                 gm.ui.choice1.setActionCommand("dl_priest6");
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
+                se.play();
+                
                 break;     
                 
             case "dl_priest6":
@@ -432,6 +452,10 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setForeground(Color.white);
                 gm.ui.choice1.setActionCommand("nothing");
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
+                se.play();
+                
                 break;  
                 
                 
@@ -462,6 +486,10 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
                 gm.ui.choice1.setActionCommand("religion2");
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
+                se.play();
+                
                 break;
                 
             case "religion2":
@@ -469,6 +497,10 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setForeground(Color.white);
                 gm.ui.choice1.setActionCommand("religion3");
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
+                se.play();
+                
                 break;  
                 
             case "religion3":
@@ -476,6 +508,10 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setForeground(Color.white);
                 gm.ui.choice1.setActionCommand("religion4");
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
+                se.play();
+                
                 break;   
                 
             case "religion4":
@@ -483,6 +519,10 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setForeground(Color.white);
                 gm.ui.choice1.setActionCommand("religion5");
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
+                se.play();
+                
                 break;  
                 
             case "religion5":
@@ -490,6 +530,10 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setForeground(Color.white);
                 gm.ui.choice1.setActionCommand("religion6");
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
+                se.play();
+                
                 break;   
                 
             case "religion6":
@@ -497,6 +541,10 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setForeground(Color.white);
                 gm.ui.choice1.setActionCommand("religion7");
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
+                se.play();
+                
                 break; 
                 
             case "religion7":
@@ -504,6 +552,10 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setForeground(Color.yellow);
                 gm.ui.choice1.setActionCommand("nothing");
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
+                se.play();
+                
                 break;     
                 
                 
@@ -529,6 +581,10 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
                 gm.ui.choice1.setActionCommand("tips_priest2");
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
+                se.play();
+                
                 break;
                 
             case "tips_priest2":
@@ -536,6 +592,10 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setForeground(Color.white);
                 gm.ui.choice1.setActionCommand("tips_priest3");
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
+                se.play();
+                
                 break;      
                 
             case "tips_priest3":
@@ -543,6 +603,10 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setForeground(Color.yellow);
                 gm.ui.choice1.setActionCommand("tips_priest4");
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
+                se.play();
+                
                 break;      
                 
              case "tips_priest4":
@@ -550,6 +614,10 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setForeground(Color.white);
                 gm.ui.choice1.setActionCommand("nothing");
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
+                se.play();
+                
                 break;    
                 
                 
@@ -1258,6 +1326,9 @@ public class DialogChoiceHandler implements ActionListener{
                 
             case "merch_items":
                 
+                gm.ui.addTalkMenu("Healing Potions", "Mana Elixirs", "Other", "merch_hsell", "merch_msell", "merch_osell");
+                gm.ui.messageText.setText("\"How can I help you?\"");
+                gm.ui.messageText.setForeground(Color.white);
                 
                 break;
                 
@@ -1265,17 +1336,70 @@ public class DialogChoiceHandler implements ActionListener{
             /* Asking Merchant about the Business */        
              
             case "merch_business":
-                
-                
+
+                gm.ui.messageText.setText("\"[INFO ABOUT BUSINESS]\"");        
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choiceButtonPanel.setVisible(false);
+                gm.ui.window.remove(gm.ui.choiceButtonPanel);
+        
+                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
+                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
+                gm.ui.choiceButtonPanel.setBackground(Color.black);
+                gm.ui.window.add(gm.ui.choiceButtonPanel);
+        
+                gm.ui.choice1 = new JButton("Continue");
+                gm.ui.choice1.setBackground(Color.black);
+                gm.ui.choice1.setForeground(Color.white);
+                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
+                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
+                gm.ui.choice1.setActionCommand("merch_business2");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+   
                 break;
+                
+            case "merch_business2":
+                
+                gm.ui.messageText.setText("\"[ETC...]\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("nothing");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                break;  
+                
                 
                 
             /* Asking Merchant about the Quest */       
                 
             case "merch_quest":
                 
-                
+                gm.ui.messageText.setText("\"[INFO ABOUT SIDEQUEST]\"");        
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choiceButtonPanel.setVisible(false);
+                gm.ui.window.remove(gm.ui.choiceButtonPanel);
+        
+                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
+                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
+                gm.ui.choiceButtonPanel.setBackground(Color.black);
+                gm.ui.window.add(gm.ui.choiceButtonPanel);
+        
+                gm.ui.choice1 = new JButton("Continue");
+                gm.ui.choice1.setBackground(Color.black);
+                gm.ui.choice1.setForeground(Color.white);
+                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
+                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
+                gm.ui.choice1.setActionCommand("merch_quest2");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+   
                 break;
+                
+             case "merch_quest2":
+                
+                gm.ui.messageText.setText("\"[ETC...]\"");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choice1.setActionCommand("nothing");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                break;    
                 
                 
             /* Priest interact */    

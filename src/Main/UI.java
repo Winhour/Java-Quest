@@ -1794,7 +1794,8 @@ public class UI {
         
         statsText = new JTextArea("   \nClass: Adventurer\n"
                 + "Level: " + gm.playerInfo.getLevel() + "\n\n" + "ATK: " + gm.playerInfo.getModifiedATK() + " (" + gm.playerInfo.getATK()+ ")\n" +
-                "DEF: " + gm.playerInfo.getModfifiedDEF() + " (" + gm.playerInfo.getDEF()+ ")\n");
+                "DEF: " + gm.playerInfo.getModfifiedDEF() + " (" + gm.playerInfo.getDEF()+ ")\n" + 
+                "MAG: " + gm.playerInfo.getMAG() + "\n" + "SPD: " + gm.playerInfo.getSPD() + "\n");
         statsText.setBounds(500,0,300,500);
         statsText.setBackground(Color.DARK_GRAY);
         statsText.setForeground(Color.WHITE);
