@@ -380,81 +380,38 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 
             case "dl_priest":
-                gm.ui.messageText.setText("\"Who exactly is the Demon Lord? Well, there are a number of theories...\"");        
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choiceButtonPanel.setVisible(false);
-                gm.ui.window.remove(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
-                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
-                gm.ui.choiceButtonPanel.setBackground(Color.black);
-                gm.ui.window.add(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choice1 = new JButton("Continue");
-                gm.ui.choice1.setBackground(Color.black);
-                gm.ui.choice1.setForeground(Color.white);
-                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
-                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
-                gm.ui.choice1.setActionCommand("dl_priest2");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
-                
-                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
-                se.play();
+               
+                talk_first("\"Who exactly is the Demon Lord? Well, there are a number of theories...\"", "dl_priest2", Color.white);
                 
                 break;
             
             case "dl_priest2":
-                gm.ui.messageText.setText("\"Some believe it's the former ruler of this kingdom, seeking revenge...\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("dl_priest3");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                 
-                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
-                se.play();
+                talk_next("\"Some believe it's the former ruler of this kingdom, seeking revenge...\"", "dl_priest3", Color.white);
                 
                 break;  
                 
             case "dl_priest3":
-                gm.ui.messageText.setText("\"A lot of other priests say that he's a punishment, sent here due to our sins...\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("dl_priest4");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                 
-                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
-                se.play();
+                talk_next("\"A lot of other priests say that he's a punishment, sent here due to our sins...\"", "dl_priest4", Color.white);
                 
                 break;    
                 
             case "dl_priest4":
-                gm.ui.messageText.setText("\"The Yothians talk about end of the world and this being proof...\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("dl_priest5");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                 
-                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
-                se.play();
+                talk_next("\"The Yothians talk about end of the world and this being proof...\"", "dl_priest5", Color.white);
                 
                 break;      
                 
             case "dl_priest5":
-                gm.ui.messageText.setText("\"Well, I think he might just be a spooky Skeleton man.\"");
-                gm.ui.messageText.setForeground(Color.yellow);
-                gm.ui.choice1.setActionCommand("dl_priest6");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                 
-                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
-                se.play();
+                talk_next("\"Well, I think he might just be a spooky Skeleton man.\"", "dl_priest6", Color.yellow);
                 
                 break;     
                 
             case "dl_priest6":
-                gm.ui.messageText.setText("\"Hoh! To be fair, we just don't really know, do we?\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("nothing");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                 
-                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
-                se.play();
+                talk_next("\"Hoh! To be fair, we just don't really know, do we?\"", "nothing", Color.white);
                 
                 break;  
                 
@@ -469,92 +426,44 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 
             case "religion":
-                gm.ui.messageText.setText("\"So, what do people believe around here?\"");        
-                gm.ui.messageText.setForeground(Color.yellow);
-                gm.ui.choiceButtonPanel.setVisible(false);
-                gm.ui.window.remove(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
-                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
-                gm.ui.choiceButtonPanel.setBackground(Color.black);
-                gm.ui.window.add(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choice1 = new JButton("Continue");
-                gm.ui.choice1.setBackground(Color.black);
-                gm.ui.choice1.setForeground(Color.white);
-                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
-                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
-                gm.ui.choice1.setActionCommand("religion2");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                 
-                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
-                se.play();
+                talk_first("\"So, what do people believe around here?\"", "religion2", Color.yellow);
                 
                 break;
                 
             case "religion2":
-                gm.ui.messageText.setText("\"Hoh! I'm glad you asked. It all started...\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("religion3");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                 
-                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
-                se.play();
+                talk_next("\"Hoh! I'm glad you asked. It all started...\"", "religion3", Color.white);
                 
                 break;  
                 
             case "religion3":
-                gm.ui.messageText.setText("\"The High prophets....Thirteen commandments......Patrocus and Patronicus.....The great schism.....Those damn heretics....\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("religion4");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                 
-                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
-                se.play();
+                talk_next("\"The High prophets....Thirteen commandments......Patrocus and Patronicus.....The great schism.....Those damn heretics....\"", "religion4", Color.white);
                 
                 break;   
                 
             case "religion4":
-                gm.ui.messageText.setText("\"Our poor karma.......Crusaders........Three floods and four droughts..........Savior is coming........They can still repent....\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("religion5");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                 
-                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
-                se.play();
+                talk_next("\"Our poor karma.......Crusaders........Three floods and four droughts..........Savior is coming........They can still repent....\"", "religion5", Color.white);
                 
                 break;  
                 
             case "religion5":
-                gm.ui.messageText.setText("\"Not zealous enough.......Church and State........Hell do they know?..........Bless the Peasants........The Other Side....\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("religion6");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                 
-                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
-                se.play();
+                talk_next("\"Not zealous enough.......Church and State........Hell do they know?..........Bless the Peasants........The Other Side....\"", "religion6", Color.white);
                 
                 break;   
                 
             case "religion6":
-                gm.ui.messageText.setText("\"And that's why we can't eat poultry on mondays!\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("religion7");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                 
-                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
-                se.play();
+                talk_next("\"And that's why we can't eat poultry on mondays!\"", "religion7", Color.white);
                 
                 break; 
                 
             case "religion7":
-                gm.ui.messageText.setText("\"I'm sorry I asked\"");
-                gm.ui.messageText.setForeground(Color.yellow);
-                gm.ui.choice1.setActionCommand("nothing");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                 
-                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
-                se.play();
+                talk_next("\"I'm sorry I asked\"", "nothing", Color.yellow);
                 
                 break;     
                 
@@ -564,26 +473,8 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 
             case "tips_priest":
-                gm.ui.messageText.setText("\"So where should I go next?\"");        
-                gm.ui.messageText.setForeground(Color.yellow);
-                gm.ui.choiceButtonPanel.setVisible(false);
-                gm.ui.window.remove(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
-                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
-                gm.ui.choiceButtonPanel.setBackground(Color.black);
-                gm.ui.window.add(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choice1 = new JButton("Continue");
-                gm.ui.choice1.setBackground(Color.black);
-                gm.ui.choice1.setForeground(Color.white);
-                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
-                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
-                gm.ui.choice1.setActionCommand("tips_priest2");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                 
-                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
-                se.play();
+                talk_first("\"So where should I go next?\"", "tips_priest2", Color.yellow);
                 
                 break;
                 
@@ -1988,6 +1879,43 @@ public class DialogChoiceHandler implements ActionListener{
                 break;
             
         }
+        
+    }
+    
+    public void talk_first(String talktext, String nextcase, Color textcolor){      /* I'll fix all the talk cases with these functions soon for clarity */
+        
+        gm.ui.messageText.setText(talktext);        
+        gm.ui.messageText.setForeground(textcolor);
+        gm.ui.choiceButtonPanel.setVisible(false);
+        gm.ui.window.remove(gm.ui.choiceButtonPanel);
+
+        gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
+        gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
+        gm.ui.choiceButtonPanel.setBackground(Color.black);
+        gm.ui.window.add(gm.ui.choiceButtonPanel);
+
+        gm.ui.choice1 = new JButton("Continue");
+        gm.ui.choice1.setBackground(Color.black);
+        gm.ui.choice1.setForeground(Color.white);
+        gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
+        gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
+        gm.ui.choice1.setActionCommand(nextcase);
+        gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+
+        se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
+        se.play();
+        
+    }
+    
+    public void talk_next(String talktext, String nextcase, Color textcolor){
+        
+        gm.ui.messageText.setText(talktext);
+        gm.ui.messageText.setForeground(textcolor);
+        gm.ui.choice1.setActionCommand(nextcase);
+        gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+
+        se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
+        se.play();
         
     }
     
