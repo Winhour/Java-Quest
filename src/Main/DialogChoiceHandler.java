@@ -288,6 +288,7 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.sceneChanger.showScreen3();
                 if(gm.ui.goblinFlag){
                     gm.monster = new Goblin();
+                    gm.music.stop();
                     gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/Fight.wav");
                     gm.music.play_low();
                     gm.music.loop();
@@ -296,6 +297,7 @@ public class DialogChoiceHandler implements ActionListener{
                     gm.ui.addFightMenu();
                 }
                 else {
+                    gm.music.stop();
                     gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_adventure.wav");
                     gm.music.play_low();
                     gm.music.loop();
@@ -310,6 +312,7 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.sceneChanger.showScreen2();
                 if(gm.ui.skeleFlag){
                     gm.monster = new Skeletons();
+                    gm.music.stop();
                     gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/Fight.wav");
                     gm.music.play_low();
                     gm.music.loop();
@@ -318,6 +321,7 @@ public class DialogChoiceHandler implements ActionListener{
                     gm.ui.addFightMenu();
                 }
                 else {
+                    gm.music.stop();
                     gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_adventure.wav");
                     gm.music.play_low();
                     gm.music.loop();
@@ -1248,7 +1252,30 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.choice1.setActionCommand("nothing");
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                 break;  
-                    
+                
+                
+            /* Buying items from Merchant */
+                
+            case "merch_items":
+                
+                
+                break;
+                
+                
+            /* Asking Merchant about the Business */        
+             
+            case "merch_business":
+                
+                
+                break;
+                
+                
+            /* Asking Merchant about the Quest */       
+                
+            case "merch_quest":
+                
+                
+                break;
                 
                 
             /* Priest interact */    

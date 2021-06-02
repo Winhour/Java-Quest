@@ -87,7 +87,7 @@ public class UI {
     
      /**********************************************************************************************************************************/
     
-    public void createTitleScreen(){
+    public void createTitleScreen(){                                                /* Title screen for the game */
         
         window = new JFrame();
         window.setSize(1024,808);
@@ -125,7 +125,7 @@ public class UI {
     
      /**********************************************************************************************************************************/
     
-    public void createMainField(){
+    public void createMainField(){                                                  /* Create the text window */
         
         messageText = new JTextArea("~ Starhome, the town of possibilities looms close in the distance~");
         messageText.setBounds(64,550,896,80);
@@ -148,7 +148,7 @@ public class UI {
     
      /**********************************************************************************************************************************/
     
-    public void createBackground(int bgNum, String bgFileName){
+    public void createBackground(int bgNum, String bgFileName){                     /* Create the background for a scene */
         
         bgPanel[bgNum] = new JPanel();
         bgPanel[bgNum].setBounds(110,50,800,500);
@@ -168,7 +168,7 @@ public class UI {
     
      /**********************************************************************************************************************************/
     
-    public void createObject(int bgNum, int objx, int objy, int objWidth, int objHeight, String objFileName){
+    public void createObject(int bgNum, int objx, int objy, int objWidth, int objHeight, String objFileName){       /* Create an object to add to a scene */
         
         JLabel objectLabel = new JLabel();
         objectLabel.setBounds(objx,objy,objWidth,objHeight);
@@ -184,6 +184,8 @@ public class UI {
     
     public void createObjectInteractable(int bgNum, int objx, int objy, int objWidth, int objHeight, String objFileName,
             String choice1Name, String choice2Name, String choice3Name, String choice1Command, String choice2Command, String choice3Command){
+        
+        /* Create an interactable object to add to a scene */
         
         JPopupMenu popMenu = new JPopupMenu();
         
@@ -243,7 +245,7 @@ public class UI {
     
      /**********************************************************************************************************************************/
     
-    public void generateScreen(){
+    public void generateScreen(){                               /* Create the scenes */
         
         //SCENE 1   Outskirts
         
@@ -336,7 +338,7 @@ public class UI {
     
      /**********************************************************************************************************************************/
     
-    public void addPlayerInfo(){
+    public void addPlayerInfo(){                            /* Add/Update the player information bar */
         
         if(playerInfoPanel != null){
             playerInfoPanel.setVisible(false);
@@ -423,7 +425,7 @@ public class UI {
      /**********************************************************************************************************************************/
     
     
-    public void addFightMenu(){
+    public void addFightMenu(){                                             /* Add Fight Menu */
         
         if(choiceButtonPanel != null){
             choiceButtonPanel.setVisible(false);
@@ -472,7 +474,7 @@ public class UI {
      /**********************************************************************************************************************************/
     
     
-    public void addInteractMenu(){
+    public void addInteractMenu(){                                                  /* Add Interaction Menu */
         
         if(choiceButtonPanel != null){
             choiceButtonPanel.setVisible(false);
@@ -521,6 +523,8 @@ public class UI {
      /**********************************************************************************************************************************/
     
      public void addTalkMenu(String ch1, String ch2, String ch3, String ch1Command, String ch2Command, String ch3Command){
+         
+         /* Add Talk Menu */
         
         if(choiceButtonPanel != null){
             choiceButtonPanel.setVisible(false);
@@ -570,6 +574,8 @@ public class UI {
      
     public void addMoveMenu(String ch1, String ch2, String ch3, String ch1Command, String ch2Command, String ch3Command){
         
+        /* Add Move Menu */
+        
         if(choiceButtonPanel != null){
             choiceButtonPanel.setVisible(false);
             window.remove(choiceButtonPanel);
@@ -618,6 +624,8 @@ public class UI {
     
     public void addConfirmMenu(String ch1, String ch2, String ch1Command, String ch2Command){
         
+        /* Add Confirm Menu */
+        
         if(choiceButtonPanel != null){
             choiceButtonPanel.setVisible(false);
             window.remove(choiceButtonPanel);
@@ -650,6 +658,8 @@ public class UI {
      /**********************************************************************************************************************************/
     
     public void addSpellMenu(){
+        
+        /* Add Spell Menu */
         
         choiceButtonPanel.setVisible(false);
         window.remove(choiceButtonPanel);
@@ -697,6 +707,8 @@ public class UI {
     
     public void addItemMenu(){
         
+        /* Add Item Menu */
+        
         choiceButtonPanel.setVisible(false);
         window.remove(choiceButtonPanel);
         
@@ -739,6 +751,8 @@ public class UI {
     /**********************************************************************************************************************************/
     
     public void addItemMenuNonFight(){
+        
+        /* Add Item Menu outside of combat */
         
         choiceButtonPanel.setVisible(false);
         window.remove(choiceButtonPanel);
@@ -783,6 +797,8 @@ public class UI {
     
     
     public void addSmithBuyMenu(){
+        
+        /* Add Smith's Shop Menu */
         
         choiceButtonPanel.setVisible(false);
         window.remove(choiceButtonPanel);
@@ -831,6 +847,7 @@ public class UI {
     
     public void inventoryScreen(){
         
+        /* Create an inventory screen */
 
         bgPanel[8] = new JPanel();
         bgPanel[8].setBounds(110,50,800,500);
@@ -1766,6 +1783,8 @@ public class UI {
     
     public void makeStatsText(){
         
+        /* Create stats panel (part of inventory screen) */
+        
         
         if(statsText != null){
             statsText.setVisible(false);
@@ -1792,6 +1811,8 @@ public class UI {
     
     public void goBack(){
         
+        /* Outdated at the moment */
+        
         choiceButtonPanel.setVisible(false);
         window.remove(choiceButtonPanel);
         
@@ -1814,6 +1835,8 @@ public class UI {
     
     public void progressForward(){
         
+        /* Outdated at the moment */
+        
         choiceButtonPanel.setVisible(false);
         window.remove(choiceButtonPanel);
         
@@ -1835,6 +1858,8 @@ public class UI {
      /**********************************************************************************************************************************/
     
     public class TitleScreenHandler implements ActionListener{
+        
+        /* Get to the game from the title screen */
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -1862,6 +1887,8 @@ public class UI {
     
     public void rememberCurrentScene(){
         
+        /* Remember the current scene */
+        
         if (bgPanel[1].isVisible()) currentScene = 1;
         else if (bgPanel[2].isVisible()) currentScene = 2;
         else if (bgPanel[3].isVisible()) currentScene = 3;
@@ -1881,6 +1908,8 @@ public class UI {
     /**********************************************************************************************************************************/
     
     public void restoreScene(){
+        
+        /* Restore the saved scene */
         
         if (currentScene == 1) gm.sceneChanger.showScreen1();
         if (currentScene == 2) gm.sceneChanger.showScreen2();

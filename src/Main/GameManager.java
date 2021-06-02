@@ -19,6 +19,8 @@ import items.SmallHealthPotion;
  * @author Marcin
  */
 public class GameManager {
+    
+    /* Main function, hub for all the moving pieces */
 
     PlayerInfo playerInfo = new PlayerInfo();
     
