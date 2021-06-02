@@ -622,144 +622,90 @@ public class DialogChoiceHandler implements ActionListener{
                 
             case "dungeon_info3":
                 
-                gm.ui.messageText.setText("\"I've seen too many good men go against the Demon Lord and never come out\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("dungeon_info4");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"I've seen too many good men go against the Demon Lord and never come out\"", "dungeon_info4", Color.white);
+                
                 break;      
                 
             case "dungeon_info4":
                 
-                gm.ui.messageText.setText("\"I prefer to hang around here and pick off stray goblins, I could use the exp you see\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("dungeon_info5");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"I prefer to hang around here and pick off stray goblins, I could use the exp you see\"", "dungeon_info5", Color.white);
+                
                 break;     
                 
             case "dungeon_info5":
                 
-                gm.ui.messageText.setText("\"...\"");
-                gm.ui.messageText.setForeground(Color.yellow);
-                gm.ui.choice1.setActionCommand("nothing");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"...\"", "nothing", Color.yellow);
+                
                 break;         
                 
             /* Asking the Hunter about Hunting */     
                 
             case "hunting_talk":
                 
-                gm.ui.messageText.setText("\"My lord sent me out here to get him a bear pelt\"");        
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choiceButtonPanel.setVisible(false);
-                gm.ui.window.remove(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
-                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
-                gm.ui.choiceButtonPanel.setBackground(Color.black);
-                gm.ui.window.add(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choice1 = new JButton("Continue");
-                gm.ui.choice1.setBackground(Color.black);
-                gm.ui.choice1.setForeground(Color.white);
-                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
-                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
-                gm.ui.choice1.setActionCommand("hunting_talk2");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_first("\"My lord sent me out here to get him a bear pelt\"", "hunting_talk2", Color.white);
+                
                 break;     
                 
             case "hunting_talk2":
                 
-                gm.ui.messageText.setText("\"Klethys, he says, your archery skills are unmatched in the realm\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("hunting_talk3");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"Klethys, he says, your archery skills are unmatched in the realm\"", "hunting_talk3", Color.white);
+                
                 break;         
                 
             case "hunting_talk3":
+
+                talk_next("\"The thing is... Bears are dangerous creatures, they close the distance to you in an instant\"", "hunting_talk4", Color.white);
                 
-                gm.ui.messageText.setText("\"The thing is... Bears are dangerous creatures, they close the distance to you in an instant\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("hunting_talk4");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                 break;      
                 
             case "hunting_talk4":
                 
-                gm.ui.messageText.setText("\"I would prefer not to put myself in the harm's way if possible\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("hunting_talk5");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"I would prefer not to put myself in the harm's way if possible\"", "hunting_talk5", Color.white);
+                
                 break;     
                 
             case "hunting_talk5":
                 
-                gm.ui.messageText.setText("\"Tell you what, if you can get me a bear hide, I'll give you this nice sword in return\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("hunting_talk6");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"Tell you what, if you can get me a bear hide, I'll give you this nice sword in return\"", "hunting_talk6", Color.white);
+                
                 break;       
                 
             case "hunting_talk6":
                 
-                gm.ui.messageText.setText("\"Deal.\"");
-                gm.ui.messageText.setForeground(Color.yellow);
-                gm.ui.choice1.setActionCommand("nothing");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"Deal.\"", "nothing", Color.yellow);
+                
                 break;          
                 
             /* Asking the Hunter about Woods */     
                 
             case "woods_info":
+
+                talk_first("\"These woods are really nice, no?\"", "woods_info2", Color.white);
                 
-                gm.ui.messageText.setText("\"These woods are really nice, no?\"");        
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choiceButtonPanel.setVisible(false);
-                gm.ui.window.remove(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
-                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
-                gm.ui.choiceButtonPanel.setBackground(Color.black);
-                gm.ui.window.add(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choice1 = new JButton("Continue");
-                gm.ui.choice1.setBackground(Color.black);
-                gm.ui.choice1.setForeground(Color.white);
-                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
-                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
-                gm.ui.choice1.setActionCommand("woods_info2");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                 break;    
                 
             case "woods_info2":
                 
-                gm.ui.messageText.setText("\"As far as woods go, sure.\"");
-                gm.ui.messageText.setForeground(Color.yellow);
-                gm.ui.choice1.setActionCommand("woods_info3");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"As far as woods go, sure.\"", "woods_info3", Color.yellow);
+                
                 break;     
                 
             case "woods_info3":
                 
-                gm.ui.messageText.setText("\"There's a lot of good game around these parts: deer, foxes...\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("woods_info4");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"There's a lot of good game around these parts: deer, foxes...\"", "woods_info4", Color.white);
+                
                 break;         
                 
             case "woods_info4":
                 
-                gm.ui.messageText.setText("\"But the bears seem more dangerous lately.\n It might be demonic influence...\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("woods_info5");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"But the bears seem more dangerous lately.\n It might be demonic influence...\"", "woods_info5", Color.white);
+                
                 break;       
                 
             case "woods_info5":
                 
-                gm.ui.messageText.setText("\"I knew there's some catch to your deal.\"");
-                gm.ui.messageText.setForeground(Color.yellow);
-                gm.ui.choice1.setActionCommand("nothing");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"I knew there's some catch to your deal.\"", "nothing", Color.yellow);
+                
                 break;      
                 
                 
@@ -767,281 +713,166 @@ public class DialogChoiceHandler implements ActionListener{
                 
             case "dl_smith":
                 
-                gm.ui.messageText.setText("\"The Demon Lord is immune to attacks from normal weapons\"");        
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choiceButtonPanel.setVisible(false);
-                gm.ui.window.remove(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
-                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
-                gm.ui.choiceButtonPanel.setBackground(Color.black);
-                gm.ui.window.add(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choice1 = new JButton("Continue");
-                gm.ui.choice1.setBackground(Color.black);
-                gm.ui.choice1.setForeground(Color.white);
-                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
-                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
-                gm.ui.choice1.setActionCommand("dl_smith2");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_first("\"The Demon Lord is immune to attacks from normal weapons\"", "dl_smith2", Color.white);
+                
                 break;        
                 
-            case "dl_smith2":    
+            case "dl_smith2":     
                 
-                gm.ui.messageText.setText("\"You need a special blade created from a magical ore to harm him\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("dl_smith3");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"You need a special blade created from a magical ore to harm him\"", "dl_smith3", Color.white);
+                
                 break;       
                 
             case "dl_smith3":    
                 
-                gm.ui.messageText.setText("\"Should you bring one to me, I will be able to create such a weapon\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("dl_smith4");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"Should you bring one to me, I will be able to create such a weapon\"", "dl_smith4", Color.white);
+                
                 break;     
                 
             case "dl_smith4":    
+
+                talk_next("\"So, you need me to find you a rock?\"", "dl_smith5", Color.yellow);
                 
-                gm.ui.messageText.setText("\"So, you need me to find you a rock?\"");
-                gm.ui.messageText.setForeground(Color.yellow);
-                gm.ui.choice1.setActionCommand("dl_smith5");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
-                break;      
+                break; 
                 
             case "dl_smith5":    
                 
-                gm.ui.messageText.setText("\"There might be a fitting one somewhere in the dungeon\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("dl_smith6");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
-                break;       
+                talk_next("\"There might be a fitting one somewhere in the dungeon\"", "dl_smith6", Color.white);
+                
+                break;    
+                      
                 
             case "dl_smith6":    
                 
-                gm.ui.messageText.setText("\"Don't face the Demon Lord without the right weapon, understood?\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("nothing");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"Don't face the Demon Lord without the right weapon, understood?\"", "nothing", Color.white);
+                
                 break;       
                 
             
             /* Asking Smith about the Town */     
                 
             case "smith_info":
+
+                talk_first("\"Starhome used to be a huge city, a pride of this kingdom\"", "smith_info2", Color.white);
                 
-                gm.ui.messageText.setText("\"Starhome used to be a huge city, a pride of this kingdom\"");        
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choiceButtonPanel.setVisible(false);
-                gm.ui.window.remove(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
-                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
-                gm.ui.choiceButtonPanel.setBackground(Color.black);
-                gm.ui.window.add(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choice1 = new JButton("Continue");
-                gm.ui.choice1.setBackground(Color.black);
-                gm.ui.choice1.setForeground(Color.white);
-                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
-                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
-                gm.ui.choice1.setActionCommand("smith_info2");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                 break;    
                 
             case "smith_info2":    
                 
-                gm.ui.messageText.setText("\"Recently though, the people started to flee to the capitol...\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("smith_info3");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"Recently though, the people started to flee to the capitol...\"", "smith_info3", Color.white);
+                
                 break;     
                 
             case "smith_info3":    
                 
-                gm.ui.messageText.setText("\"It was due to Demon Lord's attacks of course.\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("smith_info4");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"It was due to Demon Lord's attacks of course.\"", "smith_info4", Color.white);
+                
                 break;     
                 
             case "smith_info4":    
                 
-                gm.ui.messageText.setText("\"If some hero doesn't stop all this monster business soon...\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("smith_info5");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"If some hero doesn't stop all this monster business soon...\"", "smith_info5", Color.white);
+                
                 break;      
                 
             case "smith_info5":    
                 
-                gm.ui.messageText.setText("\"I fear this town will get overran\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("smith_info6");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"I fear this town will get overran\"", "smith_info6", Color.white);
+                
                 break;      
                 
             case "smith_info6":    
                 
-                gm.ui.messageText.setText("\"I won't let that happen\"");
-                gm.ui.messageText.setForeground(Color.yellow);
-                gm.ui.choice1.setActionCommand("nothing");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"I won't let that happen\"", "nothing", Color.yellow);
+                
                 break;       
                 
             /* Asking the Smith for tips */    
                 
             case "tips_smith":
                 
-                gm.ui.messageText.setText("\"I sold one of my finest swords recently to Klethys the Hunter\"");        
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choiceButtonPanel.setVisible(false);
-                gm.ui.window.remove(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
-                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
-                gm.ui.choiceButtonPanel.setBackground(Color.black);
-                gm.ui.window.add(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choice1 = new JButton("Continue");
-                gm.ui.choice1.setBackground(Color.black);
-                gm.ui.choice1.setForeground(Color.white);
-                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
-                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
-                gm.ui.choice1.setActionCommand("tips_smith2");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_first("\"I sold one of my finest swords recently to Klethys the Hunter\"", "tips_smith2", Color.white);
+                
                 break;          
                 
             case "tips_smith2":    
                 
-                gm.ui.messageText.setText("\"He often stalks his prey in the Woods close to the Dungeon\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("tips_smith3");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"He often stalks his prey in the Woods close to the Dungeon\"", "tips_smith3", Color.white);
+                
                 break;      
                 
             case "tips_smith3":    
                 
-                gm.ui.messageText.setText("\"Maybe hed'd be willing to trade if you help him out?\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("tips_smith4");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"Maybe hed'd be willing to trade if you help him out?\"", "tips_smith4", Color.white);
+                
                 break;     
                 
             case "tips_smith4":    
                 
-                gm.ui.messageText.setText("\"I'll think about it\"");
-                gm.ui.messageText.setForeground(Color.yellow);
-                gm.ui.choice1.setActionCommand("nothing");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"I'll think about it\"", "nothing", Color.yellow);
+                
                 break;   
+                
                 
             /* Asking Mayor about the Demon Lord */   
                 
+                
             case "dl_mayor":
                 
-                gm.ui.messageText.setText("\"Many of our greatest warriors already failed trying to take him down\"");        
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choiceButtonPanel.setVisible(false);
-                gm.ui.window.remove(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
-                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
-                gm.ui.choiceButtonPanel.setBackground(Color.black);
-                gm.ui.window.add(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choice1 = new JButton("Continue");
-                gm.ui.choice1.setBackground(Color.black);
-                gm.ui.choice1.setForeground(Color.white);
-                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
-                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
-                gm.ui.choice1.setActionCommand("dl_mayor2");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_first("\"Many of our greatest warriors already failed trying to take him down\"", "dl_mayor2", Color.white);
                 
                 break;    
                 
                 
             case "dl_mayor2":
                 
-                gm.ui.messageText.setText("\"They said their weapons had no effect...\nMagic seemed to be working, but it wasn't enough\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("dl_mayor3");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"They said their weapons had no effect...\nMagic seemed to be working, but it wasn't enough\"", "dl_mayor3", Color.white);
+                
                 break; 
                 
-            case "dl_mayor3":
+            case "dl_mayor3":  
                 
-                gm.ui.messageText.setText("\"There must be some trick to deafeating him, huh?\"");
-                gm.ui.messageText.setForeground(Color.yellow);
-                gm.ui.choice1.setActionCommand("dl_mayor4");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"There must be some trick to deafeating him, huh?\"", "dl_mayor4", Color.yellow);
+                
                 break;    
                 
             case "dl_mayor4":
                 
-                gm.ui.messageText.setText("\"Gunthar in the weapon's shop might be able to help.\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("nothing");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"Gunthar in the weapon's shop might be able to help.\"", "nothing", Color.white);
+                
                 break;        
 
                 
             /* Asking Mayor about the Quest */    
                 
             case "quest_info":
-                
-                
-                gm.ui.messageText.setText("\"It's good you managed to arrive in one piece.\"");        
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choiceButtonPanel.setVisible(false);
-                gm.ui.window.remove(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
-                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
-                gm.ui.choiceButtonPanel.setBackground(Color.black);
-                gm.ui.window.add(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choice1 = new JButton("Continue");
-                gm.ui.choice1.setBackground(Color.black);
-                gm.ui.choice1.setForeground(Color.white);
-                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
-                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
-                gm.ui.choice1.setActionCommand("quest_info2");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+
+                talk_first("\"It's good you managed to arrive in one piece.\"", "quest_info2", Color.white);
                 
                 break;      
                 
             case "quest_info2":
                 
-                gm.ui.messageText.setText("\"So, what is the mission?\"");
-                gm.ui.messageText.setForeground(Color.yellow);
-                gm.ui.choice1.setActionCommand("quest_info3");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"So, what is the mission?\"", "quest_info3", Color.yellow);
+                
                 break;     
                 
             case "quest_info3":
                 
-                gm.ui.messageText.setText("\"Defeat the Demon Lord that hides withing the Dungeon...\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("quest_info4");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"Defeat the Demon Lord that hides withing the Dungeon...\"", "quest_info4", Color.white);
+                
                 break;     
                 
             case "quest_info4":
                 
-                gm.ui.messageText.setText("\"Slay him and you shall receive a mountain of gold and plethora of magical artifacts.\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("quest_info5");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"Slay him and you shall receive a mountain of gold and plethora of magical artifacts.\"", "quest_info5", Color.white);
+                
                 break;   
                 
             case "quest_info5":
                 
-                gm.ui.messageText.setText("\"I like the sound of that.\"");
-                gm.ui.messageText.setForeground(Color.yellow);
-                gm.ui.choice1.setActionCommand("nothing");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"I like the sound of that.\"", "nothing", Color.yellow);
+                
                 break;        
                 
                 
@@ -1049,64 +880,38 @@ public class DialogChoiceHandler implements ActionListener{
                 
             case "town_mayor":
                 
-                gm.ui.messageText.setText("\"Before you set off, you should buy new weapons.\"");        
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choiceButtonPanel.setVisible(false);
-                gm.ui.window.remove(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
-                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
-                gm.ui.choiceButtonPanel.setBackground(Color.black);
-                gm.ui.window.add(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choice1 = new JButton("Continue");
-                gm.ui.choice1.setBackground(Color.black);
-                gm.ui.choice1.setForeground(Color.white);
-                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
-                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
-                gm.ui.choice1.setActionCommand("town_mayor2");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_first("\"Before you set off, you should buy new weapons.\"", "town_mayor2", Color.white);
                 
                 break;    
                 
             case "town_mayor2":
                 
-                gm.ui.messageText.setText("\"There is a good Blacksmith's shop nearby, stacked with Axes and Armor plates.\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("town_mayor3");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"There is a good Blacksmith's shop nearby, stacked with Axes and Armor plates.\"", "town_mayor3", Color.white);
+                
                 break;      
                 
             case "town_mayor3":
                 
-                gm.ui.messageText.setText("\"On the outskirts of the town you can also find an Item Shop...\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("town_mayor4");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"On the outskirts of the town you can also find an Item Shop...\"", "town_mayor4", Color.white);
+                
                 break;       
                     
             case "town_mayor4":
                 
-                gm.ui.messageText.setText("\"If you need healing or mana potions, that's where they can be found.\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("town_mayor5");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"If you need healing or mana potions, that's where they can be found.\"", "town_mayor5", Color.white);
+                
                 break;           
                 
             case "town_mayor5":
                 
-                gm.ui.messageText.setText("\"In case of emergency, remember that the local priests are also good healers.\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("town_mayor6");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"In case of emergency, remember that the local priests are also good healers.\"", "town_mayor6", Color.white);
+                
                 break;  
                 
             case "town_mayor6":
                 
-                gm.ui.messageText.setText("\"Thanks, I'll be sure to keep those places in mind if I need anything.\"");
-                gm.ui.messageText.setForeground(Color.yellow);
-                gm.ui.choice1.setActionCommand("nothing");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"Thanks, I'll be sure to keep those places in mind if I need anything.\"", "nothing", Color.yellow);
+                
                 break;  
                 
                 
@@ -1124,33 +929,14 @@ public class DialogChoiceHandler implements ActionListener{
             /* Asking Merchant about the Business */        
              
             case "merch_business":
-
-                gm.ui.messageText.setText("\"[INFO ABOUT BUSINESS]\"");        
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choiceButtonPanel.setVisible(false);
-                gm.ui.window.remove(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
-                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
-                gm.ui.choiceButtonPanel.setBackground(Color.black);
-                gm.ui.window.add(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choice1 = new JButton("Continue");
-                gm.ui.choice1.setBackground(Color.black);
-                gm.ui.choice1.setForeground(Color.white);
-                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
-                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
-                gm.ui.choice1.setActionCommand("merch_business2");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                talk_first("\"[INFO ABOUT BUSINESS]\"", "merch_business2", Color.white);
    
                 break;
                 
             case "merch_business2":
                 
-                gm.ui.messageText.setText("\"[ETC...]\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("nothing");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"[ETC...]\"", "nothing", Color.white);
                 
                 break;  
                 
@@ -1160,32 +946,13 @@ public class DialogChoiceHandler implements ActionListener{
                 
             case "merch_quest":
                 
-                gm.ui.messageText.setText("\"[INFO ABOUT SIDEQUEST]\"");        
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choiceButtonPanel.setVisible(false);
-                gm.ui.window.remove(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
-                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
-                gm.ui.choiceButtonPanel.setBackground(Color.black);
-                gm.ui.window.add(gm.ui.choiceButtonPanel);
-        
-                gm.ui.choice1 = new JButton("Continue");
-                gm.ui.choice1.setBackground(Color.black);
-                gm.ui.choice1.setForeground(Color.white);
-                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
-                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
-                gm.ui.choice1.setActionCommand("merch_quest2");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_first("\"[INFO ABOUT SIDEQUEST]\"", "merch_quest2", Color.white);
    
                 break;
                 
              case "merch_quest2":
                 
-                gm.ui.messageText.setText("\"[ETC...]\"");
-                gm.ui.messageText.setForeground(Color.white);
-                gm.ui.choice1.setActionCommand("nothing");
-                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                talk_next("\"[ETC...]\"", "nothing", Color.white);
                 
                 break;    
                 
@@ -1766,6 +1533,7 @@ public class DialogChoiceHandler implements ActionListener{
                 break;
                 
             case "nothing":
+                
                 gm.ui.addInteractMenu();
                 if (gm.ui.bgPanel[8].isVisible()){
                     gm.ui.choice4.setText("<<<");
@@ -1773,6 +1541,10 @@ public class DialogChoiceHandler implements ActionListener{
                 }
                 gm.ui.messageText.setText("What shall I do next?"); 
                 gm.ui.messageText.setForeground(Color.yellow);
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
+                se.play();
+                
                 break;
             
         }
