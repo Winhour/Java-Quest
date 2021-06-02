@@ -24,7 +24,7 @@ public class PlayerInfo {
     public int level = 1;
     public int maxhealth = 100 + (level-1)*20;
     public int exp = 0;
-    public int nextlevelexp = 100 + (level-1)*40;
+    public int nextlevelexp = 150 + (level-1)*40;
     public int cash = 90;
     
     public int ATK = 5;

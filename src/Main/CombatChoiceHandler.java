@@ -7,13 +7,17 @@ package Main;
 
 import Main.monsters.Skeletons;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Random;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
@@ -141,6 +145,51 @@ public class CombatChoiceHandler implements ActionListener{
                 gm.sceneChanger.showScreen2();
                 gm.ui.addFightMenu();
                 break;
+                
+            case "after_battle":
+                
+                if (gm.playerInfo.getExp()>=gm.playerInfo.getNextlevelexp()){
+                    
+                    gm.ui.messageText.setText("LEVEL UP!"); 
+                    gm.ui.messageText.setForeground(Color.white);
+                    gm.ui.choice1.setActionCommand("level_up");
+                    gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                    
+                } else {
+                
+                    gm.ui.messageText.setText("Victory is mine!"); 
+                    gm.ui.messageText.setForeground(Color.yellow);
+                    gm.ui.addInteractMenu();
+
+                }
+                
+                break;
+                
+                
+            case "level_up":
+                
+                gm.ui.messageText.setText("You are filled with a newfound strength!");
+                gm.playerInfo.setLevel(gm.playerInfo.getLevel()+1);
+                gm.playerInfo.setATK(gm.playerInfo.getATK()+2);
+                gm.playerInfo.setDEF(gm.playerInfo.getDEF()+1);
+                gm.playerInfo.setMAG(gm.playerInfo.getMAG()+1);
+                gm.playerInfo.setModifiedATK(gm.playerInfo.getATK() + gm.playerInfo.getWeapon().getModifier());
+                gm.playerInfo.setModfifiedDEF(gm.playerInfo.getDEF() + gm.playerInfo.getArmor().getModifier());
+                gm.playerInfo.setMaxhealth(100 + (gm.playerInfo.getLevel()-1)*20);
+                gm.playerInfo.setMaxmana(20 + gm.playerInfo.getMAG()*5);
+                gm.playerInfo.setExp(gm.playerInfo.getExp()-gm.playerInfo.getNextlevelexp());
+                gm.playerInfo.setNextlevelexp(150 + (gm.playerInfo.getLevel()-1)*40);
+                
+                gm.ui.makeStatsText();
+                gm.ui.statsText.setVisible(false);
+                
+                
+                gm.ui.addPlayerInfo();
+                gm.ui.addInteractMenu();
+                
+                break;
+                
+                
         }
         
     }
@@ -151,6 +200,7 @@ public class CombatChoiceHandler implements ActionListener{
                     gm.music.stop();
                     gm.ui.messageText.setText("The " + gm.monster.getName() + " was defeated!\n You gain " + gm.monster.getExp() + " exp and " + gm.monster.getGold() + " gold.");
                     gm.playerInfo.setCash(gm.playerInfo.getCash()+gm.monster.getGold());
+                    gm.playerInfo.setExp(gm.playerInfo.getExp()+gm.monster.getExp());
                     
                     if (gm.monster.getName().equals("Goblin") && gm.ui.goblinFlag){
                     //gm.ui.messageText.setText("testg");
@@ -224,7 +274,26 @@ public class CombatChoiceHandler implements ActionListener{
                         gm.ui.bearFlag = false;
                         gm.ui.bearpeltFlag = true;
                     }
-                    gm.ui.addInteractMenu();
+                    
+                    //gm.ui.addInteractMenu();
+                    
+                    gm.ui.choiceButtonPanel.setVisible(false);
+                    gm.ui.window.remove(gm.ui.choiceButtonPanel);
+
+                    gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
+                    gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
+                    gm.ui.choiceButtonPanel.setBackground(Color.black);
+                    gm.ui.window.add(gm.ui.choiceButtonPanel);
+
+                    gm.ui.choice1 = new JButton("Continue");
+                    gm.ui.choice1.setBackground(Color.black);
+                    gm.ui.choice1.setForeground(Color.white);
+                    gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
+                    gm.ui.choice1.addActionListener(gm.combatChoiceHandler);
+                    gm.ui.choice1.setActionCommand("after_battle");
+                    gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                    
+                    
         
     }
     

@@ -272,6 +272,7 @@ public class UI {
         //SCENE 5   Shop
         
         createBackground(5, "/res/shop.jpg");
+        createObjectInteractable(5,40,130,200,400,"/res/merchant.png", "Talk", "Interact", "Look", "talk_merch", "interact_merch", "look_merch");
         createObjectInteractable(5,270,180,100,100,"/res/blank.png", "Examine", "Interact", "", "examine_shelf", "interact_shelf", "nothing");
         bgPanel[5].add(bgLabel[5]);
         
