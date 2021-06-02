@@ -356,7 +356,7 @@ public class DialogChoiceHandler implements ActionListener{
                 break;    
                 
             case "talk_mayor":
-                gm.ui.addTalkMenu("Demon Lord", "Quest", "Town", "nothing", "nothing", "nothing");
+                gm.ui.addTalkMenu("Demon Lord", "Quest", "Town", "dl_mayor", "quest_info", "town_mayor");
                 gm.ui.messageText.setText("Ask about: ");
                 gm.ui.messageText.setForeground(Color.white);
                 break;   
@@ -1063,13 +1063,92 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                 break;     
                 
-             case "tips_smith4":    
+            case "tips_smith4":    
                 
                 gm.ui.messageText.setText("\"I'll think about it\"");
                 gm.ui.messageText.setForeground(Color.yellow);
                 gm.ui.choice1.setActionCommand("nothing");
                 gm.ui.choiceButtonPanel.add(gm.ui.choice1);
                 break;   
+                
+            /* Asking Mayor about the Demon Lord */   
+                
+            case "dl_mayor":
+                
+                gm.ui.messageText.setText("\"[Demon Lord info here]\"");        
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choiceButtonPanel.setVisible(false);
+                gm.ui.window.remove(gm.ui.choiceButtonPanel);
+        
+                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
+                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
+                gm.ui.choiceButtonPanel.setBackground(Color.black);
+                gm.ui.window.add(gm.ui.choiceButtonPanel);
+        
+                gm.ui.choice1 = new JButton("Continue");
+                gm.ui.choice1.setBackground(Color.black);
+                gm.ui.choice1.setForeground(Color.white);
+                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
+                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
+                gm.ui.choice1.setActionCommand("nothing");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                break;    
+                
+
+                
+            /* Asking Mayor about the Quest */    
+                
+            case "quest_info":
+                
+                
+                gm.ui.messageText.setText("\"[Quest info here]\"");        
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choiceButtonPanel.setVisible(false);
+                gm.ui.window.remove(gm.ui.choiceButtonPanel);
+        
+                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
+                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
+                gm.ui.choiceButtonPanel.setBackground(Color.black);
+                gm.ui.window.add(gm.ui.choiceButtonPanel);
+        
+                gm.ui.choice1 = new JButton("Continue");
+                gm.ui.choice1.setBackground(Color.black);
+                gm.ui.choice1.setForeground(Color.white);
+                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
+                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
+                gm.ui.choice1.setActionCommand("nothing");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                break;      
+                
+                
+            /* Asking Mayor about the Town */    
+                
+            case "town_mayor":
+                
+                gm.ui.messageText.setText("\"[Town info here]\"");        
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.choiceButtonPanel.setVisible(false);
+                gm.ui.window.remove(gm.ui.choiceButtonPanel);
+        
+                gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
+                gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
+                gm.ui.choiceButtonPanel.setBackground(Color.black);
+                gm.ui.window.add(gm.ui.choiceButtonPanel);
+        
+                gm.ui.choice1 = new JButton("Continue");
+                gm.ui.choice1.setBackground(Color.black);
+                gm.ui.choice1.setForeground(Color.white);
+                gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
+                gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
+                gm.ui.choice1.setActionCommand("nothing");
+                gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                
+                break;    
+                
+                    
+                
                 
             /* Priest interact */    
                 
