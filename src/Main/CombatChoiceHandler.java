@@ -313,6 +313,15 @@ public class CombatChoiceHandler implements ActionListener{
         
         gm.ui.gameOverScreen();
         
+        if(gm.monster.getName().equals("Bear")){
+            gm.ui.deathText.setText("You could not bear to live anymore.");
+        }
+        if(gm.monster.getName().equals("Skeletons")){
+            gm.ui.deathText.setText("You join your new skeletal friends on a brand new adventure.");
+        }
+        if(gm.monster.getName().equals("Goblin")){
+            gm.ui.deathText.setText("You managed to die against a Goblin? Impressive.");
+        }
     }
     
     

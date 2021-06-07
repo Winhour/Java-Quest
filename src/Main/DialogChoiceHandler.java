@@ -8,8 +8,11 @@ package Main;
 import Main.monsters.Bear;
 import Main.monsters.Goblin;
 import Main.monsters.Skeletons;
+import items.LargeElixir;
 import items.LargeHealthPotion;
+import items.MediumElixir;
 import items.MediumHealthPotion;
+import items.SmallElixir;
 import items.SmallHealthPotion;
 import java.awt.Color;
 import java.awt.Font;
@@ -1080,6 +1083,132 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 gm.ui.addInteractMenu();
                 break;        
+                
+            case "merch_selixir":
+                
+                gm.ui.messageText.setText("\"Are you sure you want this one?\" \n(\"Small Elixir\" +10 MP    Cost: 10 Gold)");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addConfirmMenu("Gimme!", "Nope", "bought_selixir", "nothing");
+                
+                break; 
+                
+            case "bought_selixir":
+                
+                if (gm.playerInfo.getCash() >= 10 && gm.itemlist[8] == null){
+                    
+                    se.setFile(System.getProperty("user.dir") + "/src/res/sound/coin_sound.wav");
+                    se.play();
+                    gm.playerInfo.setCash(gm.playerInfo.getCash()-10);
+                    gm.ui.addPlayerInfo();
+
+                    gm.ui.messageText.setText("You bought a [SMALL ELIXIR]!");
+                    gm.ui.messageText.setForeground(Color.white);
+
+                    for (int i=0;i<9;i++){
+                            if (gm.itemlist[i] == null){
+                                gm.itemlist[i] = new SmallElixir();
+                                break;
+                            }
+                        }
+                } else if (gm.itemlist[8] != null){
+                    
+                    gm.ui.messageText.setText("You're carrying too many items!");
+                    gm.ui.messageText.setForeground(Color.white);
+                    
+                } else {
+                    
+                    gm.ui.messageText.setText("Come on, you need money to buy items, duh!");
+                    gm.ui.messageText.setForeground(Color.white);
+                    
+                }
+                
+                gm.ui.addInteractMenu();
+                
+                break;
+                
+            case "merch_melixir":
+                
+                gm.ui.messageText.setText("\"Are you sure you want this one?\" \n(\"Medium Elixir\" +20 MP    Cost: 25 Gold)");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addConfirmMenu("Gimme!", "Nope", "bought_melixir", "nothing");
+                
+                break; 
+                
+            case "bought_melixir":
+                
+                if (gm.playerInfo.getCash() >= 25 && gm.itemlist[8] == null){
+                    
+                    se.setFile(System.getProperty("user.dir") + "/src/res/sound/coin_sound.wav");
+                    se.play();
+                    gm.playerInfo.setCash(gm.playerInfo.getCash()-25);
+                    gm.ui.addPlayerInfo();
+
+                    gm.ui.messageText.setText("You bought a [MEDIUM ELIXIR]!");
+                    gm.ui.messageText.setForeground(Color.white);
+
+                    for (int i=0;i<9;i++){
+                            if (gm.itemlist[i] == null){
+                                gm.itemlist[i] = new MediumElixir();
+                                break;
+                            }
+                        }
+                } else if (gm.itemlist[8] != null){
+                    
+                    gm.ui.messageText.setText("You're carrying too many items!");
+                    gm.ui.messageText.setForeground(Color.white);
+                    
+                } else {
+                    
+                    gm.ui.messageText.setText("Come on, you need money to buy items, duh!");
+                    gm.ui.messageText.setForeground(Color.white);
+                    
+                }
+                
+                gm.ui.addInteractMenu();
+                
+                break;
+                
+            case "merch_lelixir":
+                
+                gm.ui.messageText.setText("\"Are you sure you want this one?\" \n(\"Large Elixir\" Full MP    Cost: 40 Gold)");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addConfirmMenu("Gimme!", "Nope", "bought_lelixir", "nothing");
+                
+                break;     
+                
+            case "bought_lelixir":
+                
+                if (gm.playerInfo.getCash() >= 40 && gm.itemlist[8] == null){
+                    
+                    se.setFile(System.getProperty("user.dir") + "/src/res/sound/coin_sound.wav");
+                    se.play();
+                    gm.playerInfo.setCash(gm.playerInfo.getCash()-40);
+                    gm.ui.addPlayerInfo();
+
+                    gm.ui.messageText.setText("You bought a [LARGE ELIXIR]!");
+                    gm.ui.messageText.setForeground(Color.white);
+
+                    for (int i=0;i<9;i++){
+                            if (gm.itemlist[i] == null){
+                                gm.itemlist[i] = new LargeElixir();
+                                break;
+                            }
+                        }
+                } else if (gm.itemlist[8] != null){
+                    
+                    gm.ui.messageText.setText("You're carrying too many items!");
+                    gm.ui.messageText.setForeground(Color.white);
+                    
+                } else {
+                    
+                    gm.ui.messageText.setText("Come on, you need money to buy items, duh!");
+                    gm.ui.messageText.setForeground(Color.white);
+                    
+                }
+                
+                gm.ui.addInteractMenu();
+                
+                break;
                 
                 
             /* Asking Merchant about the Business */        

@@ -31,4 +31,8 @@ public class DataSaveLoad {
         
     }
     
+    public void loadData(){
+        
+    }
+    
 }

@@ -76,6 +76,7 @@ public class UI {
     
     public JPanel gameOverPanel;
     public JLabel gameOverLabel;
+    public JTextArea deathText = new JTextArea();
     public JPanel continueButtonPanel;
     public JButton continueButton;
     
@@ -1942,6 +1943,15 @@ public class UI {
         gameOverLabel.setForeground(Color.red);
         gameOverLabel.setFont(titleFont);
         
+        deathText = new JTextArea("");
+        deathText.setBounds(150,350,724,80);
+        deathText.setBackground(Color.BLACK);
+        deathText.setForeground(Color.WHITE);
+        deathText.setEditable(false);
+        deathText.setLineWrap(true);
+        deathText.setWrapStyleWord(true);
+        deathText.setFont(new Font("Book Antiqua", Font.PLAIN, 32));
+        
         continueButtonPanel = new JPanel();
         continueButtonPanel.setBounds(360, 512, 280, 100);
         continueButtonPanel.setBackground(Color.black);
@@ -1958,6 +1968,7 @@ public class UI {
         continueButtonPanel.add(continueButton);
         window.add(continueButtonPanel);
         window.add(gameOverPanel);
+        window.add(deathText);
         
         
         
@@ -1971,6 +1982,8 @@ public class UI {
         window.remove(gameOverPanel);
         continueButtonPanel.setVisible(false);
         window.remove(continueButtonPanel);
+        deathText.setVisible(false);
+        window.remove(deathText);
         
         titleNamePanel = new JPanel();
         titleNamePanel.setBounds(128,128,768,192);
@@ -2050,6 +2063,15 @@ public class UI {
             gm.itemlist[7] = null;
             gm.itemlist[8] = null;
             gm.playerInfo.setItemlist(gm.itemlist);
+            
+            goblinFlag = true;
+            skeleFlag = true;
+            bearFlag = true;
+            bearpeltFlag = false;
+            moonoreFlag = false;
+            combatFlag = false;
+            
+            currentScene = 1;
             
             backTitleScreen();
             

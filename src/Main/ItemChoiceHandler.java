@@ -269,7 +269,118 @@ public class ItemChoiceHandler implements ActionListener{
                     gm.ui.addPlayerInfo();
                 }
                 gm.ui.addInteractMenu();
+                break;   
+                
+                
+            case "M Elixir":
+                
+                damageRoll2 = rand.nextInt(3);
+                
+                if (gm.playerInfo.getMana() == gm.playerInfo.getMaxmana()){
+                    gm.ui.messageText.setText("Your mana is full!");
+                }
+                else {
+                
+                    gm.playerInfo.setMana(gm.playerInfo.getMana()+20);
+
+                    if (gm.playerInfo.getMana() > gm.playerInfo.getMaxmana()) gm.playerInfo.setMana(gm.playerInfo.getMaxmana());
+                    
+                    gm.playerInfo.setHealth(gm.playerInfo.getHealth()-damageRoll2);
+
+                    gm.ui.messageText.setText("You recovered 20 mana!" + "\n" + "The " + gm.monster.getName() + " attacks you for " + damageRoll2); 
+
+                    for (int i=8;i>=0;i--){
+                        if (gm.itemlist[i] != null && gm.itemlist[i].getName().equals("M Elixir")){
+                            gm.itemlist[i] = null;
+                            break;
+                        }
+                    }
+
+                    gm.ui.addPlayerInfo();
+                }
+                gm.ui.addFightMenu();
                 break;    
+                
+            case "M Elixirnc":
+                
+                if (gm.playerInfo.getMana() == gm.playerInfo.getMaxmana()){
+                    gm.ui.messageText.setText("Your mana is full!");
+                }
+                else {
+                
+                    gm.playerInfo.setMana(gm.playerInfo.getMana()+20);
+
+                    if (gm.playerInfo.getMana() > gm.playerInfo.getMaxmana()) gm.playerInfo.setMana(gm.playerInfo.getMaxmana());
+
+                    gm.ui.messageText.setText("You recovered 20 mana!"); 
+
+                    for (int i=8;i>=0;i--){
+                        if (gm.itemlist[i] != null && gm.itemlist[i].getName().equals("M Elixir")){
+                            gm.itemlist[i] = null;
+                            break;
+                        }
+                    }
+
+                    gm.ui.addPlayerInfo();
+                }
+                gm.ui.addInteractMenu();
+                break;      
+                
+             
+            case "L Elixir":
+                
+                damageRoll2 = rand.nextInt(3);
+                
+                if (gm.playerInfo.getMana() == gm.playerInfo.getMaxmana()){
+                    gm.ui.messageText.setText("Your mana is full!");
+                }
+                else {
+                
+                    gm.playerInfo.setMana(gm.playerInfo.getMaxmana());
+
+                    if (gm.playerInfo.getMana() > gm.playerInfo.getMaxmana()) gm.playerInfo.setMana(gm.playerInfo.getMaxmana());
+                    
+                    gm.playerInfo.setHealth(gm.playerInfo.getHealth()-damageRoll2);
+
+                    gm.ui.messageText.setText("You fully recovered your mana!" + "\n" + "The " + gm.monster.getName() + " attacks you for " + damageRoll2); 
+
+                    for (int i=8;i>=0;i--){
+                        if (gm.itemlist[i] != null && gm.itemlist[i].getName().equals("L Elixir")){
+                            gm.itemlist[i] = null;
+                            break;
+                        }
+                    }
+
+                    gm.ui.addPlayerInfo();
+                }
+                gm.ui.addFightMenu();
+                break;    
+                
+            case "L Elixirnc":
+                
+                if (gm.playerInfo.getMana() == gm.playerInfo.getMaxmana()){
+                    gm.ui.messageText.setText("Your mana is full!");
+                }
+                else {
+                
+                    gm.playerInfo.setMana(gm.playerInfo.getMaxmana());
+
+                    if (gm.playerInfo.getMana() > gm.playerInfo.getMaxmana()) gm.playerInfo.setMana(gm.playerInfo.getMaxmana());
+
+                    gm.ui.messageText.setText("You fully recovered your mana!"); 
+
+                    for (int i=8;i>=0;i--){
+                        if (gm.itemlist[i] != null && gm.itemlist[i].getName().equals("L Elixir")){
+                            gm.itemlist[i] = null;
+                            break;
+                        }
+                    }
+
+                    gm.ui.addPlayerInfo();
+                }
+                gm.ui.addInteractMenu();
+                break;          
+                
                 
             case "empty":
                 gm.ui.messageText.setText("It's unlikely this empty space will be too much help..."); 
