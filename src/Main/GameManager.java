@@ -39,6 +39,7 @@ public class GameManager {
     DialogChoiceHandler dialogChoiceHandler = new DialogChoiceHandler(this);
     WeaponChoiceHandler weaponChoiceHandler = new WeaponChoiceHandler(this);
     UI ui = new UI(this);
+    DataSaveLoad dsl = new DataSaveLoad(this);
     SceneChanger sceneChanger = new SceneChanger(this);
     
     SoundEffect music = new SoundEffect();

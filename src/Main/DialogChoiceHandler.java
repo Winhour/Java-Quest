@@ -229,6 +229,7 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.rememberCurrentScene();
                 gm.sceneChanger.showScreen10();
                 if(gm.ui.bearFlag){
+                    gm.ui.combatFlag = true;
                     gm.monster = new Bear();
                     gm.music.stop();
                     gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/Fight.wav");
@@ -287,6 +288,7 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 gm.sceneChanger.showScreen3();
                 if(gm.ui.goblinFlag){
+                    gm.ui.combatFlag = true;
                     gm.monster = new Goblin();
                     gm.music.stop();
                     gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/Fight.wav");
@@ -311,6 +313,7 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.rememberCurrentScene();
                 gm.sceneChanger.showScreen2();
                 if(gm.ui.skeleFlag){
+                    gm.ui.combatFlag = true;
                     gm.monster = new Skeletons();
                     gm.music.stop();
                     gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/Fight.wav");
@@ -930,15 +933,39 @@ public class DialogChoiceHandler implements ActionListener{
              
             case "merch_business":
                 
-                talk_first("\"[INFO ABOUT BUSINESS]\"", "merch_business2", Color.white);
+                talk_first("\"How is your business these days?\"", "merch_business2", Color.yellow);
    
                 break;
                 
             case "merch_business2":
                 
-                talk_next("\"[ETC...]\"", "nothing", Color.white);
+                talk_next("\"No shortage of adventurers in need of potions around here recently\"", "merch_business3", Color.white);
                 
                 break;  
+                
+            case "merch_business3":
+                
+                talk_next("\"So you can say it's a good time to be an Item Merchant\"", "merch_business4", Color.white);
+                
+                break;
+                
+            case "merch_business4":
+                
+                talk_next("\"The future is looking pretty bleak though...\"", "merch_business5", Color.white);
+                
+                break;    
+                
+            case "merch_business5":
+                
+                talk_next("\"Either someone gets rid of the Demon Lord and there are no more adventurers coming around...\"", "merch_business6", Color.white);
+                
+                break;        
+                
+            case "merch_business6":
+                
+                talk_next("\"... or the Demon Lord destroys us all, this shop included.\"", "nothing", Color.white);
+                
+                break;       
                 
                 
                 
@@ -946,15 +973,27 @@ public class DialogChoiceHandler implements ActionListener{
                 
             case "merch_quest":
                 
-                talk_first("\"[INFO ABOUT SIDEQUEST]\"", "merch_quest2", Color.white);
+                talk_first("\"Got any quests for someone like me?\"", "merch_quest2", Color.yellow);
    
                 break;
                 
-             case "merch_quest2":
+            case "merch_quest2":
                 
-                talk_next("\"[ETC...]\"", "nothing", Color.white);
+                talk_next("\"There is one thing, I need some leaves of Brueshrub tree.\n They are required for me to brew my potions.\"", "merch_quest3", Color.white);
                 
-                break;    
+                break;  
+                
+            case "merch_quest3":
+                
+                talk_next("\"I don't think I saw any of those trees around here...\"", "merch_quest4", Color.yellow);
+                
+                break;        
+                
+            case "merch_quest4":
+                
+                talk_next("\"Well, if you somehow manage to find some, bring them here and I'll give you a worthy reward.\"", "nothing", Color.white);
+                
+                break;        
                 
                 
             /* Priest interact */    

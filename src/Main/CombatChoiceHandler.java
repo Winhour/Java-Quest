@@ -114,6 +114,7 @@ public class CombatChoiceHandler implements ActionListener{
                 
             case "run":
                 
+                gm.ui.combatFlag = false;
                 gm.music.stop();
                 gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_adventure.wav");
                 gm.music.play_low();
@@ -197,102 +198,103 @@ public class CombatChoiceHandler implements ActionListener{
     public void winState(){
         
         se.play();
-                    gm.music.stop();
-                    gm.ui.messageText.setText("The " + gm.monster.getName() + " was defeated!\n You gain " + gm.monster.getExp() + " exp and " + gm.monster.getGold() + " gold.");
-                    gm.playerInfo.setCash(gm.playerInfo.getCash()+gm.monster.getGold());
-                    gm.playerInfo.setExp(gm.playerInfo.getExp()+gm.monster.getExp());
-                    
-                    if (gm.monster.getName().equals("Goblin") && gm.ui.goblinFlag){
-                    //gm.ui.messageText.setText("testg");
-                        gm.ui.bgPanel[3].remove(0);
-                        gm.ui.goblinFlag = false;
+        gm.ui.combatFlag = false;
+        gm.music.stop();
+        gm.ui.messageText.setText("The " + gm.monster.getName() + " was defeated!\n You gain " + gm.monster.getExp() + " exp and " + gm.monster.getGold() + " gold.");
+        gm.playerInfo.setCash(gm.playerInfo.getCash()+gm.monster.getGold());
+        gm.playerInfo.setExp(gm.playerInfo.getExp()+gm.monster.getExp());
 
-                        gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_adventure.wav");
-                        gm.music.play_low();
-                        gm.music.loop();
-                    
+        if (gm.monster.getName().equals("Goblin") && gm.ui.goblinFlag){
+        //gm.ui.messageText.setText("testg");
+            gm.ui.bgPanel[3].remove(0);
+            gm.ui.goblinFlag = false;
+
+            gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_adventure.wav");
+            gm.music.play_low();
+            gm.music.loop();
+
+        }
+        if (gm.monster.getName().equals("Skeletons") && gm.ui.skeleFlag){
+            //gm.ui.messageText.setText("tests");
+            gm.ui.bgPanel[2].remove(0);
+            gm.ui.skeleFlag = false;
+
+            gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_adventure.wav");
+            gm.music.play_low();
+            gm.music.loop();
+
+        }
+        if (gm.monster.getName().equals("Bear") && gm.ui.bearFlag){
+            //gm.ui.messageText.setText("tests");
+            gm.ui.bgPanel[10].remove(0);
+
+            gm.ui.messageText.setText("The " + gm.monster.getName() + " was defeated!\n You got [BEAR PELT]");
+
+            gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_tavern.wav");
+            gm.music.play_low();
+            gm.music.loop();
+
+            gm.ui.j3x2.setIcon(new ImageIcon(getClass().getResource("/res/bear_pelt.png")));
+
+            JMenuItem menuItem[] = new JMenuItem[2];
+
+            JPopupMenu popMenu = new JPopupMenu();
+
+            menuItem[0] = new JMenuItem("Examine");
+            menuItem[0].addActionListener(gm.weaponChoiceHandler);
+            menuItem[0].setActionCommand("examine_bpelt");
+            popMenu.add(menuItem[0]);
+
+            gm.ui.j3x2.addMouseListener(new MouseListener(){
+
+
+                @Override
+                public void mouseClicked(MouseEvent e){}
+
+                @Override
+                public void mousePressed(MouseEvent e){
+
+                    if (SwingUtilities.isRightMouseButton(e)){
+                        popMenu.show(gm.ui.j3x2, e.getX(), e.getY());
                     }
-                    if (gm.monster.getName().equals("Skeletons") && gm.ui.skeleFlag){
-                        //gm.ui.messageText.setText("tests");
-                        gm.ui.bgPanel[2].remove(0);
-                        gm.ui.skeleFlag = false;
-                        
-                        gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_adventure.wav");
-                        gm.music.play_low();
-                        gm.music.loop();
-                    
-                    }
-                    if (gm.monster.getName().equals("Bear") && gm.ui.bearFlag){
-                        //gm.ui.messageText.setText("tests");
-                        gm.ui.bgPanel[10].remove(0);
-                        
-                        gm.ui.messageText.setText("The " + gm.monster.getName() + " was defeated!\n You got [BEAR PELT]");
-                        
-                        gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_tavern.wav");
-                        gm.music.play_low();
-                        gm.music.loop();
 
-                        gm.ui.j3x2.setIcon(new ImageIcon(getClass().getResource("/res/bear_pelt.png")));
+                }
 
-                        JMenuItem menuItem[] = new JMenuItem[2];
+                @Override
+                public void mouseReleased(MouseEvent e){}
 
-                        JPopupMenu popMenu = new JPopupMenu();
+                @Override
+                public void mouseEntered(MouseEvent e){}
 
-                        menuItem[0] = new JMenuItem("Examine");
-                        menuItem[0].addActionListener(gm.weaponChoiceHandler);
-                        menuItem[0].setActionCommand("examine_bpelt");
-                        popMenu.add(menuItem[0]);
-
-                        gm.ui.j3x2.addMouseListener(new MouseListener(){
+                @Override
+                public void mouseExited(MouseEvent e){}
 
 
-                            @Override
-                            public void mouseClicked(MouseEvent e){}
-
-                            @Override
-                            public void mousePressed(MouseEvent e){
-
-                                if (SwingUtilities.isRightMouseButton(e)){
-                                    popMenu.show(gm.ui.j3x2, e.getX(), e.getY());
-                                }
-
-                            }
-
-                            @Override
-                            public void mouseReleased(MouseEvent e){}
-
-                            @Override
-                            public void mouseEntered(MouseEvent e){}
-
-                            @Override
-                            public void mouseExited(MouseEvent e){}
+            });
 
 
-                        });
+            gm.ui.bearFlag = false;
+            gm.ui.bearpeltFlag = true;
+        }
 
-                                
-                        gm.ui.bearFlag = false;
-                        gm.ui.bearpeltFlag = true;
-                    }
-                    
-                    //gm.ui.addInteractMenu();
-                    
-                    gm.ui.choiceButtonPanel.setVisible(false);
-                    gm.ui.window.remove(gm.ui.choiceButtonPanel);
+        //gm.ui.addInteractMenu();
 
-                    gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
-                    gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
-                    gm.ui.choiceButtonPanel.setBackground(Color.black);
-                    gm.ui.window.add(gm.ui.choiceButtonPanel);
+        gm.ui.choiceButtonPanel.setVisible(false);
+        gm.ui.window.remove(gm.ui.choiceButtonPanel);
 
-                    gm.ui.choice1 = new JButton("Continue");
-                    gm.ui.choice1.setBackground(Color.black);
-                    gm.ui.choice1.setForeground(Color.white);
-                    gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
-                    gm.ui.choice1.addActionListener(gm.combatChoiceHandler);
-                    gm.ui.choice1.setActionCommand("after_battle");
-                    gm.ui.choiceButtonPanel.add(gm.ui.choice1);
-                    
+        gm.ui.choiceButtonPanel = new JPanel(new GridLayout(1,1,180,10));
+        gm.ui.choiceButtonPanel.setBounds(64, 640, 896, 100);
+        gm.ui.choiceButtonPanel.setBackground(Color.black);
+        gm.ui.window.add(gm.ui.choiceButtonPanel);
+
+        gm.ui.choice1 = new JButton("Continue");
+        gm.ui.choice1.setBackground(Color.black);
+        gm.ui.choice1.setForeground(Color.white);
+        gm.ui.choice1.setFont(new Font("Book Antiqua", Font.PLAIN, 36));
+        gm.ui.choice1.addActionListener(gm.combatChoiceHandler);
+        gm.ui.choice1.setActionCommand("after_battle");
+        gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+
                     
         
     }

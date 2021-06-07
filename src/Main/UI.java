@@ -10,13 +10,16 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextArea;
@@ -42,6 +45,7 @@ public class UI {
     public JTextArea messageText = new JTextArea();
     public JPanel choiceButtonPanel;
     public JPanel playerInfoPanel;
+    public JPanel menuCogPanel;
     public JButton choice1, choice2, choice3, choice4;
     public JPanel bgPanel[] = new JPanel[20];
     public JLabel bgLabel[] = new JLabel[20];
@@ -61,6 +65,7 @@ public class UI {
     boolean bearFlag = true;
     boolean bearpeltFlag = false;
     boolean moonoreFlag = false;
+    boolean combatFlag = false;
     
     public JLabel j1x1, j1x2, j1x3, j1x4;
     public JLabel j2x1, j2x2, j2x3, j2x4;
@@ -346,7 +351,7 @@ public class UI {
         }
         
         playerInfoPanel = new JPanel();
-        playerInfoPanel.setBounds(20,5,960,50);
+        playerInfoPanel.setBounds(20,5,940,50);
         playerInfoPanel.setBackground(Color.black);
         window.add(playerInfoPanel);
         
@@ -418,9 +423,58 @@ public class UI {
         cashLabel.setForeground(Color.white);
         cashLabel.setText(String.valueOf(gm.playerInfo.getCash()));
         playerInfoPanel.add(cashLabel);
-  
+        
+        addMenuCog();
         
     }
+    
+     /**********************************************************************************************************************************/
+    
+    public void addMenuCog(){
+        
+        if(menuCogPanel != null){
+            menuCogPanel.setVisible(false);
+            window.remove(menuCogPanel);
+        }
+        
+        menuCogPanel = new JPanel();
+        menuCogPanel.setBounds(960,5,40,50);
+        menuCogPanel.setBackground(Color.black);
+        window.add(menuCogPanel);
+        
+        
+        
+        JLabel menu_cog = new JLabel();
+        menu_cog.setBounds(10,10,40,40);
+        ImageIcon menuIcon = new ImageIcon(getClass().getResource("/res/cog.png"));
+        menu_cog.setIcon(menuIcon);
+        menuCogPanel.add(menu_cog);
+        menu_cog.addMouseListener(new MouseAdapter()  
+        {  
+            public void mouseClicked(MouseEvent e)  
+            {  
+                if (!combatFlag){   /* Check if player is in combat, can't save in combat */
+                    int response = JOptionPane.showConfirmDialog(window, "Do you want to save and quit the game? (NOTE: Save doesn't work yet)", "Java Quest", JOptionPane.YES_NO_OPTION);
+                    if (response == JOptionPane.YES_OPTION){
+
+                        window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
+                    } else  {
+                        //System.out.println("nothing");
+                    }
+                }
+                else {
+                    JOptionPane.showMessageDialog(window, "Can't save right now!", "Java Quest", JOptionPane.WARNING_MESSAGE);
+                }
+                
+                
+            }  
+        }); 
+        
+        
+        
+    }
+    
+    
     
      /**********************************************************************************************************************************/
     
