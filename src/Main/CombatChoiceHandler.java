@@ -56,6 +56,9 @@ public class CombatChoiceHandler implements ActionListener{
                     se.play();
                     if ((gm.playerInfo.getModfifiedDEF()-damageRoll2)<0){
                         gm.playerInfo.setHealth(gm.playerInfo.getHealth()+gm.playerInfo.getModfifiedDEF()-damageRoll2);
+                        if (gm.playerInfo.getHealth()<=0){
+                            loseState();
+                        }
                     }
                     gm.ui.messageText.setText("You slashed at the " + gm.monster.getName() + "! It took " + (damageRoll-gm.monster.getDEF()) + " damage\n It attacks back! You took " + (damageRoll2-gm.playerInfo.getModfifiedDEF()) + " damage");
                 } else {
@@ -63,7 +66,9 @@ public class CombatChoiceHandler implements ActionListener{
                     winState();
                     
                 }
-                gm.ui.addPlayerInfo();
+                if (gm.playerInfo.getHealth()>0){
+                    gm.ui.addPlayerInfo();
+                }
                 break;
                 
             case "fireball":
@@ -296,6 +301,17 @@ public class CombatChoiceHandler implements ActionListener{
         gm.ui.choiceButtonPanel.add(gm.ui.choice1);
 
                     
+        
+    }
+    
+    public void loseState(){
+        
+        gm.music.stop();
+        
+        se.setFile(System.getProperty("user.dir") + "/src/res/sound/wilhelm_scream.wav");
+        se.play();
+        
+        gm.ui.gameOverScreen();
         
     }
     

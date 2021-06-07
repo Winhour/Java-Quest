@@ -31,7 +31,6 @@ public class GameManager {
     GameItem potion3 = new MediumHealthPotion();
     GameItem elixir = new SmallElixir();
     
-    
     GameItem[] itemlist= new GameItem[9];
     
     CombatChoiceHandler combatChoiceHandler = new CombatChoiceHandler(this);

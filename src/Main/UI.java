@@ -5,6 +5,7 @@
  */
 package Main;
 
+import items.GameItem;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -72,6 +73,13 @@ public class UI {
     public JLabel j3x1, j3x2, j3x3, j3x4;
     public JLabel j4x1, j4x2, j4x3, j4x4;
     public JLabel j1x5, j2x5, j3x5, j4x5;
+    
+    public JPanel gameOverPanel;
+    public JLabel gameOverLabel;
+    public JPanel continueButtonPanel;
+    public JButton continueButton;
+    
+    GameOverHandler goHandler = new GameOverHandler();
     
     
     
@@ -1909,8 +1917,90 @@ public class UI {
         choiceButtonPanel.add(choice1);
         
     }
-    
      /**********************************************************************************************************************************/
+    
+    public void gameOverScreen(){
+        
+        playerInfoPanel.setVisible(false);
+        window.remove(playerInfoPanel);
+        choiceButtonPanel.setVisible(false);
+        window.remove(choiceButtonPanel);
+        messageText.setVisible(false);
+        window.remove(messageText);
+        menuCogPanel.setVisible(false);
+        window.remove(menuCogPanel);
+        
+        for (int i=1;i<15;i++){
+            bgPanel[i].setVisible(false);
+            window.remove(bgPanel[i]);
+        }
+        
+        gameOverPanel = new JPanel();
+        gameOverPanel.setBounds(128,128,768,192);
+        gameOverPanel.setBackground(Color.black);
+        gameOverLabel = new JLabel("GAME OVER");
+        gameOverLabel.setForeground(Color.red);
+        gameOverLabel.setFont(titleFont);
+        
+        continueButtonPanel = new JPanel();
+        continueButtonPanel.setBounds(360, 512, 280, 100);
+        continueButtonPanel.setBackground(Color.black);
+        continueButtonPanel.setForeground(Color.black);
+        
+        continueButton = new JButton("CONTINUE");
+        continueButton.setBackground(Color.black);
+        continueButton.setForeground(Color.white);
+        continueButton.setFont(new Font("Book Antiqua", Font.PLAIN, 44));
+        continueButton.setFocusable(false);
+        continueButton.addActionListener(goHandler);
+        
+        gameOverPanel.add(gameOverLabel);
+        continueButtonPanel.add(continueButton);
+        window.add(continueButtonPanel);
+        window.add(gameOverPanel);
+        
+        
+        
+    }
+
+     /**********************************************************************************************************************************/
+    
+    public void backTitleScreen(){
+        
+        gameOverPanel.setVisible(false);
+        window.remove(gameOverPanel);
+        continueButtonPanel.setVisible(false);
+        window.remove(continueButtonPanel);
+        
+        titleNamePanel = new JPanel();
+        titleNamePanel.setBounds(128,128,768,192);
+        titleNamePanel.setBackground(Color.black);
+        titleNameLabel = new JLabel("JAVA QUEST");
+        titleNameLabel.setForeground(Color.white);
+        titleNameLabel.setFont(titleFont);
+        
+        startButtonPanel = new JPanel();
+        startButtonPanel.setBounds(400, 512, 220, 100);
+        startButtonPanel.setBackground(Color.black);
+        startButtonPanel.setForeground(Color.black);
+        
+        startButton = new JButton("START");
+        startButton.setBackground(Color.black);
+        startButton.setForeground(Color.white);
+        startButton.setFont(new Font("Book Antiqua", Font.PLAIN, 44));
+        //startButton.setBorderPainted(false);
+        startButton.setFocusable(false);
+        startButton.addActionListener(tsHandler);
+        
+        titleNamePanel.add(titleNameLabel);
+        startButtonPanel.add(startButton);
+        window.add(startButtonPanel);
+        window.add(titleNamePanel);
+        
+    }
+    
+    
+    /**********************************************************************************************************************************/
     
     public class TitleScreenHandler implements ActionListener{
         
@@ -1931,6 +2021,7 @@ public class UI {
             
             window.setVisible(true);
             
+            gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_one.wav");
             gm.music.play_low();
             gm.music.loop();
             
@@ -1939,6 +2030,35 @@ public class UI {
     }
     
      /**********************************************************************************************************************************/
+    
+    public class GameOverHandler implements ActionListener{
+        
+        /* Get to the game from the title screen */
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+            gm.playerInfo = new PlayerInfo();
+            gm.itemlist = new GameItem[9];
+            gm.itemlist[0] = gm.potion;
+            gm.itemlist[1] = gm.potion2;
+            gm.itemlist[2] = gm.potion3;
+            gm.itemlist[3] = gm.elixir;
+            gm.itemlist[4] = null;
+            gm.itemlist[5] = null;
+            gm.itemlist[6] = null;
+            gm.itemlist[7] = null;
+            gm.itemlist[8] = null;
+            gm.playerInfo.setItemlist(gm.itemlist);
+            
+            backTitleScreen();
+            
+        }
+    
+    }
+    
+    
+    /**********************************************************************************************************************************/
     
     public void rememberCurrentScene(){
         
