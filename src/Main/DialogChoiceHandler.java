@@ -9,6 +9,8 @@ import Main.monsters.Bear;
 import Main.monsters.Goblin;
 import Main.monsters.Skeletons;
 import items.LargeHealthPotion;
+import items.MediumHealthPotion;
+import items.SmallHealthPotion;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -928,6 +930,157 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 break;
                 
+            case "merch_hsell":
+                
+                gm.ui.addTalkMenu("S Potion", "M Potion", "L Potion", "merch_spotion", "merch_mpotion", "merch_lpotion");
+                gm.ui.messageText.setText("\"Need healing items to fix yourself up?\"");
+                gm.ui.messageText.setForeground(Color.white);
+                
+                break;
+                
+            case "merch_msell":
+                
+                gm.ui.addTalkMenu("S Elixir", "M Elixir", "L Elixir", "merch_selixir", "merch_melixir", "merch_lelixir");
+                gm.ui.messageText.setText("\"If you plan on using spells a lot, you should buy some of these.\"");
+                gm.ui.messageText.setForeground(Color.white);
+                
+                break;
+                
+            case "merch_osell":
+                
+                gm.ui.addTalkMenu("OPTION 1", "OPTION 2", "OPTION 3", "nothing", "nothing", "nothing");
+                gm.ui.messageText.setText("\"Out of stock, check back later.\"");
+                gm.ui.messageText.setForeground(Color.white);
+                
+                break;
+                
+            case "merch_spotion":
+                
+                gm.ui.messageText.setText("\"Are you sure you want this one?\" \n(\"Small Health Potion\" +10 HP    Cost: 5 Gold)");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addConfirmMenu("Gimme!", "Nope", "bought_spotion", "nothing");
+                
+                break;
+                
+            case "bought_spotion":
+                
+                
+                if (gm.playerInfo.getCash() >= 5 && gm.itemlist[8] == null){
+                    
+                    se.setFile(System.getProperty("user.dir") + "/src/res/sound/coin_sound.wav");
+                    se.play();
+                    gm.playerInfo.setCash(gm.playerInfo.getCash()-5);
+                    gm.ui.addPlayerInfo();
+
+                    gm.ui.messageText.setText("You bought a [SMALL HEALTH POTION]!");
+                    gm.ui.messageText.setForeground(Color.white);
+
+                    for (int i=0;i<9;i++){
+                            if (gm.itemlist[i] == null){
+                                gm.itemlist[i] = new SmallHealthPotion();
+                                break;
+                            }
+                        }
+                } else if (gm.itemlist[8] != null){
+                    
+                    gm.ui.messageText.setText("You're carrying too many items!");
+                    gm.ui.messageText.setForeground(Color.white);
+                    
+                } else {
+                    
+                    gm.ui.messageText.setText("Come on, you need money to buy items, duh!");
+                    gm.ui.messageText.setForeground(Color.white);
+                    
+                }
+                
+                gm.ui.addInteractMenu();
+                break;
+                
+                
+            case "merch_mpotion":
+                
+                gm.ui.messageText.setText("\"Are you sure you want this one?\" \n(\"Medium Health Potion\" +25 HP    Cost: 12 Gold)");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addConfirmMenu("Gimme!", "Nope", "bought_mpotion", "nothing");
+                
+                break;    
+                
+            case "bought_mpotion":
+                
+                
+                if (gm.playerInfo.getCash() >= 12 && gm.itemlist[8] == null){
+                    
+                    se.setFile(System.getProperty("user.dir") + "/src/res/sound/coin_sound.wav");
+                    se.play();
+                    gm.playerInfo.setCash(gm.playerInfo.getCash()-12);
+                    gm.ui.addPlayerInfo();
+
+                    gm.ui.messageText.setText("You bought a [MEDIUM HEALTH POTION]!");
+                    gm.ui.messageText.setForeground(Color.white);
+
+                    for (int i=0;i<9;i++){
+                            if (gm.itemlist[i] == null){
+                                gm.itemlist[i] = new MediumHealthPotion();
+                                break;
+                            }
+                        }
+                } else if (gm.itemlist[8] != null){
+                    
+                    gm.ui.messageText.setText("You're carrying too many items!");
+                    gm.ui.messageText.setForeground(Color.white);
+                    
+                } else {
+                    
+                    gm.ui.messageText.setText("Come on, you need money to buy items, duh!");
+                    gm.ui.messageText.setForeground(Color.white);
+                    
+                }
+                
+                gm.ui.addInteractMenu();
+                break;    
+                
+            case "merch_lpotion":
+                
+                gm.ui.messageText.setText("\"Are you sure you want this one?\" \n(\"Large Health Potion\" +60 HP    Cost: 28 Gold)");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addConfirmMenu("Gimme!", "Nope", "bought_lpotion", "nothing");
+                
+                break;    
+                
+            case "bought_lpotion":
+                
+                
+                if (gm.playerInfo.getCash() >= 28 && gm.itemlist[8] == null){
+                    
+                    se.setFile(System.getProperty("user.dir") + "/src/res/sound/coin_sound.wav");
+                    se.play();
+                    gm.playerInfo.setCash(gm.playerInfo.getCash()-28);
+                    gm.ui.addPlayerInfo();
+
+                    gm.ui.messageText.setText("You bought a [LARGE HEALTH POTION]!");
+                    gm.ui.messageText.setForeground(Color.white);
+
+                    for (int i=0;i<9;i++){
+                            if (gm.itemlist[i] == null){
+                                gm.itemlist[i] = new LargeHealthPotion();
+                                break;
+                            }
+                        }
+                } else if (gm.itemlist[8] != null){
+                    
+                    gm.ui.messageText.setText("You're carrying too many items!");
+                    gm.ui.messageText.setForeground(Color.white);
+                    
+                } else {
+                    
+                    gm.ui.messageText.setText("Come on, you need money to buy items, duh!");
+                    gm.ui.messageText.setForeground(Color.white);
+                    
+                }
+                
+                gm.ui.addInteractMenu();
+                break;        
+                
                 
             /* Asking Merchant about the Business */        
              
@@ -1406,6 +1559,16 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setText("\"[Some kind of interaction here]\"");
                 gm.ui.messageText.setForeground(Color.yellow);
 
+                break;
+                
+                
+            /* Item shop interact */
+                
+            case "interact_merch":
+                
+                gm.ui.messageText.setText("\"I'm sure she'll be up for a trade, assuming I can get the right items.\"");
+                gm.ui.messageText.setForeground(Color.yellow);
+              
                 break;
                 
                 
