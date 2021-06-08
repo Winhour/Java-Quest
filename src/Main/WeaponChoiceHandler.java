@@ -121,7 +121,7 @@ public class WeaponChoiceHandler implements ActionListener {
                 gm.ui.makeStatsText();
                 break;      
                 
-            case "examine_demon":
+            case "examine_demon" :
                 gm.ui.messageText.setText("Sword infused with magic, can harm demonic entities\n(ATK + 10)");
                 gm.ui.messageText.setForeground(Color.white);
                 break;    
@@ -145,6 +145,20 @@ public class WeaponChoiceHandler implements ActionListener {
                 gm.ui.messageText.setText("A majestic ore glinting with the shine of moonlight");
                 gm.ui.messageText.setForeground(Color.white);
                 break;    
+                
+            case "examine_amulet_s" :
+                
+                gm.ui.messageText.setText("An amulet made out of Growltiger's claw (ATK +2)");
+                gm.ui.messageText.setForeground(Color.white);
+                
+                break;
+                
+            case "examine_amulet_m" :
+                
+                gm.ui.messageText.setText("The magical jewel makes your magic more potent (MAG +3)");
+                gm.ui.messageText.setForeground(Color.white);
+                
+                break;
                 
             
         }

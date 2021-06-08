@@ -951,8 +951,8 @@ public class DialogChoiceHandler implements ActionListener{
                 
             case "merch_osell":
                 
-                gm.ui.addTalkMenu("OPTION 1", "OPTION 2", "OPTION 3", "nothing", "nothing", "nothing");
-                gm.ui.messageText.setText("\"Out of stock, check back later.\"");
+                gm.ui.addTalkMenu("Mage's Amulet", "", "", "merch_mamulet", "nothing", "nothing");
+                gm.ui.messageText.setText("\"Want something from this special selection?\"");
                 gm.ui.messageText.setForeground(Color.white);
                 
                 break;
@@ -1207,6 +1207,77 @@ public class DialogChoiceHandler implements ActionListener{
                 }
                 
                 gm.ui.addInteractMenu();
+                
+                break;
+                
+             
+            case "merch_mamulet":
+                
+                gm.ui.messageText.setText("\"A Mage's favorite, it can empower your spells!\" \n(\"Mage's Amulet\" (MAG +3)    Cost: 50 Gold)");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addConfirmMenu("Gimme!", "Nope", "bought_mamulet", "nothing");
+                
+                break;     
+                
+            case "bought_mamulet":  
+                
+                if (gm.playerInfo.getCash() >= 50){
+                    
+                    se.setFile(System.getProperty("user.dir") + "/src/res/sound/coin_sound.wav");
+                    se.play();
+                    gm.playerInfo.setCash(gm.playerInfo.getCash()-50);
+                    gm.ui.messageText.setText("\"The magical power courses through my entire body!\"");
+                    gm.ui.messageText.setForeground(Color.yellow);
+                    gm.ui.j4x1.setIcon(new ImageIcon(getClass().getResource("/res/magic_amulet.png")));
+                    
+                    gm.playerInfo.setMAG(gm.playerInfo.getMAG()+3);
+                    gm.ui.addPlayerInfo();
+                    gm.ui.makeStatsText();
+                    gm.ui.statsText.setVisible(false);
+
+                    JMenuItem menuItem4[] = new JMenuItem[2];
+
+                    JPopupMenu popMenu4 = new JPopupMenu();
+
+                    menuItem4[0] = new JMenuItem("Examine");
+                    menuItem4[0].addActionListener(gm.weaponChoiceHandler);
+                    menuItem4[0].setActionCommand("examine_amulet_m");
+                    popMenu4.add(menuItem4[0]);
+
+                    gm.ui.j4x1.addMouseListener(new MouseListener(){
+
+
+                        @Override
+                        public void mouseClicked(MouseEvent e){}
+
+                        @Override
+                        public void mousePressed(MouseEvent e){
+
+                            if (SwingUtilities.isRightMouseButton(e)){
+                                popMenu4.show(gm.ui.j4x1, e.getX(), e.getY());
+                            }
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e){}
+
+                        @Override
+                        public void mouseEntered(MouseEvent e){}
+
+                        @Override
+                        public void mouseExited(MouseEvent e){}
+
+
+                    });
+                }
+                else {
+                    gm.ui.messageText.setText("\"I know it's expensive, but this not a charity!\"");
+                    gm.ui.messageText.setForeground(Color.white);
+                }
+                
+                
+                gm.ui.addInteractMenu();     
                 
                 break;
                 
@@ -1509,13 +1580,14 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 
                 
-             case "buy_sarmor":
+            case "buy_sarmor":
                 gm.ui.messageText.setText("\"Everyone's buying this plate these days. Decided?\" \n(\"Soldier Armor\" +4 DEF    Cost: 40 Gold)");
                 gm.ui.messageText.setForeground(Color.white);
                 gm.ui.addConfirmMenu("Gimme!", "Nope", "bought_sarmor", "nothing");
                 break;
                 
-             case "bought_sarmor":    
+            case "bought_sarmor":  
+                 
                  if (gm.playerInfo.getCash() >= 40){
                     se.setFile(System.getProperty("user.dir") + "/src/res/sound/coin_sound.wav");
                     se.play();
@@ -1575,6 +1647,77 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.addInteractMenu();
                 
                 break;
+                
+            case "buy_amulet":
+                 
+                gm.ui.messageText.setText("\"This jewel can bring out your inner ferocity. Decided?\" \n(\"Strength Amulet\" +2 ATK    Cost: 40 Gold)");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addConfirmMenu("Gimme!", "Nope", "bought_amulet", "nothing");
+                break; 
+                
+            case "bought_amulet":
+                 
+                if (gm.playerInfo.getCash() >= 40){
+                    
+                    se.setFile(System.getProperty("user.dir") + "/src/res/sound/coin_sound.wav");
+                    se.play();
+                    gm.playerInfo.setCash(gm.playerInfo.getCash()-40);
+                    gm.ui.messageText.setText("\"I feel stronger already! I hope there are no side effects...\"");
+                    gm.ui.messageText.setForeground(Color.yellow);
+                    gm.ui.j3x1.setIcon(new ImageIcon(getClass().getResource("/res/amulet_strength.png")));
+                    
+                    gm.playerInfo.setATK(gm.playerInfo.getATK()+2);
+                    gm.playerInfo.setModifiedATK(gm.playerInfo.getModifiedATK()+2);
+                    gm.ui.addPlayerInfo();
+                    gm.ui.makeStatsText();
+                    gm.ui.statsText.setVisible(false);
+
+                    JMenuItem menuItem4[] = new JMenuItem[2];
+
+                    JPopupMenu popMenu4 = new JPopupMenu();
+
+                    menuItem4[0] = new JMenuItem("Examine");
+                    menuItem4[0].addActionListener(gm.weaponChoiceHandler);
+                    menuItem4[0].setActionCommand("examine_amulet_s");
+                    popMenu4.add(menuItem4[0]);
+
+                    gm.ui.j3x1.addMouseListener(new MouseListener(){
+
+
+                        @Override
+                        public void mouseClicked(MouseEvent e){}
+
+                        @Override
+                        public void mousePressed(MouseEvent e){
+
+                            if (SwingUtilities.isRightMouseButton(e)){
+                                popMenu4.show(gm.ui.j3x1, e.getX(), e.getY());
+                            }
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e){}
+
+                        @Override
+                        public void mouseEntered(MouseEvent e){}
+
+                        @Override
+                        public void mouseExited(MouseEvent e){}
+
+
+                    });
+                }
+                else {
+                    gm.ui.messageText.setText("\"Come back, when you have sufficient gold, adventurer.\"");
+                    gm.ui.messageText.setForeground(Color.white);
+                }
+                
+                
+                gm.ui.addInteractMenu();     
+                 
+                break;
+
                 
             /* Hunter interact */    
                 
