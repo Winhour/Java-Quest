@@ -45,6 +45,7 @@ public class CombatChoiceHandler implements ActionListener{
         int damageRoll2;
         
         switch (yourChoice){
+
             case "fight":
                 
                 int damageRoll = gm.playerInfo.getATK() + rand.nextInt(gm.playerInfo.getModifiedATK()+1);
@@ -86,7 +87,7 @@ public class CombatChoiceHandler implements ActionListener{
                     se.play();
                 
                     gm.playerInfo.setMana(gm.playerInfo.getMana()-6);
-                    int firedamage = 25+gm.playerInfo.getMAG();
+                    int firedamage = 25+(gm.playerInfo.getMAG()*2);
                     damageRoll2 = rand.nextInt(gm.monster.getATK()+1);
 
                     gm.monster.setHealth(gm.monster.getHealth()-firedamage);
@@ -100,17 +101,82 @@ public class CombatChoiceHandler implements ActionListener{
                     gm.ui.addPlayerInfo();
                     
                 }
-                
-                
-                
+
                 break;
+
+            case "thunder":
+
+                if (gm.playerInfo.getMana() < 2) {
+
+                        gm.ui.messageText.setText("Insufficient mana!");
+                        gm.ui.addFightMenu();
+
+                    }
+
+                    else {
+
+                        se.setFile(System.getProperty("user.dir") + "/src/res/sound/zap.wav");
+                        se.play();
+
+                        gm.playerInfo.setMana(gm.playerInfo.getMana()-2);
+                        int thunderdamage = 10+gm.playerInfo.getMAG();
+                        damageRoll2 = rand.nextInt(gm.monster.getATK()+1);
+
+                        gm.monster.setHealth(gm.monster.getHealth()-thunderdamage);
+                        if(gm.monster.getHealth()>0){
+                            gm.playerInfo.setHealth(gm.playerInfo.getHealth()-damageRoll2);
+                            gm.ui.messageText.setText("Lightning strikes the " + gm.monster.getName() + "! It took " + thunderdamage + " damage\n It attacks back! You took " + damageRoll2 + " damage");
+                            gm.ui.addFightMenu();
+                        } else {
+                            winState();
+                        }
+                        gm.ui.addPlayerInfo();
+
+                    }    
+
+
+                break;    
+
+            case "freeze":
+                
+            if (gm.playerInfo.getMana() < 5) {
+                    
+                    gm.ui.messageText.setText("Insufficient mana!");
+                    gm.ui.addFightMenu();
+                    
+                }
+                
+                else {
+                    
+                    se.setFile(System.getProperty("user.dir") + "/src/res/sound/ice.wav");
+                    se.play();
+                
+                    gm.playerInfo.setMana(gm.playerInfo.getMana()-5);
+                    int freezedamage = 15+gm.playerInfo.getMAG();
+                    damageRoll2 = rand.nextInt(gm.monster.getATK()+1);
+
+                    gm.monster.setHealth(gm.monster.getHealth()-freezedamage);
+                    if(gm.monster.getHealth()>0){
+                        gm.playerInfo.setHealth(gm.playerInfo.getHealth()-damageRoll2);
+                        gm.ui.messageText.setText(gm.monster.getName() + " gets covered by a cold veil! It took " + freezedamage + " damage\n It attacks back! You took " + damageRoll2 + " damage");
+                        gm.ui.addFightMenu();
+                    } else {
+                        winState();
+                    }
+                    gm.ui.addPlayerInfo();
+                    
+                }    
+                
+                
+            break;
+
 
             case "spell":
                 gm.ui.messageText.setText("Choose your spell:"); 
                 gm.ui.messageText.setForeground(Color.white);
                 gm.ui.addSpellMenu();
                 break;
-                
+
             case "item":
                 gm.ui.messageText.setText("Choose your item:");
                 gm.ui.messageText.setForeground(Color.white);
