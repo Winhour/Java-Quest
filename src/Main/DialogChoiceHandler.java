@@ -1261,7 +1261,7 @@ public class DialogChoiceHandler implements ActionListener{
                 
             case "merch_quest2":
                 
-                talk_next("\"There is one thing, I need some leaves of Brueshrub tree.\n They are required for me to brew my potions.\"", "merch_quest3", Color.white);
+                talk_next("\"There is one thing, I need some leaves of Blueshrub tree.\n They are required for me to brew my potions.\"", "merch_quest3", Color.white);
                 
                 break;  
                 
@@ -1344,6 +1344,8 @@ public class DialogChoiceHandler implements ActionListener{
                     gm.ui.choice1.addActionListener(gm.dialogChoiceHandler);
                     gm.ui.choice1.setActionCommand("event_demonsbane");
                     gm.ui.choiceButtonPanel.add(gm.ui.choice1);
+                    
+                    /* Add the removal of moon ore from inventory here */
                     
                 } else {
                 
@@ -1862,6 +1864,54 @@ public class DialogChoiceHandler implements ActionListener{
                     }
 
                 break;
+                
+            case "examine_smiths":   
+                
+                gm.ui.messageText.setText("The Smith's shop I believe. Maybe I should come in to see what they have to offer?");
+                gm.ui.messageText.setForeground(Color.yellow);
+                
+                break;
+                
+                
+            case "examine_thall":
+                
+                gm.ui.messageText.setText("Looks like the local Town Hall, a place where the clerical workers can be found.");
+                gm.ui.messageText.setForeground(Color.yellow);
+                
+                break;
+                
+            case "examine_barrels":   
+                
+                if (gm.ui.barrelgoldFlag){
+                
+                    gm.ui.messageText.setText("You notice something shining inside the barrels.");
+                    gm.ui.messageText.setForeground(Color.white);
+                
+                } else {
+                    
+                    gm.ui.messageText.setText("A couple of wooden barrels.");
+                    gm.ui.messageText.setForeground(Color.white);
+                    
+                }
+                
+                break;
+                
+            case "interact_barrels":
+                
+                if (gm.ui.barrelgoldFlag){
+                    
+                    gm.ui.messageText.setText("You found 20 gold!");
+                    gm.playerInfo.setCash(gm.playerInfo.getCash()+20);
+                    gm.ui.messageText.setForeground(Color.white);
+                    gm.ui.barrelgoldFlag = false;
+                    gm.ui.addPlayerInfo();
+                
+                } else {
+                    gm.ui.messageText.setText("There doesn't seem to be anything else here...");
+                    gm.ui.messageText.setForeground(Color.yellow);
+                }
+
+                break;   
                 
             case "nothing":
                 

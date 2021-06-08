@@ -93,6 +93,9 @@ public class CombatChoiceHandler implements ActionListener{
                     gm.monster.setHealth(gm.monster.getHealth()-firedamage);
                     if(gm.monster.getHealth()>0){
                         gm.playerInfo.setHealth(gm.playerInfo.getHealth()-damageRoll2);
+                        if (gm.playerInfo.getHealth()<=0){
+                            loseState();
+                        }
                         gm.ui.messageText.setText("Flames engulf the " + gm.monster.getName() + "! It took " + firedamage + " damage\n It attacks back! You took " + damageRoll2 + " damage");
                         gm.ui.addFightMenu();
                     } else {
@@ -125,6 +128,9 @@ public class CombatChoiceHandler implements ActionListener{
                         gm.monster.setHealth(gm.monster.getHealth()-thunderdamage);
                         if(gm.monster.getHealth()>0){
                             gm.playerInfo.setHealth(gm.playerInfo.getHealth()-damageRoll2);
+                            if (gm.playerInfo.getHealth()<=0){
+                                loseState();
+                            }
                             gm.ui.messageText.setText("Lightning strikes the " + gm.monster.getName() + "! It took " + thunderdamage + " damage\n It attacks back! You took " + damageRoll2 + " damage");
                             gm.ui.addFightMenu();
                         } else {
@@ -154,11 +160,20 @@ public class CombatChoiceHandler implements ActionListener{
                     gm.playerInfo.setMana(gm.playerInfo.getMana()-5);
                     int freezedamage = 15+gm.playerInfo.getMAG();
                     damageRoll2 = rand.nextInt(gm.monster.getATK()+1);
+                    int freezechance = rand.nextInt(4);
 
                     gm.monster.setHealth(gm.monster.getHealth()-freezedamage);
                     if(gm.monster.getHealth()>0){
-                        gm.playerInfo.setHealth(gm.playerInfo.getHealth()-damageRoll2);
-                        gm.ui.messageText.setText(gm.monster.getName() + " gets covered by a cold veil! It took " + freezedamage + " damage\n It attacks back! You took " + damageRoll2 + " damage");
+                        if(freezechance != 3){
+                            gm.playerInfo.setHealth(gm.playerInfo.getHealth()-damageRoll2);
+                            if (gm.playerInfo.getHealth()<=0){
+                                loseState();
+                            }
+                            gm.ui.messageText.setText(gm.monster.getName() + " gets covered by a cold veil! It took " + freezedamage + " damage\n It attacks back! You took " + damageRoll2 + " damage");
+                        } else {
+                            gm.ui.messageText.setText(gm.monster.getName() + " gets covered by a cold veil! It took " + freezedamage 
+                                    + " damage\nThe " + gm.monster.getName() + " is frozen solid");
+                        }
                         gm.ui.addFightMenu();
                     } else {
                         winState();

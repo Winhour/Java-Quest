@@ -52,6 +52,9 @@ public class ItemChoiceHandler implements ActionListener{
                     if (gm.playerInfo.getHealth() > gm.playerInfo.getMaxhealth()) gm.playerInfo.setHealth(gm.playerInfo.getMaxhealth());
                     
                     gm.playerInfo.setHealth(gm.playerInfo.getHealth()-damageRoll2);
+                    if (gm.playerInfo.getHealth()<=0){
+                            gm.combatChoiceHandler.loseState();
+                        }
 
                     gm.ui.messageText.setText(gm.potion.getEffectMessage() + "\n" + "The " + gm.monster.getName() + " attacks you for " + damageRoll2); 
 
@@ -112,6 +115,9 @@ public class ItemChoiceHandler implements ActionListener{
                     if (gm.playerInfo.getHealth() > gm.playerInfo.getMaxhealth()) gm.playerInfo.setHealth(gm.playerInfo.getMaxhealth());
                     
                     gm.playerInfo.setHealth(gm.playerInfo.getHealth()-damageRoll2);
+                    if (gm.playerInfo.getHealth()<=0){
+                            gm.combatChoiceHandler.loseState();
+                        }
 
                     gm.ui.messageText.setText(gm.potion3.getEffectMessage() + "\n" + "The " + gm.monster.getName() + " attacks you for " + damageRoll2); 
 
@@ -173,6 +179,9 @@ public class ItemChoiceHandler implements ActionListener{
                     if (gm.playerInfo.getHealth() > gm.playerInfo.getMaxhealth()) gm.playerInfo.setHealth(gm.playerInfo.getMaxhealth());
                     
                     gm.playerInfo.setHealth(gm.playerInfo.getHealth()-damageRoll2);
+                    if (gm.playerInfo.getHealth()<=0){
+                            gm.combatChoiceHandler.loseState();
+                        }
 
                     gm.ui.messageText.setText("You recovered 60 health!" + "\n" + "The " + gm.monster.getName() + " attacks you for " + damageRoll2); 
 
@@ -231,6 +240,9 @@ public class ItemChoiceHandler implements ActionListener{
                     if (gm.playerInfo.getMana() > gm.playerInfo.getMaxmana()) gm.playerInfo.setMana(gm.playerInfo.getMaxmana());
                     
                     gm.playerInfo.setHealth(gm.playerInfo.getHealth()-damageRoll2);
+                    if (gm.playerInfo.getHealth()<=0){
+                        gm.combatChoiceHandler.loseState();
+                    }
 
                     gm.ui.messageText.setText(gm.elixir.getEffectMessage() + "\n" + "The " + gm.monster.getName() + " attacks you for " + damageRoll2); 
 
@@ -286,6 +298,9 @@ public class ItemChoiceHandler implements ActionListener{
                     if (gm.playerInfo.getMana() > gm.playerInfo.getMaxmana()) gm.playerInfo.setMana(gm.playerInfo.getMaxmana());
                     
                     gm.playerInfo.setHealth(gm.playerInfo.getHealth()-damageRoll2);
+                    if (gm.playerInfo.getHealth()<=0){
+                            gm.combatChoiceHandler.loseState();
+                    }
 
                     gm.ui.messageText.setText("You recovered 20 mana!" + "\n" + "The " + gm.monster.getName() + " attacks you for " + damageRoll2); 
 
@@ -341,6 +356,9 @@ public class ItemChoiceHandler implements ActionListener{
                     if (gm.playerInfo.getMana() > gm.playerInfo.getMaxmana()) gm.playerInfo.setMana(gm.playerInfo.getMaxmana());
                     
                     gm.playerInfo.setHealth(gm.playerInfo.getHealth()-damageRoll2);
+                    if (gm.playerInfo.getHealth()<=0){
+                            gm.combatChoiceHandler.loseState();
+                    }
 
                     gm.ui.messageText.setText("You fully recovered your mana!" + "\n" + "The " + gm.monster.getName() + " attacks you for " + damageRoll2); 
 

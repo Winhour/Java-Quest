@@ -67,6 +67,7 @@ public class UI {
     boolean bearpeltFlag = false;
     boolean moonoreFlag = false;
     boolean combatFlag = false;
+    boolean barrelgoldFlag = true;
     
     public JLabel j1x1, j1x2, j1x3, j1x4;
     public JLabel j2x1, j2x2, j2x3, j2x4;
@@ -284,12 +285,16 @@ public class UI {
         
         createBackground(4, "/res/town.jpg");
         bgPanel[4].add(bgLabel[4]);
+        createObjectInteractable(4,30,180,100,100,"/res/blank.png", "Examine", "", "", "examine_thall", "", "");
+        createObjectInteractable(4,330,280,100,100,"/res/blank.png", "Examine", "", "", "examine_smiths", "", "");
+        createObjectInteractable(4,675,390,50,50,"/res/blank.png", "Examine", "Interact", "", "examine_barrels", "interact_barrels", "");
+        
         
         //SCENE 5   Shop
         
         createBackground(5, "/res/shop.jpg");
         createObjectInteractable(5,40,130,200,400,"/res/merchant.png", "Talk", "Interact", "Look", "talk_merch", "interact_merch", "look_merch");
-        createObjectInteractable(5,270,180,100,100,"/res/blank.png", "Examine", "Interact", "", "examine_shelf", "interact_shelf", "nothing");
+        createObjectInteractable(5,280,180,100,100,"/res/blank.png", "Examine", "Interact", "", "examine_shelf", "interact_shelf", "");
         bgPanel[5].add(bgLabel[5]);
         
         //SCENE 6   Smith
@@ -2070,6 +2075,7 @@ public class UI {
             bearpeltFlag = false;
             moonoreFlag = false;
             combatFlag = false;
+            barrelgoldFlag = true;
             
             currentScene = 1;
             
