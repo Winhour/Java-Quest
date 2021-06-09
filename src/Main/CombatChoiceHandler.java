@@ -294,6 +294,9 @@ public class CombatChoiceHandler implements ActionListener{
         //gm.ui.messageText.setText("testg");
             gm.ui.bgPanel[3].remove(0);
             gm.ui.goblinFlag = false;
+            gm.ui.bgPanel[3].getComponent(0).setVisible(true);
+            gm.ui.bgPanel[3].getComponent(1).setVisible(true);
+            gm.ui.bgPanel[3].getComponent(2).setVisible(true);
 
             gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_adventure.wav");
             gm.music.play_low();

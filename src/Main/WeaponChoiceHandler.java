@@ -52,7 +52,7 @@ public class WeaponChoiceHandler implements ActionListener {
                 break;
                 
             case "examine_empty":
-                gm.ui.messageText.setText("The void stares back at you");
+                gm.ui.messageText.setText("The void stares back at you...");
                 gm.ui.messageText.setForeground(Color.white);
                 break;
                 
@@ -137,12 +137,12 @@ public class WeaponChoiceHandler implements ActionListener {
                 break;         
              
             case "examine_bpelt"  :
-                gm.ui.messageText.setText("A large pelt of Bear skin and fur");
+                gm.ui.messageText.setText("A large pelt of Bear skin and fur.");
                 gm.ui.messageText.setForeground(Color.white);
                 break;
                 
             case "examine_ore"  :
-                gm.ui.messageText.setText("A majestic ore glinting with the shine of moonlight");
+                gm.ui.messageText.setText("A majestic ore glinting with the shine of moonlight.");
                 gm.ui.messageText.setForeground(Color.white);
                 break;    
                 
@@ -156,6 +156,13 @@ public class WeaponChoiceHandler implements ActionListener {
             case "examine_amulet_m" :
                 
                 gm.ui.messageText.setText("The magical jewel makes your magic more potent (MAG +3)");
+                gm.ui.messageText.setForeground(Color.white);
+                
+                break;
+                
+            case "examine_key" :
+                
+                gm.ui.messageText.setText("A golden key that should open a door somewhere in the Dungeon.");
                 gm.ui.messageText.setForeground(Color.white);
                 
                 break;

@@ -93,6 +93,15 @@ public class DialogChoiceHandler implements ActionListener{
                 else if (gm.ui.bgPanel[14].isVisible()){
                     gm.ui.messageText.setText("What were they mining here? And who did exactly?");
                 }
+                else if (gm.ui.bgPanel[15].isVisible()){
+                    gm.ui.messageText.setText("I pity the fools that ended their lives here.");
+                }
+                else if (gm.ui.bgPanel[16].isVisible()){
+                    gm.ui.messageText.setText("They have their own armory here and all? I might have hit the jackpot (or a medieval equivalent)!");
+                }
+                else if (gm.ui.bgPanel[17].isVisible()){
+                    gm.ui.messageText.setText("Comfy desk for a dungeon if you ask me.");
+                }
                 else {
                     gm.ui.messageText.setText("How in nine hells did I end up here?");
                 }
@@ -159,13 +168,22 @@ public class DialogChoiceHandler implements ActionListener{
                     gm.ui.addMoveMenu("Wooden Door", "Stairway", "Chapel", "move_gobdun", "move_skedun", "move_chapel");
                 }
                 else if (gm.ui.bgPanel[12].isVisible()){
-                    gm.ui.addMoveMenu("Path", "", "", "move_gobdun", "", "");
+                    gm.ui.addMoveMenu("Main path", "Prison", "", "move_gobdun", "move_prison", "");
                 }
                 else if (gm.ui.bgPanel[13].isVisible()){
                     gm.ui.addMoveMenu("Hallway", "", "", "move_treas1", "", "");
                 }
                 else if (gm.ui.bgPanel[14].isVisible()){
                     gm.ui.addMoveMenu("Catacombs", "", "", "move_skedun", "", "");
+                }
+                else if (gm.ui.bgPanel[15].isVisible()){
+                    gm.ui.addMoveMenu("Sideroom", "Armory", "", "move_side", "move_armory", "");
+                }
+                else if (gm.ui.bgPanel[16].isVisible()){
+                    gm.ui.addMoveMenu("Prison", "Desk", "", "move_prison", "move_desk", "");
+                }
+                else if (gm.ui.bgPanel[17].isVisible()){
+                    gm.ui.addMoveMenu("Armory", "", "", "move_armory", "", "");
                 }
                 else {
                     gm.ui.addMoveMenu("Town", "Item Shop", "Dungeon", "move_twn2", "move_ishop", "move_gobdun");
@@ -264,7 +282,7 @@ public class DialogChoiceHandler implements ActionListener{
                 
             case "move_side":
                 gm.sceneChanger.showScreen12();
-                gm.ui.messageText.setText("There is nothing of interest here (or is there?)");
+                gm.ui.messageText.setText("This path seems to lead to some sort of prison...");
                 gm.ui.messageText.setForeground(Color.white);
                 gm.ui.addInteractMenu();
                 break;     
@@ -293,6 +311,9 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 gm.sceneChanger.showScreen3();
                 if(gm.ui.goblinFlag){
+                    gm.ui.bgPanel[3].getComponent(1).setVisible(false);
+                    gm.ui.bgPanel[3].getComponent(2).setVisible(false);
+                    gm.ui.bgPanel[3].getComponent(3).setVisible(false);
                     gm.ui.combatFlag = true;
                     gm.monster = new Goblin();
                     gm.music.stop();
@@ -337,7 +358,33 @@ public class DialogChoiceHandler implements ActionListener{
                     gm.ui.messageText.setForeground(Color.yellow);
                     gm.ui.addInteractMenu();
                 }
+                
                 break;    
+                
+            case "move_prison":
+                
+                gm.ui.rememberCurrentScene();
+                gm.sceneChanger.showScreen15();
+                
+                gm.ui.messageText.setText("This place gives me the creeps.");
+                gm.ui.messageText.setForeground(Color.yellow);
+                gm.ui.addInteractMenu();
+                
+                break;
+                
+            case "move_armory":
+                gm.sceneChanger.showScreen16();
+                gm.ui.messageText.setText("An abandoned armory appears before you.");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addInteractMenu();
+                break; 
+                
+            case "move_desk":
+                gm.sceneChanger.showScreen17();
+                gm.ui.messageText.setText("You notice various items scattered on the desk.");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addInteractMenu();
+                break;     
                 
                 
                 
@@ -2056,6 +2103,84 @@ public class DialogChoiceHandler implements ActionListener{
 
                 break;   
                 
+            case "examine_gsword":
+                
+                gm.ui.messageText.setText("I would consider taking it, but I already have a sword of better quality.");
+                gm.ui.messageText.setForeground(Color.yellow);
+                
+                break;
+                
+            case "examine_cultist":    
+                
+                gm.ui.messageText.setText("What is that thing?! And why can't I fight it?");
+                gm.ui.messageText.setForeground(Color.yellow);
+                
+                break;
+                
+            case "examine_gbarrel":
+                
+                gm.ui.messageText.setText("Empty...");
+                gm.ui.messageText.setForeground(Color.yellow);
+                
+                break;    
+                
+            case "examine_key":
+                
+                gm.ui.messageText.setText("A gold key lies on the table. Might be useful?");
+                gm.ui.messageText.setForeground(Color.yellow);
+                
+                break;  
+                
+            case "grab_key":
+                
+                gm.ui.bgPanel[17].remove(0);
+                
+                gm.ui.messageText.setText("You acquired [GOLD KEY]");
+                gm.ui.messageText.setForeground(Color.white);
+                
+                gm.ui.j3x3.setIcon(new ImageIcon(getClass().getResource("/res/key.png")));
+
+                JMenuItem menuItem7[] = new JMenuItem[2];
+
+                JPopupMenu popMenu7 = new JPopupMenu();
+
+                menuItem7[0] = new JMenuItem("Examine");
+                menuItem7[0].addActionListener(gm.weaponChoiceHandler);
+                menuItem7[0].setActionCommand("examine_key");
+                popMenu7.add(menuItem7[0]);
+
+                gm.ui.j3x3.addMouseListener(new MouseListener(){
+
+
+                    @Override
+                    public void mouseClicked(MouseEvent e){}
+
+                    @Override
+                    public void mousePressed(MouseEvent e){
+
+                        if (SwingUtilities.isRightMouseButton(e)){
+                            popMenu7.show(gm.ui.j3x3, e.getX(), e.getY());
+                        }
+
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent e){}
+
+                    @Override
+                    public void mouseEntered(MouseEvent e){}
+
+                    @Override
+                    public void mouseExited(MouseEvent e){}
+
+
+                });
+
+            gm.ui.goldkeyFlag = true;
+
+            break;    
+                
+                
             case "nothing":
                 
                 gm.ui.addInteractMenu();
@@ -2069,7 +2194,7 @@ public class DialogChoiceHandler implements ActionListener{
                 se.setFile(System.getProperty("user.dir") + "/src/res/sound/click.wav");
                 se.play();
                 
-                break;
+                break;   
             
         }
         

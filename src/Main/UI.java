@@ -48,9 +48,11 @@ public class UI {
     public JPanel playerInfoPanel;
     public JPanel menuCogPanel;
     public JButton choice1, choice2, choice3, choice4;
-    public JPanel bgPanel[] = new JPanel[20];
-    public JLabel bgLabel[] = new JLabel[20];
+    public JPanel bgPanel[] = new JPanel[30];
+    public JLabel bgLabel[] = new JLabel[30];
     public JTextArea statsText;
+    
+    /* FONTS */
     
     Font titleFont = new Font("Times New Roman",Font.PLAIN, 100);
     Font normalFont = new Font("Book Antiqua", Font.PLAIN, 36);
@@ -61,6 +63,8 @@ public class UI {
     public int currentScene = 1;
     public int nextScene = 0;
     
+    /* FLAGS */
+    
     boolean goblinFlag = true;
     boolean skeleFlag = true;
     boolean bearFlag = true;
@@ -68,6 +72,7 @@ public class UI {
     boolean moonoreFlag = false;
     boolean combatFlag = false;
     boolean barrelgoldFlag = true;
+    boolean goldkeyFlag = false;
     
     public JLabel j1x1, j1x2, j1x3, j1x4;
     public JLabel j2x1, j2x2, j2x3, j2x4;
@@ -269,16 +274,19 @@ public class UI {
         createObjectInteractable(1, 480,80,400,400,"/res/peasant.png", "Talk", "Interact", "Look", "talk_peasant", "interact_peasant","look_peasant");
         bgPanel[1].add(bgLabel[1]);
         
-        //SCENE 2   Goblin
+        //SCENE 2   Skeleton
         
         createBackground(2, "/res/dungeon2.jpg");
         createObject(2, 240,60,400,400,"/res/skeletons.png");
         bgPanel[2].add(bgLabel[2]);
         
-         //SCENE 3  Skeleton
+         //SCENE 3  Goblin
         
         createBackground(3, "/res/dungeon.jpg");
         createObject(3, 240,60,400,400,"/res/goblin.png");
+        createObjectInteractable(3,170,310,100,100,"/res/blank.png", "Examine", "", "", "examine_gsword", "", "");
+        createObjectInteractable(3,300,200,100,100,"/res/blank.png", "Examine", "", "", "examine_cultist", "", "");
+        createObjectInteractable(3,470,280,100,100,"/res/blank.png", "Examine", "", "", "examine_gbarrel", "", "");
         bgPanel[3].add(bgLabel[3]);
         
         //SCENE 4   Town
@@ -331,7 +339,7 @@ public class UI {
         //SCENE 11  Dungeon Hallway
         
         createBackground(11, "/res/dungeon_hallway.jpg");
-        createObjectInteractable(11, 210,170,300,300,"/res/chest.png","Open","Examine","","open_chest","examine_chest","nothing");
+        createObjectInteractable(11, 210,210,300,300,"/res/chest.png","Open","Examine","","open_chest","examine_chest","nothing");
         bgPanel[11].add(bgLabel[11]);
         
         //SCENE 12  Dungeon Sideroom
@@ -348,8 +356,27 @@ public class UI {
         //SCENE 14  Dungeon Mine
         
         createBackground(14, "/res/mine.jpg");
-        createObjectInteractable(14, 520,270,150,100,"/res/ore.png","Grab","Examine","","grab_ore","examine_ore","nothing");
+        createObjectInteractable(14, 520,270,150,100,"/res/ore.png","Grab","Examine","","grab_ore","examine_ore","");
         bgPanel[14].add(bgLabel[14]);
+        
+        //SCENE 15  Prison
+        
+        createBackground(15, "/res/prison.jpg");
+        createObject(15, 240,60,400,400,"/res/zombie.png");
+        bgPanel[15].add(bgLabel[15]);
+        
+        
+        //SCENE 16  Armory
+        
+        createBackground(16, "/res/armory.jpg");
+        bgPanel[16].add(bgLabel[16]);
+        
+        
+        //SCENE 17 Desk
+        
+        createBackground(17, "/res/desk.jpg");
+        createObjectInteractable(17, 660,210,150,100,"/res/key_object.png","Grab","Examine","","grab_key","examine_key","");
+        bgPanel[17].add(bgLabel[17]);
         
         
         
@@ -444,7 +471,7 @@ public class UI {
     
      /**********************************************************************************************************************************/
     
-    public void addMenuCog(){
+    public void addMenuCog(){                                           /* Menu cog in the right top corner */
         
         if(menuCogPanel != null){
             menuCogPanel.setVisible(false);
@@ -1925,7 +1952,7 @@ public class UI {
     }
      /**********************************************************************************************************************************/
     
-    public void gameOverScreen(){
+    public void gameOverScreen(){                                       /* Game Over screen, appears when players health <= 0 */
         
         playerInfoPanel.setVisible(false);
         window.remove(playerInfoPanel);
@@ -1981,7 +2008,7 @@ public class UI {
 
      /**********************************************************************************************************************************/
     
-    public void backTitleScreen(){
+    public void backTitleScreen(){                              /* Go back to title screen */
         
         gameOverPanel.setVisible(false);
         window.remove(gameOverPanel);
@@ -2051,7 +2078,7 @@ public class UI {
     
     public class GameOverHandler implements ActionListener{
         
-        /* Get to the game from the title screen */
+        /* Get to the title screen from game over and restore some data back to starting point */
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -2076,6 +2103,7 @@ public class UI {
             moonoreFlag = false;
             combatFlag = false;
             barrelgoldFlag = true;
+            goldkeyFlag = false;
             
             currentScene = 1;
             
@@ -2105,6 +2133,10 @@ public class UI {
         else if (bgPanel[12].isVisible()) currentScene = 12;
         else if (bgPanel[13].isVisible()) currentScene = 13;
         else if (bgPanel[14].isVisible()) currentScene = 14;
+        else if (bgPanel[15].isVisible()) currentScene = 15;
+        else if (bgPanel[16].isVisible()) currentScene = 16;
+        else if (bgPanel[17].isVisible()) currentScene = 17;
+        
         
     }
     
@@ -2127,6 +2159,9 @@ public class UI {
         if (currentScene == 12) gm.sceneChanger.showScreen12();
         if (currentScene == 13) gm.sceneChanger.showScreen13();
         if (currentScene == 14) gm.sceneChanger.showScreen14();
+        if (currentScene == 15) gm.sceneChanger.showScreen15();
+        if (currentScene == 16) gm.sceneChanger.showScreen16();
+        if (currentScene == 17) gm.sceneChanger.showScreen17();
         
         
     }
