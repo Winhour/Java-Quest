@@ -2201,6 +2201,14 @@ public class DialogChoiceHandler implements ActionListener{
 
             break;    
                 
+            
+            case "examine_book":
+                
+                gm.ui.messageText.setText("Yep, it's a book.");
+                gm.ui.messageText.setForeground(Color.yellow); 
+                
+                break;
+            
                 
             case "nothing":
                 
@@ -2221,7 +2229,7 @@ public class DialogChoiceHandler implements ActionListener{
         
     }
     
-    public void talk_first(String talktext, String nextcase, Color textcolor){      /* I'll fix all the talk cases with these functions soon for clarity */
+    public void talk_first(String talktext, String nextcase, Color textcolor){      /* I'll fix all the talk cases with these functions soon for clarity - DONE */
         
         gm.ui.messageText.setText(talktext);        
         gm.ui.messageText.setForeground(textcolor);

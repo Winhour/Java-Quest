@@ -377,6 +377,7 @@ public class UI {
         
         createBackground(17, "/res/desk.jpg");
         createObjectInteractable(17, 660,210,100,65,"/res/key_object.png","Grab","Examine","","grab_key","examine_key","");
+        createObjectInteractable(17, 320,210,200,100,"/res/blank.png","Examine","","","examine_book","","");
         bgPanel[17].add(bgLabel[17]);
         
         
