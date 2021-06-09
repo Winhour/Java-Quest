@@ -8,6 +8,7 @@ package Main;
 import Main.monsters.Bear;
 import Main.monsters.Goblin;
 import Main.monsters.Skeletons;
+import Main.monsters.Zombie;
 import items.LargeElixir;
 import items.LargeHealthPotion;
 import items.MediumElixir;
@@ -366,9 +367,27 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.rememberCurrentScene();
                 gm.sceneChanger.showScreen15();
                 
-                gm.ui.messageText.setText("This place gives me the creeps.");
-                gm.ui.messageText.setForeground(Color.yellow);
-                gm.ui.addInteractMenu();
+                
+                if(gm.ui.zombieFlag){
+                    gm.ui.combatFlag = true;
+                    gm.monster = new Zombie();
+                    gm.music.stop();
+                    gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/Fight.wav");
+                    gm.music.play_low();
+                    gm.music.loop();
+                    gm.ui.messageText.setText("A zombie appears from inside the cells!"); 
+                    gm.ui.messageText.setForeground(Color.white);
+                    gm.ui.addFightMenu();
+                }
+                else {
+                    gm.music.stop();
+                    gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_adventure.wav");
+                    gm.music.play_low();
+                    gm.music.loop();
+                    gm.ui.messageText.setText("This place gives me the creeps."); 
+                    gm.ui.messageText.setForeground(Color.yellow);
+                    gm.ui.addInteractMenu();
+                }
                 
                 break;
                 
@@ -2038,7 +2057,7 @@ public class DialogChoiceHandler implements ActionListener{
                 
             case "interact_secsid":
                 
-                gm.ui.messageText.setText("You found a [LARGE HEALTH POTION]");
+                gm.ui.messageText.setText("You found a [LARGE HEALTH POTION]!");
                 gm.ui.messageText.setForeground(Color.white);
                 
                 for (int i=0;i<9;i++){
@@ -2134,8 +2153,10 @@ public class DialogChoiceHandler implements ActionListener{
             case "grab_key":
                 
                 gm.ui.bgPanel[17].remove(0);
+                gm.ui.bgPanel[17].setVisible(false);
+                gm.ui.bgPanel[17].setVisible(true);
                 
-                gm.ui.messageText.setText("You acquired [GOLD KEY]");
+                gm.ui.messageText.setText("You acquired [GOLD KEY]!");
                 gm.ui.messageText.setForeground(Color.white);
                 
                 gm.ui.j3x3.setIcon(new ImageIcon(getClass().getResource("/res/key.png")));

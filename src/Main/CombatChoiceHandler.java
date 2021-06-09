@@ -291,7 +291,6 @@ public class CombatChoiceHandler implements ActionListener{
         gm.playerInfo.setExp(gm.playerInfo.getExp()+gm.monster.getExp());
 
         if (gm.monster.getName().equals("Goblin") && gm.ui.goblinFlag){
-        //gm.ui.messageText.setText("testg");
             gm.ui.bgPanel[3].remove(0);
             gm.ui.goblinFlag = false;
             gm.ui.bgPanel[3].getComponent(0).setVisible(true);
@@ -304,7 +303,6 @@ public class CombatChoiceHandler implements ActionListener{
 
         }
         if (gm.monster.getName().equals("Skeletons") && gm.ui.skeleFlag){
-            //gm.ui.messageText.setText("tests");
             gm.ui.bgPanel[2].remove(0);
             gm.ui.skeleFlag = false;
 
@@ -313,8 +311,16 @@ public class CombatChoiceHandler implements ActionListener{
             gm.music.loop();
 
         }
+        if (gm.monster.getName().equals("Zombie") && gm.ui.zombieFlag){
+            gm.ui.bgPanel[15].remove(0);
+            gm.ui.zombieFlag = false;
+
+            gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_adventure.wav");
+            gm.music.play_low();
+            gm.music.loop();
+
+        }
         if (gm.monster.getName().equals("Bear") && gm.ui.bearFlag){
-            //gm.ui.messageText.setText("tests");
             gm.ui.bgPanel[10].remove(0);
 
             gm.ui.messageText.setText("The " + gm.monster.getName() + " was defeated!\n You got [BEAR PELT]");
@@ -406,6 +412,10 @@ public class CombatChoiceHandler implements ActionListener{
         if(gm.monster.getName().equals("Goblin")){
             gm.ui.deathText.setText("You managed to die against a Goblin? Impressive.");
         }
+        if(gm.monster.getName().equals("Zombie")){
+            gm.ui.deathText.setText("Seems like you will remain in this prison forever...");
+        }
+        
     }
     
     

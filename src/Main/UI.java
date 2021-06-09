@@ -68,6 +68,7 @@ public class UI {
     boolean goblinFlag = true;
     boolean skeleFlag = true;
     boolean bearFlag = true;
+    boolean zombieFlag = true;
     boolean bearpeltFlag = false;
     boolean moonoreFlag = false;
     boolean combatFlag = false;
@@ -375,7 +376,7 @@ public class UI {
         //SCENE 17 Desk
         
         createBackground(17, "/res/desk.jpg");
-        createObjectInteractable(17, 660,210,150,100,"/res/key_object.png","Grab","Examine","","grab_key","examine_key","");
+        createObjectInteractable(17, 660,210,100,65,"/res/key_object.png","Grab","Examine","","grab_key","examine_key","");
         bgPanel[17].add(bgLabel[17]);
         
         
@@ -1963,7 +1964,7 @@ public class UI {
         menuCogPanel.setVisible(false);
         window.remove(menuCogPanel);
         
-        for (int i=1;i<15;i++){
+        for (int i=1;i<18;i++){
             bgPanel[i].setVisible(false);
             window.remove(bgPanel[i]);
         }
@@ -2099,6 +2100,7 @@ public class UI {
             goblinFlag = true;
             skeleFlag = true;
             bearFlag = true;
+            zombieFlag = true;
             bearpeltFlag = false;
             moonoreFlag = false;
             combatFlag = false;
