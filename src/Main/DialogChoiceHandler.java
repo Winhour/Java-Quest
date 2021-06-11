@@ -7,6 +7,7 @@ package Main;
 
 import Main.monsters.Bear;
 import Main.monsters.Goblin;
+import Main.monsters.LichLord;
 import Main.monsters.Skeletons;
 import Main.monsters.Zombie;
 import items.LargeElixir;
@@ -103,6 +104,15 @@ public class DialogChoiceHandler implements ActionListener{
                 else if (gm.ui.bgPanel[17].isVisible()){
                     gm.ui.messageText.setText("Comfy desk for a dungeon if you ask me.");
                 }
+                else if (gm.ui.bgPanel[18].isVisible()){
+                    gm.ui.messageText.setText("Let's make sure I have everything I need before the final battle.");
+                }
+                else if (gm.ui.bgPanel[19].isVisible()){
+                    gm.ui.messageText.setText("When this is all over, I'll come back here and gather all this loot.");
+                }
+                else if (gm.ui.bgPanel[20].isVisible()){
+                    gm.ui.messageText.setText("The battle is finally over.");
+                }
                 else {
                     gm.ui.messageText.setText("How in nine hells did I end up here?");
                 }
@@ -142,7 +152,7 @@ public class DialogChoiceHandler implements ActionListener{
                     gm.ui.addMoveMenu("Town", "Item Shop", "Dungeon", "move_twn2", "move_ishop", "move_dunent");
                 }
                 else if (gm.ui.bgPanel[2].isVisible()){
-                    gm.ui.addMoveMenu("Stairway", "Mine", "Metal Door", "move_treas1", "move_mine", "move_treas2");
+                    gm.ui.addMoveMenu("Stairway", "Mine", "Metal Door", "move_treas1", "move_mine", "move_hub");
                 }
                 else if (gm.ui.bgPanel[3].isVisible()){
                     gm.ui.addMoveMenu("Entrance", "Sideroom", "Wooden Door", "move_dunent", "move_side", "move_treas1");
@@ -169,7 +179,7 @@ public class DialogChoiceHandler implements ActionListener{
                     gm.ui.addMoveMenu("Wooden Door", "Stairway", "Chapel", "move_gobdun", "move_skedun", "move_chapel");
                 }
                 else if (gm.ui.bgPanel[12].isVisible()){
-                    gm.ui.addMoveMenu("Main path", "Prison", "", "move_gobdun", "move_prison", "");
+                    gm.ui.addMoveMenu("Main Path", "Prison", "", "move_gobdun", "move_prison", "");
                 }
                 else if (gm.ui.bgPanel[13].isVisible()){
                     gm.ui.addMoveMenu("Hallway", "", "", "move_treas1", "", "");
@@ -185,6 +195,15 @@ public class DialogChoiceHandler implements ActionListener{
                 }
                 else if (gm.ui.bgPanel[17].isVisible()){
                     gm.ui.addMoveMenu("Armory", "", "", "move_armory", "", "");
+                }
+                else if (gm.ui.bgPanel[18].isVisible()){
+                    gm.ui.addMoveMenu("Metal Door", "Treasure Room", "???", "move_skedun", "move_treas2", "move_boss");
+                }
+                else if (gm.ui.bgPanel[19].isVisible()){
+                    gm.ui.addMoveMenu("Crossroads", "", "", "move_hub", "", "");
+                }
+                else if (gm.ui.bgPanel[20].isVisible()){
+                    gm.ui.addMoveMenu("Crossroads", "", "", "move_hub", "", "");
                 }
                 else {
                     gm.ui.addMoveMenu("Town", "Item Shop", "Dungeon", "move_twn2", "move_ishop", "move_gobdun");
@@ -302,9 +321,17 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.addInteractMenu();
                 break; 
                 
-            case "move_treas2":
-                gm.ui.messageText.setText("Not yet implemented.");
-                gm.ui.messageText.setForeground(Color.white);
+            case "move_hub":
+                if (!gm.ui.goldkeyFlag){
+                    gm.ui.messageText.setText("This door needs a key to open.");
+                    gm.ui.messageText.setForeground(Color.white);
+                } else {
+                    gm.sceneChanger.showScreen18();
+                    gm.ui.messageText.setText("An ominous feeling of dread fills the air. The Demon Lord must be close..");
+                    gm.ui.messageText.setForeground(Color.white);
+                    gm.ui.addInteractMenu();
+                }
+                
                 break;
             
             case "move_gobdun":
@@ -405,7 +432,42 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.addInteractMenu();
                 break;     
                 
+            case "move_treas2":
                 
+                gm.sceneChanger.showScreen19();
+                gm.ui.messageText.setText("You come across Demon Lord's vault.");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addInteractMenu();
+                
+                break;
+                
+            case "move_boss":    
+                
+                gm.ui.rememberCurrentScene();
+                gm.sceneChanger.showScreen20();
+                
+                if(gm.ui.demonFlag){
+                    gm.ui.combatFlag = true;
+                    gm.monster = new LichLord();
+                    gm.music.stop();
+                    gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/Boss.wav");
+                    gm.music.play_low();
+                    gm.music.loop();
+                    gm.ui.messageText.setText("Foolish mortal, you're no match for me!!"); 
+                    gm.ui.messageText.setForeground(Color.red);
+                    gm.ui.addFightMenu();
+                }
+                else {
+                    gm.music.stop();
+                    gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_adventure.wav");
+                    gm.music.play_low();
+                    gm.music.loop();
+                    gm.ui.messageText.setText("The remains of our epic battle are still here..."); 
+                    gm.ui.messageText.setForeground(Color.yellow);
+                    gm.ui.addInteractMenu();
+                }
+                
+                break;
                 
                 
                 
@@ -1906,9 +1968,105 @@ public class DialogChoiceHandler implements ActionListener{
                 
             case "interact_merch":
                 
-                gm.ui.messageText.setText("\"I'm sure she'll be up for a trade, assuming I can get the right items.\"");
-                gm.ui.messageText.setForeground(Color.yellow);
+                if (!gm.ui.blueleavesFlag){
+                    gm.ui.messageText.setText("\"I'm sure she'll be up for a trade, assuming I can get the right items.\"");
+                    gm.ui.messageText.setForeground(Color.yellow);
+                } else {
+                    gm.ui.messageText.setText("\"You have them! I can give you this special suit of armor that apparently came here from outer space in return.\"");
+                    gm.ui.messageText.setForeground(Color.white);
+                    gm.ui.addConfirmMenu("Deal", "No Deal", "sparmor_trade", "nothing");
+                }
               
+                break;
+                
+            case "sparmor_trade":
+                
+                gm.ui.blueleavesFlag = false;
+                
+                gm.ui.j4x3.setIcon(new ImageIcon(getClass().getResource("/res/empty2.png")));
+
+                    JPopupMenu popMenu9 = new JPopupMenu();
+                    
+                    JMenuItem menuItem9[] = new JMenuItem[2];
+        
+                    menuItem9[0] = new JMenuItem("Examine");
+                    menuItem9[0].addActionListener(gm.weaponChoiceHandler);
+                    menuItem9[0].setActionCommand("examine_empty");
+                    popMenu9.add(menuItem9[0]);
+        
+                    gm.ui.j4x3.addMouseListener(new MouseListener(){
+
+
+                        @Override
+                        public void mouseClicked(MouseEvent e){}
+
+                        @Override
+                        public void mousePressed(MouseEvent e){
+
+                            if (SwingUtilities.isRightMouseButton(e)){
+                                popMenu9.show(gm.ui.j4x3, e.getX(), e.getY());
+                            }
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e){}
+
+                        @Override
+                        public void mouseEntered(MouseEvent e){}
+
+                        @Override
+                        public void mouseExited(MouseEvent e){}
+
+
+                    });
+                    
+                gm.ui.j2x4.setIcon(new ImageIcon(getClass().getResource("/res/saiyan-suit.png")));    
+                    
+                    JPopupMenu popMenu10 = new JPopupMenu();
+                    
+                    menuItem9[0] = new JMenuItem("Equip");
+                    menuItem9[0].addActionListener(gm.weaponChoiceHandler);
+                    menuItem9[0].setActionCommand("equip_sparmor");
+                    popMenu10.add(menuItem9[0]);
+                    
+                    menuItem9[1] = new JMenuItem("Examine");
+                    menuItem9[1].addActionListener(gm.weaponChoiceHandler);
+                    menuItem9[1].setActionCommand("examine_sparmor");
+                    popMenu10.add(menuItem9[1]);
+        
+                    gm.ui.j2x4.addMouseListener(new MouseListener(){
+
+
+                        @Override
+                        public void mouseClicked(MouseEvent e){}
+
+                        @Override
+                        public void mousePressed(MouseEvent e){
+
+                            if (SwingUtilities.isRightMouseButton(e)){
+                                popMenu10.show(gm.ui.j2x4, e.getX(), e.getY());
+                            }
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e){}
+
+                        @Override
+                        public void mouseEntered(MouseEvent e){}
+
+                        @Override
+                        public void mouseExited(MouseEvent e){}
+
+
+                    });
+                    
+                gm.ui.messageText.setText("You got [SPECIAL ARMOR].\nArmor of exquisite quality. (DEF + 7)");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addInteractMenu();
+                
+                
                 break;
                 
                 
@@ -2206,6 +2364,143 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 gm.ui.messageText.setText("Yep, it's a book.");
                 gm.ui.messageText.setForeground(Color.yellow); 
+                
+                break;
+                  
+            case "examine_gold":    
+                
+                gm.ui.messageText.setText("Should I take some for the road?");
+                gm.ui.messageText.setForeground(Color.yellow); 
+                
+                break;
+                
+            case "grab_gold":
+                
+                /* Let's make it infinite for now */
+                
+                gm.ui.messageText.setText("You found 100 gold!");
+                gm.playerInfo.setCash(gm.playerInfo.getCash()+100);
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addPlayerInfo();
+                
+                break;
+                
+                
+            case "examine_leaves":
+                
+                gm.ui.messageText.setText("Looks like even demons see the value of Blueshrub leaves.");
+                gm.ui.messageText.setForeground(Color.yellow); 
+                
+                break;
+                
+                
+            case "grab_leaves":
+                
+                gm.ui.bgPanel[19].remove(0);
+                gm.ui.bgPanel[19].setVisible(false);
+                gm.ui.bgPanel[19].setVisible(true);
+                
+                gm.ui.messageText.setText("You acquired [BLUESHRUB LEAVES]!");
+                gm.ui.messageText.setForeground(Color.white);
+                
+                gm.ui.j4x3.setIcon(new ImageIcon(getClass().getResource("/res/leaves.png")));
+
+                JMenuItem menuItem8[] = new JMenuItem[2];
+
+                JPopupMenu popMenu8 = new JPopupMenu();
+
+                menuItem8[0] = new JMenuItem("Examine");
+                menuItem8[0].addActionListener(gm.weaponChoiceHandler);
+                menuItem8[0].setActionCommand("examine_leaves");
+                popMenu8.add(menuItem8[0]);
+
+                gm.ui.j4x3.addMouseListener(new MouseListener(){
+
+
+                    @Override
+                    public void mouseClicked(MouseEvent e){}
+
+                    @Override
+                    public void mousePressed(MouseEvent e){
+
+                        if (SwingUtilities.isRightMouseButton(e)){
+                            popMenu8.show(gm.ui.j4x3, e.getX(), e.getY());
+                        }
+
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent e){}
+
+                    @Override
+                    public void mouseEntered(MouseEvent e){}
+
+                    @Override
+                    public void mouseExited(MouseEvent e){}
+
+
+                });
+
+                gm.ui.blueleavesFlag = true;
+                
+                break;
+                
+                
+            case "examine_karmor":
+                
+                gm.ui.messageText.setText("A suit of armor worthy of the greatest knights.");
+                gm.ui.messageText.setForeground(Color.white); 
+                
+                break;
+                
+            case "grab_karmor":
+                
+                JMenuItem menuItem11[] = new JMenuItem[2];
+                    
+                gm.ui.j2x3.setIcon(new ImageIcon(getClass().getResource("/res/knight_armor.png")));    
+                    
+                    JPopupMenu popMenu11 = new JPopupMenu();
+                    
+                    menuItem11[0] = new JMenuItem("Equip");
+                    menuItem11[0].addActionListener(gm.weaponChoiceHandler);
+                    menuItem11[0].setActionCommand("equip_karmor");
+                    popMenu11.add(menuItem11[0]);
+                    
+                    menuItem11[1] = new JMenuItem("Examine");
+                    menuItem11[1].addActionListener(gm.weaponChoiceHandler);
+                    menuItem11[1].setActionCommand("examine_karmor");
+                    popMenu11.add(menuItem11[1]);
+        
+                    gm.ui.j2x3.addMouseListener(new MouseListener(){
+
+
+                        @Override
+                        public void mouseClicked(MouseEvent e){}
+
+                        @Override
+                        public void mousePressed(MouseEvent e){
+
+                            if (SwingUtilities.isRightMouseButton(e)){
+                                popMenu11.show(gm.ui.j2x3, e.getX(), e.getY());
+                            }
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e){}
+
+                        @Override
+                        public void mouseEntered(MouseEvent e){}
+
+                        @Override
+                        public void mouseExited(MouseEvent e){}
+
+
+                    });
+                    
+                gm.ui.messageText.setText("You got [KNIGHT ARMOR].\nA suit of armor worthy of the greatest knights. (DEF + 5)");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addInteractMenu();
                 
                 break;
             

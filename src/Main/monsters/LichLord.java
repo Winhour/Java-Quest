@@ -11,9 +11,10 @@ package Main.monsters;
  */
 public class LichLord extends Monster {
     
-    int health = 250;
-    int exp = 1000;
-    String name = "Lich Lord";
+    int health = 1666;
+    int exp = 200;
+    String name = "Demon Lord";
+    int gold = 150;
     
     int ATK = 10;
     int DEF = 1;
@@ -80,6 +81,16 @@ public class LichLord extends Monster {
     @Override
     public void setName(String name) {
         this.name = name;
+    }
+    
+    @Override
+    public int getGold() {
+        return gold;
+    }
+    
+    @Override
+    public void setGold(int gold) {
+        this.gold = gold;
     }
     
 }

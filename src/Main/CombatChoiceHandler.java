@@ -61,7 +61,19 @@ public class CombatChoiceHandler implements ActionListener{
                             loseState();
                         }
                     }
-                    gm.ui.messageText.setText("You slashed at the " + gm.monster.getName() + "! It took " + (damageRoll-gm.monster.getDEF()) + " damage\n It attacks back! You took " + (damageRoll2-gm.playerInfo.getModfifiedDEF()) + " damage");
+                    if(!gm.monster.getName().equals("Demon Lord")){
+                        gm.ui.messageText.setText("You slashed at the " + gm.monster.getName() + "! It took " + (damageRoll-gm.monster.getDEF()) + " damage\n It attacks back! You took " + (damageRoll2-gm.playerInfo.getModfifiedDEF()) + " damage");
+                    } else if (!gm.playerInfo.getWeapon().getName().equals("Demonsbane")){
+                        gm.ui.messageText.setForeground(Color.white);
+                        gm.ui.messageText.setText("Your weapon is ineffective!" + " Demon Lord sends out orbs of black magic! You took " + (damageRoll2-gm.playerInfo.getModfifiedDEF()) + " damage");
+                    } else {
+                        /* Demon Lord combat here, will make it more complex later, multiple random attacks etc. */
+                        
+                        gm.ui.messageText.setForeground(Color.white);
+                        
+                        gm.ui.messageText.setText("You attacked the Demon Lord! It took " + (damageRoll-gm.monster.getDEF()) + " damage\n It attacks back! You took " + (damageRoll2-gm.playerInfo.getModfifiedDEF()) + " damage");
+                        
+                    }
                 } else {
                     
                     winState();
@@ -371,6 +383,15 @@ public class CombatChoiceHandler implements ActionListener{
             gm.ui.bearFlag = false;
             gm.ui.bearpeltFlag = true;
         }
+        if (gm.monster.getName().equals("Demon Lord") && gm.ui.demonFlag){
+            gm.ui.bgPanel[20].remove(0);
+            gm.ui.demonFlag = false;
+
+            gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_adventure.wav");
+            gm.music.play_low();
+            gm.music.loop();
+
+        }
 
         //gm.ui.addInteractMenu();
 
@@ -414,6 +435,10 @@ public class CombatChoiceHandler implements ActionListener{
         }
         if(gm.monster.getName().equals("Zombie")){
             gm.ui.deathText.setText("Seems like you will remain in this prison forever...");
+        }
+        if(gm.monster.getName().equals("Demon Lord")){
+            gm.ui.deathText.setText("\"Your soul is mine!\"");
+            gm.ui.deathText.setForeground(Color.red);
         }
         
     }

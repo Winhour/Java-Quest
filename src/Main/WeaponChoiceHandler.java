@@ -11,7 +11,9 @@ import java.awt.event.ActionListener;
 import weapons.Broadsword;
 import weapons.Demonsbane;
 import weapons.Katana;
+import weapons.Knight_Armor;
 import weapons.Leather_Armor;
+import weapons.Saiyan_Armor;
 import weapons.Soldier_Armor;
 import weapons.War_Axe;
 
@@ -22,6 +24,7 @@ import weapons.War_Axe;
 public class WeaponChoiceHandler implements ActionListener {
     
     GameManager gm;
+    SoundEffect se = new SoundEffect();
     
     public WeaponChoiceHandler(GameManager gm){
         
@@ -42,6 +45,10 @@ public class WeaponChoiceHandler implements ActionListener {
                 break;
                 
             case "equip_brdswrd"  :
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/metal.wav");
+                se.play();
+                
                 gm.ui.messageText.setText("Equipped <BROADSWORD>!");
                 gm.ui.messageText.setForeground(Color.LIGHT_GRAY);
                 gm.playerInfo.setWeapon(new Broadsword());
@@ -67,6 +74,10 @@ public class WeaponChoiceHandler implements ActionListener {
                 break;
                 
             case "equip_lthrarm"  :
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/metal.wav");
+                se.play();
+                
                 gm.ui.messageText.setText("Equipped <LEATHER ARMOR>!");
                 gm.ui.messageText.setForeground(Color.LIGHT_GRAY);
                 gm.playerInfo.setArmor(new Leather_Armor());
@@ -82,6 +93,10 @@ public class WeaponChoiceHandler implements ActionListener {
                 break;
                 
             case "equip_waraxe"  :
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/metal.wav");
+                se.play();
+                
                 gm.ui.messageText.setText("Equipped <WAR AXE>!");
                 gm.ui.messageText.setForeground(Color.LIGHT_GRAY);
                 gm.playerInfo.setWeapon(new War_Axe());
@@ -97,6 +112,10 @@ public class WeaponChoiceHandler implements ActionListener {
                 break;
                 
             case "equip_sldarm"  :
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/metal.wav");
+                se.play();
+                
                 gm.ui.messageText.setText("Equipped <SOLDIER ARMOR>!");
                 gm.ui.messageText.setForeground(Color.LIGHT_GRAY);
                 gm.playerInfo.setArmor(new Soldier_Armor());
@@ -112,6 +131,10 @@ public class WeaponChoiceHandler implements ActionListener {
                 break;    
                 
             case "equip_katana"  :
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/metal.wav");
+                se.play();
+                
                 gm.ui.messageText.setText("Equipped <KATANA>!");
                 gm.ui.messageText.setForeground(Color.LIGHT_GRAY);
                 gm.playerInfo.setWeapon(new Katana());
@@ -127,6 +150,10 @@ public class WeaponChoiceHandler implements ActionListener {
                 break;    
                 
             case "equip_demon"  :
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/metal.wav");
+                se.play();
+                
                 gm.ui.messageText.setText("Equipped <DEMONSBANE>!");
                 gm.ui.messageText.setForeground(Color.LIGHT_GRAY);
                 gm.playerInfo.setWeapon(new Demonsbane());
@@ -134,7 +161,47 @@ public class WeaponChoiceHandler implements ActionListener {
                 
                 gm.ui.addPlayerInfo();
                 gm.ui.makeStatsText();
-                break;         
+                break;   
+                
+            case "examine_karmor" :
+                gm.ui.messageText.setText("A suit of armor worthy of the greatest knights.\n(DEF + 5)");
+                gm.ui.messageText.setForeground(Color.white);
+                break;     
+                
+            case "equip_karmor"  :
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/metal.wav");
+                se.play();
+                
+                gm.ui.messageText.setText("Equipped <KNIGHT ARMOR>!");
+                gm.ui.messageText.setForeground(Color.LIGHT_GRAY);
+                gm.playerInfo.setArmor(new Knight_Armor());
+                gm.playerInfo.setModfifiedDEF(gm.playerInfo.getDEF()+gm.playerInfo.getArmor().getModifier());
+                
+                gm.ui.addPlayerInfo();
+                gm.ui.makeStatsText();
+                break;      
+                
+            case "examine_sparmor" :
+                gm.ui.messageText.setText("Nobody knows where it came from, but this armor is of exquisite quality.\n(DEF + 7)");
+                gm.ui.messageText.setForeground(Color.white);
+                break;     
+                
+            case "equip_sparmor"  :
+                
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/metal.wav");
+                se.play();
+                
+                gm.ui.messageText.setText("Equipped <SPECIAL ARMOR>!");
+                gm.ui.messageText.setForeground(Color.LIGHT_GRAY);
+                gm.playerInfo.setArmor(new Saiyan_Armor());
+                gm.playerInfo.setModfifiedDEF(gm.playerInfo.getDEF()+gm.playerInfo.getArmor().getModifier());
+                
+                gm.ui.addPlayerInfo();
+                gm.ui.makeStatsText();
+                break;       
+                
+                
              
             case "examine_bpelt"  :
                 gm.ui.messageText.setText("A large pelt of Bear skin and fur.");
@@ -166,6 +233,13 @@ public class WeaponChoiceHandler implements ActionListener {
                 gm.ui.messageText.setForeground(Color.white);
                 
                 break;
+                
+            case "examine_leaves" :
+                
+                gm.ui.messageText.setText("Leaves of a Blueshrub tree, said to have magical powers.");
+                gm.ui.messageText.setForeground(Color.white);
+                
+                break;    
                 
             
         }

@@ -69,11 +69,13 @@ public class UI {
     boolean skeleFlag = true;
     boolean bearFlag = true;
     boolean zombieFlag = true;
+    boolean demonFlag = true;
     boolean bearpeltFlag = false;
     boolean moonoreFlag = false;
     boolean combatFlag = false;
-    boolean barrelgoldFlag = true;
+    boolean barrelgoldFlag = true;                  
     boolean goldkeyFlag = false;
+    boolean blueleavesFlag = false; 
     
     public JLabel j1x1, j1x2, j1x3, j1x4;
     public JLabel j2x1, j2x2, j2x3, j2x4;
@@ -370,6 +372,7 @@ public class UI {
         //SCENE 16  Armory
         
         createBackground(16, "/res/armory.jpg");
+        createObjectInteractable(16, 500,210,100,200,"/res/blank.png","Grab","Examine","","grab_karmor","examine_karmor","");
         bgPanel[16].add(bgLabel[16]);
         
         
@@ -379,6 +382,26 @@ public class UI {
         createObjectInteractable(17, 660,210,100,65,"/res/key_object.png","Grab","Examine","","grab_key","examine_key","");
         createObjectInteractable(17, 320,210,200,100,"/res/blank.png","Examine","","","examine_book","","");
         bgPanel[17].add(bgLabel[17]);
+        
+        //SCENE 18  Hub
+        
+        createBackground(18, "/res/hub.jpg");
+        bgPanel[18].add(bgLabel[18]);
+        
+        
+        //SCENE 19  Treasure Room
+        
+        createBackground(19, "/res/treasure_room.jpg");
+        createObjectInteractable(19, 660,230,100,100,"/res/leaves_object.png","Grab","Examine","","grab_leaves","examine_leaves","");
+        createObjectInteractable(19, 10,180,100,100,"/res/blank.png","Grab","Examine","","grab_gold","examine_gold","");
+        bgPanel[19].add(bgLabel[19]);
+        
+        
+        //SCENE 20 Boss Room
+        
+        createBackground(20, "/res/boss.jpg");
+        createObject(20, 240,60,400,400,"/res/lich.png");
+        bgPanel[20].add(bgLabel[20]);
         
         
         
@@ -1965,7 +1988,7 @@ public class UI {
         menuCogPanel.setVisible(false);
         window.remove(menuCogPanel);
         
-        for (int i=1;i<18;i++){
+        for (int i=1;i<21;i++){
             bgPanel[i].setVisible(false);
             window.remove(bgPanel[i]);
         }
@@ -2066,6 +2089,26 @@ public class UI {
         
             generateScreen();
             
+            gm.ui.bgPanel[2].setVisible(false);
+            gm.ui.bgPanel[3].setVisible(false);
+            gm.ui.bgPanel[4].setVisible(false);
+            gm.ui.bgPanel[5].setVisible(false);
+            gm.ui.bgPanel[6].setVisible(false);
+            gm.ui.bgPanel[7].setVisible(false);
+            gm.ui.bgPanel[8].setVisible(false);
+            gm.ui.bgPanel[9].setVisible(false);
+            gm.ui.bgPanel[10].setVisible(false);
+            gm.ui.bgPanel[11].setVisible(false);
+            gm.ui.bgPanel[12].setVisible(false);
+            gm.ui.bgPanel[13].setVisible(false);
+            gm.ui.bgPanel[14].setVisible(false);
+            gm.ui.bgPanel[15].setVisible(false);
+            gm.ui.bgPanel[16].setVisible(false);
+            gm.ui.bgPanel[17].setVisible(false);
+            gm.ui.bgPanel[18].setVisible(false);
+            gm.ui.bgPanel[19].setVisible(false);
+            gm.ui.bgPanel[20].setVisible(false);
+            
             window.setVisible(true);
             
             gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_one.wav");
@@ -2102,11 +2145,13 @@ public class UI {
             skeleFlag = true;
             bearFlag = true;
             zombieFlag = true;
+            demonFlag = true;
             bearpeltFlag = false;
             moonoreFlag = false;
             combatFlag = false;
             barrelgoldFlag = true;
             goldkeyFlag = false;
+            blueleavesFlag = false;
             
             currentScene = 1;
             
@@ -2139,6 +2184,10 @@ public class UI {
         else if (bgPanel[15].isVisible()) currentScene = 15;
         else if (bgPanel[16].isVisible()) currentScene = 16;
         else if (bgPanel[17].isVisible()) currentScene = 17;
+        else if (bgPanel[18].isVisible()) currentScene = 18;
+        else if (bgPanel[19].isVisible()) currentScene = 19;
+        else if (bgPanel[20].isVisible()) currentScene = 20;
+        
         
         
     }
@@ -2165,6 +2214,9 @@ public class UI {
         if (currentScene == 15) gm.sceneChanger.showScreen15();
         if (currentScene == 16) gm.sceneChanger.showScreen16();
         if (currentScene == 17) gm.sceneChanger.showScreen17();
+        if (currentScene == 18) gm.sceneChanger.showScreen18();
+        if (currentScene == 19) gm.sceneChanger.showScreen19();
+        if (currentScene == 20) gm.sceneChanger.showScreen20();
         
         
     }
