@@ -5,6 +5,7 @@
  */
 package Main;
 
+import Other.CustomCursor;
 import items.GameItem;
 import java.awt.Color;
 import java.awt.Font;
@@ -91,6 +92,8 @@ public class UI {
     
     GameOverHandler goHandler = new GameOverHandler();
     
+    //CustomCursor cCursor;
+    
     
     
     
@@ -99,7 +102,7 @@ public class UI {
         this.gm = gm;
         
         createTitleScreen();
-        
+
         //createMainField();
         
         //generateScreen();
@@ -286,10 +289,10 @@ public class UI {
          //SCENE 3  Goblin
         
         createBackground(3, "/res/dungeon.jpg");
-        createObject(3, 240,60,400,400,"/res/goblin.png");
         createObjectInteractable(3,170,310,100,100,"/res/blank.png", "Examine", "", "", "examine_gsword", "", "");
         createObjectInteractable(3,300,200,100,100,"/res/blank.png", "Examine", "", "", "examine_cultist", "", "");
         createObjectInteractable(3,470,280,100,100,"/res/blank.png", "Examine", "", "", "examine_gbarrel", "", "");
+        createObject(3, 240,60,400,400,"/res/goblin.png");
         bgPanel[3].add(bgLabel[3]);
         
         //SCENE 4   Town

@@ -339,9 +339,9 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 gm.sceneChanger.showScreen3();
                 if(gm.ui.goblinFlag){
+                    gm.ui.bgPanel[3].getComponent(0).setVisible(false);
                     gm.ui.bgPanel[3].getComponent(1).setVisible(false);
                     gm.ui.bgPanel[3].getComponent(2).setVisible(false);
-                    gm.ui.bgPanel[3].getComponent(3).setVisible(false);
                     gm.ui.combatFlag = true;
                     gm.monster = new Goblin();
                     gm.music.stop();
@@ -2125,6 +2125,8 @@ public class DialogChoiceHandler implements ActionListener{
                 
             case "open_chest":
                 
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/getgold.wav");
+                se.play();
                 gm.ui.messageText.setText("You found 50 gold!");
                 gm.playerInfo.setCash(gm.playerInfo.getCash()+50);
                 gm.ui.bgPanel[11].remove(0);
@@ -2143,6 +2145,8 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 /* Let's make it infinite for now */
                 
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/getgold.wav");
+                se.play();
                 gm.ui.messageText.setText("You found 10 gold!");
                 gm.playerInfo.setCash(gm.playerInfo.getCash()+10);
                 gm.ui.messageText.setForeground(Color.white);
@@ -2267,6 +2271,8 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 if (gm.ui.barrelgoldFlag){
                     
+                    se.setFile(System.getProperty("user.dir") + "/src/res/sound/getgold.wav");
+                    se.play();
                     gm.ui.messageText.setText("You found 20 gold!");
                     gm.playerInfo.setCash(gm.playerInfo.getCash()+20);
                     gm.ui.messageText.setForeground(Color.white);
@@ -2378,6 +2384,8 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 /* Let's make it infinite for now */
                 
+                se.setFile(System.getProperty("user.dir") + "/src/res/sound/getgold.wav");
+                se.play();
                 gm.ui.messageText.setText("You found 100 gold!");
                 gm.playerInfo.setCash(gm.playerInfo.getCash()+100);
                 gm.ui.messageText.setForeground(Color.white);

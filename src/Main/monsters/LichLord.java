@@ -11,7 +11,7 @@ package Main.monsters;
  */
 public class LichLord extends Monster {
     
-    int health = 1666;
+    int health = 666;
     int exp = 200;
     String name = "Demon Lord";
     int gold = 150;

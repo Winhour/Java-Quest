@@ -6,6 +6,7 @@
 package Main;
 
 import Main.monsters.Skeletons;
+import Other.DisappearingLabel;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -13,7 +14,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
@@ -55,28 +59,32 @@ public class CombatChoiceHandler implements ActionListener{
                 gm.monster.setHealth(gm.monster.getHealth()+gm.monster.getDEF()-damageRoll);
                 if(gm.monster.getHealth()>0){
                     se.play();
-                    if ((gm.playerInfo.getModfifiedDEF()-damageRoll2)<0){
-                        gm.playerInfo.setHealth(gm.playerInfo.getHealth()+gm.playerInfo.getModfifiedDEF()-damageRoll2);
-                        if (gm.playerInfo.getHealth()<=0){
-                            loseState();
-                        }
-                    }
                     if(!gm.monster.getName().equals("Demon Lord")){
                         gm.ui.messageText.setText("You slashed at the " + gm.monster.getName() + "! It took " + (damageRoll-gm.monster.getDEF()) + " damage\n It attacks back! You took " + (damageRoll2-gm.playerInfo.getModfifiedDEF()) + " damage");
                     } else if (!gm.playerInfo.getWeapon().getName().equals("Demonsbane")){
                         gm.ui.messageText.setForeground(Color.white);
                         gm.ui.messageText.setText("Your weapon is ineffective!" + " Demon Lord sends out orbs of black magic! You took " + (damageRoll2-gm.playerInfo.getModfifiedDEF()) + " damage");
                     } else {
-                        /* Demon Lord combat here, will make it more complex later, multiple random attacks etc. */
+                        /* Demon Lord combat here, will make it more complex later, multiple random attacks etc. (also move this to separate function and also put in spells) */
                         
-                        gm.ui.messageText.setForeground(Color.white);
+                        damageRoll2 = dLordCombat(damageRoll, damageRoll2);
                         
-                        gm.ui.messageText.setText("You attacked the Demon Lord! It took " + (damageRoll-gm.monster.getDEF()) + " damage\n It attacks back! You took " + (damageRoll2-gm.playerInfo.getModfifiedDEF()) + " damage");
-                        
+                    }
+                    if ((gm.playerInfo.getModfifiedDEF()-damageRoll2)<0){
+                        gm.playerInfo.setHealth(gm.playerInfo.getHealth()+gm.playerInfo.getModfifiedDEF()-damageRoll2);
+                        if (gm.playerInfo.getHealth()<=0){
+                            loseState();
+                        }
                     }
                 } else {
                     
-                    winState();
+                    try {
+                        winState();
+                    } catch (IOException ex) {
+                        Logger.getLogger(CombatChoiceHandler.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(CombatChoiceHandler.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     
                 }
                 if (gm.playerInfo.getHealth()>0){
@@ -84,7 +92,7 @@ public class CombatChoiceHandler implements ActionListener{
                 }
                 break;
                 
-            case "fireball":
+            case "fireball":                            /* Add the Demon Lord cases to spells */
                 
                 if (gm.playerInfo.getMana() < 6) {
                     
@@ -111,7 +119,13 @@ public class CombatChoiceHandler implements ActionListener{
                         gm.ui.messageText.setText("Flames engulf the " + gm.monster.getName() + "! It took " + firedamage + " damage\n It attacks back! You took " + damageRoll2 + " damage");
                         gm.ui.addFightMenu();
                     } else {
-                        winState();
+                        try {
+                            winState();
+                        } catch (IOException ex) {
+                            Logger.getLogger(CombatChoiceHandler.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(CombatChoiceHandler.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                     gm.ui.addPlayerInfo();
                     
@@ -146,7 +160,13 @@ public class CombatChoiceHandler implements ActionListener{
                             gm.ui.messageText.setText("Lightning strikes the " + gm.monster.getName() + "! It took " + thunderdamage + " damage\n It attacks back! You took " + damageRoll2 + " damage");
                             gm.ui.addFightMenu();
                         } else {
-                            winState();
+                            try {
+                                winState();
+                            } catch (IOException ex) {
+                                Logger.getLogger(CombatChoiceHandler.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(CombatChoiceHandler.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
                         gm.ui.addPlayerInfo();
 
@@ -188,7 +208,13 @@ public class CombatChoiceHandler implements ActionListener{
                         }
                         gm.ui.addFightMenu();
                     } else {
-                        winState();
+                        try {
+                            winState();
+                        } catch (IOException ex) {
+                            Logger.getLogger(CombatChoiceHandler.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(CombatChoiceHandler.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                     gm.ui.addPlayerInfo();
                     
@@ -293,7 +319,7 @@ public class CombatChoiceHandler implements ActionListener{
         
     }
     
-    public void winState(){
+    public void winState() throws IOException, InterruptedException{
         
         se.play();
         gm.ui.combatFlag = false;
@@ -303,7 +329,9 @@ public class CombatChoiceHandler implements ActionListener{
         gm.playerInfo.setExp(gm.playerInfo.getExp()+gm.monster.getExp());
 
         if (gm.monster.getName().equals("Goblin") && gm.ui.goblinFlag){
-            gm.ui.bgPanel[3].remove(0);
+            
+            gm.ui.bgPanel[3].remove(3);
+            createObjectwg2d(3,240,60,400,400,"/res/goblin.png");
             gm.ui.goblinFlag = false;
             gm.ui.bgPanel[3].getComponent(0).setVisible(true);
             gm.ui.bgPanel[3].getComponent(1).setVisible(true);
@@ -440,6 +468,40 @@ public class CombatChoiceHandler implements ActionListener{
             gm.ui.deathText.setText("\"Your soul is mine!\"");
             gm.ui.deathText.setForeground(Color.red);
         }
+        
+    }
+    
+    public int dLordCombat(int damageRoll, int damageRoll2){
+        
+        gm.ui.messageText.setForeground(Color.white);
+                        
+        int attackRand = rand.nextInt(6);
+
+        if (attackRand == 0 && attackRand == 1 && attackRand == 2){
+            gm.ui.messageText.setText("You attacked the Demon Lord! It took " + (damageRoll-gm.monster.getDEF()) + " damage\n It attacks back! You took " + (damageRoll2-gm.playerInfo.getModfifiedDEF()) + " damage");
+        } else if (attackRand == 3){
+            damageRoll2 = 20;
+            gm.ui.messageText.setText("You attacked the Demon Lord! It took " + (damageRoll-gm.monster.getDEF()) + " damage\n It uses Void Blast! You took " + (damageRoll2) + " damage");
+        } else if (attackRand == 4){
+            damageRoll2 = 15;
+           gm.ui.messageText.setText("You attacked the Demon Lord! It took " + (damageRoll-gm.monster.getDEF()) + " damage\n It uses Dark Strike! You took " + (damageRoll2) + " damage"); 
+        } else {
+            damageRoll2 = 10;
+            gm.ui.messageText.setText("You attacked the Demon Lord! It took " + (damageRoll-gm.monster.getDEF()) + " damage\n It uses Necroslash! You took " + (damageRoll2) + " damage");
+        }
+        
+        return damageRoll2;
+    }
+    
+    /* Trying to figure out how to change object alpha value, work in progress */
+    
+    public void createObjectwg2d(int bgNum, int objx, int objy, int objWidth, int objHeight, String objFileName) throws IOException{
+     
+        DisappearingLabel objectLabel = new DisappearingLabel(objFileName);
+        objectLabel.setBounds(objx,objy,objWidth,objHeight);
+        gm.ui.bgPanel[bgNum].setVisible(false);
+        gm.ui.bgPanel[bgNum].add(objectLabel);
+        gm.ui.bgPanel[bgNum].setVisible(true);
         
     }
     
