@@ -331,7 +331,9 @@ public class CombatChoiceHandler implements ActionListener{
         if (gm.monster.getName().equals("Goblin") && gm.ui.goblinFlag){
             
             gm.ui.bgPanel[3].remove(3);
+            gm.ui.bgPanel[3].remove(3);
             createObjectwg2d(3,240,60,400,400,"/res/goblin.png");
+            gm.ui.bgPanel[3].add(gm.ui.bgLabel[3]);
             gm.ui.goblinFlag = false;
             gm.ui.bgPanel[3].getComponent(0).setVisible(true);
             gm.ui.bgPanel[3].getComponent(1).setVisible(true);
@@ -495,13 +497,17 @@ public class CombatChoiceHandler implements ActionListener{
     
     /* Trying to figure out how to change object alpha value, work in progress */
     
-    public void createObjectwg2d(int bgNum, int objx, int objy, int objWidth, int objHeight, String objFileName) throws IOException{
+    public void createObjectwg2d(int bgNum, int objx, int objy, int objWidth, int objHeight, String objFileName) throws IOException, InterruptedException{
      
         DisappearingLabel objectLabel = new DisappearingLabel(objFileName);
         objectLabel.setBounds(objx,objy,objWidth,objHeight);
+        
+        /*ImageIcon objectIcon = new ImageIcon(getClass().getResource(objFileName));
+        objectLabel.setIcon(objectIcon);
+        
         gm.ui.bgPanel[bgNum].setVisible(false);
         gm.ui.bgPanel[bgNum].add(objectLabel);
-        gm.ui.bgPanel[bgNum].setVisible(true);
+        gm.ui.bgPanel[bgNum].setVisible(true);*/
         
     }
     

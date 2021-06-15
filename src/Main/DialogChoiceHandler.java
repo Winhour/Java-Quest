@@ -113,6 +113,9 @@ public class DialogChoiceHandler implements ActionListener{
                 else if (gm.ui.bgPanel[20].isVisible()){
                     gm.ui.messageText.setText("The battle is finally over.");
                 }
+                else if (gm.ui.bgPanel[21].isVisible()){
+                    gm.ui.messageText.setText("Did she make it in Paint or something?");
+                }
                 else {
                     gm.ui.messageText.setText("How in nine hells did I end up here?");
                 }
@@ -126,7 +129,10 @@ public class DialogChoiceHandler implements ActionListener{
                 break;
                 
             case "inventory":
-                gm.ui.rememberCurrentScene();
+                
+                if (!gm.ui.bgPanel[21].isVisible()){
+                    gm.ui.rememberCurrentScene();
+                }
                 gm.sceneChanger.showScreen8();
                 gm.ui.messageText.setText("Let's see what we're working with here.");
                 gm.ui.messageText.setForeground(Color.yellow);
@@ -134,6 +140,7 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 gm.ui.choice4.setText("<<<");
                 gm.ui.choice4.setActionCommand("restore_scene");
+                
                 break;
                 
             case "restore_scene":
@@ -309,7 +316,7 @@ public class DialogChoiceHandler implements ActionListener{
                 
             case "move_chapel":
                 gm.sceneChanger.showScreen13();
-                gm.ui.messageText.setText("[There will be an NPC here]");
+                gm.ui.messageText.setText("A headless knight is praying near a bloodsoaked altar.");
                 gm.ui.messageText.setForeground(Color.white);
                 gm.ui.addInteractMenu();
                 break;      
@@ -1079,7 +1086,7 @@ public class DialogChoiceHandler implements ActionListener{
                 
             case "merch_osell":
                 
-                gm.ui.addTalkMenu("Mage's Amulet", "", "", "merch_mamulet", "nothing", "nothing");
+                gm.ui.addTalkMenu("Mage's Amulet", "Dungeon Map", "", "merch_mamulet", "merch_dmap", "nothing");
                 gm.ui.messageText.setText("\"Want something from this special selection?\"");
                 gm.ui.messageText.setForeground(Color.white);
                 
@@ -1409,6 +1416,73 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 break;
                 
+                
+            case "merch_dmap":
+                
+                gm.ui.messageText.setText("\"A rough sketch of the Dungeon and surrounding areas, interested?    (Cost: 5 Gold)");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addConfirmMenu("Gimme!", "Nope", "bought_dmap", "nothing");
+                
+                break;
+                
+                
+            case "bought_dmap":
+                
+                if (gm.playerInfo.getCash() >= 5){
+                    
+                    se.setFile(System.getProperty("user.dir") + "/src/res/sound/coin_sound.wav");
+                    se.play();
+                    gm.playerInfo.setCash(gm.playerInfo.getCash()-5);
+                    gm.ui.messageText.setText("\"If I ever get lost, this might come in handy\"");
+                    gm.ui.messageText.setForeground(Color.yellow);
+                    gm.ui.j3x4.setIcon(new ImageIcon(getClass().getResource("/res/map.png")));
+
+                    JMenuItem menuItem4[] = new JMenuItem[2];
+
+                    JPopupMenu popMenu4 = new JPopupMenu();
+
+                    menuItem4[0] = new JMenuItem("Examine");
+                    menuItem4[0].addActionListener(gm.weaponChoiceHandler);
+                    menuItem4[0].setActionCommand("examine_dmap");
+                    popMenu4.add(menuItem4[0]);
+
+                    gm.ui.j3x4.addMouseListener(new MouseListener(){
+
+
+                        @Override
+                        public void mouseClicked(MouseEvent e){}
+
+                        @Override
+                        public void mousePressed(MouseEvent e){
+
+                            if (SwingUtilities.isRightMouseButton(e)){
+                                popMenu4.show(gm.ui.j3x4, e.getX(), e.getY());
+                            }
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e){}
+
+                        @Override
+                        public void mouseEntered(MouseEvent e){}
+
+                        @Override
+                        public void mouseExited(MouseEvent e){}
+
+
+                    });
+                }
+                else {
+                    gm.ui.messageText.setText("\"If you actually want it, come back with some money!\"");
+                    gm.ui.messageText.setForeground(Color.white);
+                }
+                
+                
+                gm.ui.addInteractMenu();    
+                
+                
+                break;
                 
             /* Asking Merchant about the Business */        
              
@@ -2509,6 +2583,28 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setText("You got [KNIGHT ARMOR].\nA suit of armor worthy of the greatest knights. (DEF + 5)");
                 gm.ui.messageText.setForeground(Color.white);
                 gm.ui.addInteractMenu();
+                
+                break;
+                
+            case "look_dknight":
+                
+                gm.ui.messageText.setText("\"This guy seems like trouble...\"");
+                gm.ui.messageText.setForeground(Color.yellow);
+                
+                break;
+                
+            case "interact_dknight":
+                
+                gm.ui.messageText.setText("\"Not really my kind of crowd.\"");
+                gm.ui.messageText.setForeground(Color.yellow);
+                
+                break;
+                
+            case "talk_dknight":
+                
+                gm.ui.addTalkMenu("Option 1", "Option 2", "Option 3", "", "", "");
+                gm.ui.messageText.setText("Ask about: ");
+                gm.ui.messageText.setForeground(Color.white);
                 
                 break;
             

@@ -241,6 +241,17 @@ public class WeaponChoiceHandler implements ActionListener {
                 
                 break;    
                 
+            case "examine_dmap" :
+
+                gm.ui.messageText.setText("\"Let's see where we are.\"");
+                gm.ui.messageText.setForeground(Color.yellow);
+                gm.sceneChanger.showScreen21();
+                
+                gm.ui.choice4.setText("<<<");
+                gm.ui.choice4.setActionCommand("restore_scene");
+                
+                break;   
+                
             
         }
                 

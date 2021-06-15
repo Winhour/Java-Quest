@@ -5,7 +5,6 @@
  */
 package Main;
 
-import Other.CustomCursor;
 import items.GameItem;
 import java.awt.Color;
 import java.awt.Font;
@@ -345,7 +344,7 @@ public class UI {
         //SCENE 11  Dungeon Hallway
         
         createBackground(11, "/res/dungeon_hallway.jpg");
-        createObjectInteractable(11, 210,210,300,300,"/res/chest.png","Open","Examine","","open_chest","examine_chest","nothing");
+        createObjectInteractable(11, 230,180,300,300,"/res/chest.png","Open","Examine","","open_chest","examine_chest","nothing");
         bgPanel[11].add(bgLabel[11]);
         
         //SCENE 12  Dungeon Sideroom
@@ -357,6 +356,7 @@ public class UI {
         //SCENE 13  Dungeon Chapel
         
         createBackground(13, "/res/chapel.jpg");
+        createObjectInteractable(13,180,30,400,510,"/res/dark_knight.png", "Talk", "Interact", "Look", "talk_dknight", "interact_dknight", "look_dknight");
         bgPanel[13].add(bgLabel[13]);
 
         //SCENE 14  Dungeon Mine
@@ -405,6 +405,12 @@ public class UI {
         createBackground(20, "/res/boss.jpg");
         createObject(20, 240,60,400,400,"/res/lich.png");
         bgPanel[20].add(bgLabel[20]);
+        
+        
+        //SCENE 21 Map
+        
+        createBackground(21, "/res/map_paint.png");
+        bgPanel[21].add(bgLabel[21]);
         
         
         
@@ -1991,7 +1997,7 @@ public class UI {
         menuCogPanel.setVisible(false);
         window.remove(menuCogPanel);
         
-        for (int i=1;i<21;i++){
+        for (int i=1;i<22;i++){
             bgPanel[i].setVisible(false);
             window.remove(bgPanel[i]);
         }
@@ -2111,6 +2117,7 @@ public class UI {
             gm.ui.bgPanel[18].setVisible(false);
             gm.ui.bgPanel[19].setVisible(false);
             gm.ui.bgPanel[20].setVisible(false);
+            gm.ui.bgPanel[21].setVisible(false);
             
             window.setVisible(true);
             
@@ -2190,6 +2197,7 @@ public class UI {
         else if (bgPanel[18].isVisible()) currentScene = 18;
         else if (bgPanel[19].isVisible()) currentScene = 19;
         else if (bgPanel[20].isVisible()) currentScene = 20;
+        else if (bgPanel[21].isVisible()) currentScene = 21;
         
         
         
@@ -2220,6 +2228,7 @@ public class UI {
         if (currentScene == 18) gm.sceneChanger.showScreen18();
         if (currentScene == 19) gm.sceneChanger.showScreen19();
         if (currentScene == 20) gm.sceneChanger.showScreen20();
+        if (currentScene == 21) gm.sceneChanger.showScreen21();
         
         
     }
