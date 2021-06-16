@@ -38,6 +38,8 @@ public class DialogChoiceHandler implements ActionListener{
     
     GameManager gm;
     SoundEffect se = new SoundEffect();
+    //SoundEffect se = gm.context.getBean("se", SoundEffect.class);
+    //SoundEffect se;
     
     public DialogChoiceHandler(GameManager gm){
         
@@ -2664,5 +2666,7 @@ public class DialogChoiceHandler implements ActionListener{
         se.play();
         
     }
+    
+    
     
 }

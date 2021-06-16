@@ -75,6 +75,12 @@ public class SoundEffect {
         clip.close();
         
     }
+
+    public void setClip(Clip clip) {
+        this.clip = clip;
+    }
+    
+    
     
     
 }

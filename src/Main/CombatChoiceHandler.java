@@ -275,6 +275,8 @@ public class CombatChoiceHandler implements ActionListener{
                 
                 if (gm.playerInfo.getExp()>=gm.playerInfo.getNextlevelexp()){
                     
+                    se.setFile(System.getProperty("user.dir") + "/src/res/sound/level_up.wav");
+                    se.play();
                     gm.ui.messageText.setText("LEVEL UP!"); 
                     gm.ui.messageText.setForeground(Color.white);
                     gm.ui.choice1.setActionCommand("level_up");

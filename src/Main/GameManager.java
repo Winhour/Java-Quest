@@ -11,6 +11,8 @@ import items.GameItem;
 import items.MediumHealthPotion;
 import items.SmallElixir;
 import items.SmallHealthPotion;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
 
@@ -21,8 +23,12 @@ import items.SmallHealthPotion;
 public class GameManager {
     
     /* Main function, hub for all the moving pieces */
+    
+    ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");       /* Will try to convert as much as possbile to Spring and do IOC + dependency injections */
 
-    PlayerInfo playerInfo = new PlayerInfo();
+    //PlayerInfo playerInfo = new PlayerInfo();
+    
+    PlayerInfo playerInfo = context.getBean("playerInfo", PlayerInfo.class);
     
     Monster monster = new Goblin();
     
@@ -41,7 +47,7 @@ public class GameManager {
     DataSaveLoad dsl = new DataSaveLoad(this);
     SceneChanger sceneChanger = new SceneChanger(this);
     
-    SoundEffect music = new SoundEffect();
+    SoundEffect music = context.getBean("music",SoundEffect.class);
     
     
     public static void main(String[] args) {
@@ -66,6 +72,7 @@ public class GameManager {
         music.setFile(System.getProperty("user.dir") + "/src/res/sound/medieval_loop_one.wav");
         
         /* https://wingless-seraph.net/en/material-music_battle.html for music */
+
                
     }
     

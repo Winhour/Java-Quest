@@ -17,7 +17,27 @@ import weapons.Weapon;
  */
 public class PlayerInfo {
     
-    public int health = 100;
+    public int health;
+    public int mana;
+    public Weapon weapon;
+    public Weapon armor;
+    public int level;
+    public int maxhealth;
+    public int exp;
+    public int nextlevelexp;
+    public int cash;
+    
+    public int ATK;
+    public int DEF;
+    public int MAG;
+    public int SPD;
+    
+    public int modifiedATK;
+    public int modfifiedDEF;
+
+    public int maxmana;
+  
+    /*public int health = 100;
     public int mana = 20;
     public Weapon weapon = new Broadsword();
     public Weapon armor = new Leather_Armor();
@@ -35,7 +55,7 @@ public class PlayerInfo {
     public int modifiedATK = ATK + weapon.getModifier();
     public int modfifiedDEF = DEF + armor.getModifier();
 
-    public int maxmana = 20 + MAG*5;
+    public int maxmana = 20 + MAG*5;*/
     
     public GameItem[] itemlist = new GameItem[9];
     

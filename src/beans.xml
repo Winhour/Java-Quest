@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <bean id="se" class="Main.SoundEffect"/>
+    <bean id="music" class="Main.SoundEffect"/>
+    
+    <bean id = "broadsword" class="weapons.Broadsword"></bean>
+    <bean id = "larmor" class="weapons.Leather_Armor"></bean>
+    
+    <bean id="playerInfo" class="Main.PlayerInfo">
+        
+        <property name="health" value = "100"/>
+        <property name="mana" value = "20"/>
+        <property name="weapon" ref="broadsword"/>
+        <property name="armor" ref="larmor"/>
+        <property name="level" value = "1"/>
+        <property name="maxhealth" value = "100"/>
+        <property name="exp" value = "0"/>
+        <property name="nextlevelexp" value = "150"/>
+        <property name="cash" value = "90"/>
+        <property name="ATK" value = "5"/>
+        <property name="DEF" value = "1"/>
+        <property name="MAG" value = "0"/>
+        <property name="SPD" value = "5"/>
+        <property name="modifiedATK" value = "8"/>
+        <property name="modfifiedDEF" value = "3"/>
+        <property name="maxmana" value = "20"/>
+
+    </bean>
+    
+    
+    
+</beans>
