@@ -9,7 +9,14 @@
     <bean id="music" class="Main.SoundEffect"/>
     
     <bean id = "broadsword" class="weapons.Broadsword"></bean>
+    <bean id = "waraxe" class="weapons.War_Axe"></bean>
+    <bean id = "katana" class="weapons.Katana"></bean>
+    <bean id = "demonsbane" class="weapons.Demonsbane"></bean>
+    
     <bean id = "larmor" class="weapons.Leather_Armor"></bean>
+    <bean id = "sarmor" class="weapons.Soldier_Armor"></bean>
+    <bean id = "karmor" class="weapons.Knight_Armor"></bean>
+    <bean id = "sparmor" class="weapons.Saiyan_Armor"></bean>
     
     <bean id="playerInfo" class="Main.PlayerInfo">
         
@@ -31,6 +38,78 @@
         <property name="maxmana" value = "20"/>
 
     </bean>
+    
+    <bean id="goblin" class="Main.monsters.Goblin">
+        
+        <property name="health" value = "50"/>
+        <property name="exp" value = "100"/>
+        <property name="name" value = "Goblin"/>
+        <property name="gold" value = "10"/>
+        <property name="ATK" value = "7"/>
+        <property name="DEF" value = "0"/>
+        <property name="SPD" value = "3"/>
+
+    </bean>
+    
+    <bean id="skeletons" class="Main.monsters.Skeletons">
+        
+        <property name="health" value = "210"/>
+        <property name="exp" value = "200"/>
+        <property name="name" value = "Skeletons"/>
+        <property name="gold" value = "30"/>
+        <property name="ATK" value = "12"/>
+        <property name="DEF" value = "1"/>
+        <property name="SPD" value = "2"/>
+
+    </bean>
+    
+    <bean id="bear" class="Main.monsters.Bear">
+        
+        <property name="health" value = "160"/>
+        <property name="exp" value = "300"/>
+        <property name="name" value = "Bear"/>
+        <property name="gold" value = "0"/>
+        <property name="ATK" value = "12"/>
+        <property name="DEF" value = "4"/>
+        <property name="SPD" value = "4"/>
+
+    </bean>
+    
+    <bean id="zombie" class="Main.monsters.Zombie">
+        
+        <property name="health" value = "220"/>
+        <property name="exp" value = "120"/>
+        <property name="name" value = "Zombie"/>
+        <property name="gold" value = "30"/>
+        <property name="ATK" value = "8"/>
+        <property name="DEF" value = "2"/>
+        <property name="SPD" value = "1"/>
+
+    </bean>
+    
+    <bean id="dlord" class="Main.monsters.LichLord">
+        
+        <property name="health" value = "666"/>
+        <property name="exp" value = "200"/>
+        <property name="name" value = "Demon Lord"/>
+        <property name="gold" value = "150"/>
+        <property name="ATK" value = "10"/>
+        <property name="DEF" value = "1"/>
+        <property name="SPD" value = "3"/>
+
+    </bean>
+    
+    
+    
+    <bean id = "spotion" class="items.SmallHealthPotion"></bean>
+    <bean id = "mpotion" class="items.MediumHealthPotion"></bean>
+    <bean id = "lpotion" class="items.LargeHealthPotion"></bean>
+    
+    <bean id = "selixir" class="items.SmallElixir"></bean>
+    <bean id = "melixir" class="items.MediumElixir"></bean>
+    <bean id = "lelixir" class="items.LargeElixir"></bean>
+    
+    
     
     
     

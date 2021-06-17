@@ -30,12 +30,12 @@ public class GameManager {
     
     PlayerInfo playerInfo = context.getBean("playerInfo", PlayerInfo.class);
     
-    Monster monster = new Goblin();
+    Monster monster = context.getBean("goblin", Goblin.class);
     
-    GameItem potion = new SmallHealthPotion();
-    GameItem potion2 = new SmallHealthPotion();
-    GameItem potion3 = new MediumHealthPotion();
-    GameItem elixir = new SmallElixir();
+    GameItem potion = context.getBean("spotion", SmallHealthPotion.class);
+    GameItem potion2 = context.getBean("spotion", SmallHealthPotion.class);
+    GameItem potion3 = context.getBean("mpotion", MediumHealthPotion.class);
+    GameItem elixir = context.getBean("selixir", SmallElixir.class);
     
     GameItem[] itemlist= new GameItem[9];
     

@@ -2138,7 +2138,7 @@ public class UI {
         @Override
         public void actionPerformed(ActionEvent e) {
             
-            gm.playerInfo = new PlayerInfo();
+            gm.playerInfo = gm.context.getBean("playerInfo", PlayerInfo.class);
             gm.itemlist = new GameItem[9];
             gm.itemlist[0] = gm.potion;
             gm.itemlist[1] = gm.potion2;

@@ -12,15 +12,24 @@ import Main.monsters.Monster;
  * @author Marcin
  */
 public class Goblin extends Monster{
+    
+    int health;
+    int exp;
+    String name;
+    int gold;
+    
+    int ATK;
+    int DEF;
+    int SPD;
 
-    int health = 50;
+    /*int health = 50;
     int exp = 100;
     String name = "Goblin";
     int gold = 10;
     
     int ATK = 7;
     int DEF = 0;
-    int SPD = 3;
+    int SPD = 3;*/
 
     public Goblin() {
     }

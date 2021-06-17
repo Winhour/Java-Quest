@@ -282,7 +282,7 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.sceneChanger.showScreen10();
                 if(gm.ui.bearFlag){
                     gm.ui.combatFlag = true;
-                    gm.monster = new Bear();
+                    gm.monster = gm.context.getBean("bear", Bear.class);
                     gm.music.stop();
                     gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/Fight.wav");
                     gm.music.play_low();
@@ -352,7 +352,7 @@ public class DialogChoiceHandler implements ActionListener{
                     gm.ui.bgPanel[3].getComponent(1).setVisible(false);
                     gm.ui.bgPanel[3].getComponent(2).setVisible(false);
                     gm.ui.combatFlag = true;
-                    gm.monster = new Goblin();
+                    gm.monster = gm.context.getBean("goblin", Goblin.class);
                     gm.music.stop();
                     gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/Fight.wav");
                     gm.music.play_low();
@@ -377,7 +377,7 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.sceneChanger.showScreen2();
                 if(gm.ui.skeleFlag){
                     gm.ui.combatFlag = true;
-                    gm.monster = new Skeletons();
+                    gm.monster = gm.context.getBean("skeletons", Skeletons.class);
                     gm.music.stop();
                     gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/Fight.wav");
                     gm.music.play_low();
@@ -406,7 +406,7 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 if(gm.ui.zombieFlag){
                     gm.ui.combatFlag = true;
-                    gm.monster = new Zombie();
+                    gm.monster = gm.context.getBean("zombie", Zombie.class);
                     gm.music.stop();
                     gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/Fight.wav");
                     gm.music.play_low();
@@ -457,7 +457,7 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 if(gm.ui.demonFlag){
                     gm.ui.combatFlag = true;
-                    gm.monster = new LichLord();
+                    gm.monster = gm.context.getBean("dlord", LichLord.class);
                     gm.music.stop();
                     gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/Boss.wav");
                     gm.music.play_low();

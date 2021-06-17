@@ -51,7 +51,7 @@ public class WeaponChoiceHandler implements ActionListener {
                 
                 gm.ui.messageText.setText("Equipped <BROADSWORD>!");
                 gm.ui.messageText.setForeground(Color.LIGHT_GRAY);
-                gm.playerInfo.setWeapon(new Broadsword());
+                gm.playerInfo.setWeapon(gm.context.getBean("broadsword",Broadsword.class));
                 gm.playerInfo.setModifiedATK(gm.playerInfo.getATK()+gm.playerInfo.getWeapon().getModifier());
                 
                 gm.ui.addPlayerInfo();
@@ -80,7 +80,7 @@ public class WeaponChoiceHandler implements ActionListener {
                 
                 gm.ui.messageText.setText("Equipped <LEATHER ARMOR>!");
                 gm.ui.messageText.setForeground(Color.LIGHT_GRAY);
-                gm.playerInfo.setArmor(new Leather_Armor());
+                gm.playerInfo.setArmor(gm.context.getBean("larmor",Leather_Armor.class));
                 gm.playerInfo.setModfifiedDEF(gm.playerInfo.getDEF()+gm.playerInfo.getArmor().getModifier());
                 
                 gm.ui.addPlayerInfo();
@@ -99,7 +99,7 @@ public class WeaponChoiceHandler implements ActionListener {
                 
                 gm.ui.messageText.setText("Equipped <WAR AXE>!");
                 gm.ui.messageText.setForeground(Color.LIGHT_GRAY);
-                gm.playerInfo.setWeapon(new War_Axe());
+                gm.playerInfo.setWeapon(gm.context.getBean("waraxe",War_Axe.class));
                 gm.playerInfo.setModifiedATK(gm.playerInfo.getATK()+gm.playerInfo.getWeapon().getModifier());
                 
                 gm.ui.addPlayerInfo();
@@ -118,7 +118,7 @@ public class WeaponChoiceHandler implements ActionListener {
                 
                 gm.ui.messageText.setText("Equipped <SOLDIER ARMOR>!");
                 gm.ui.messageText.setForeground(Color.LIGHT_GRAY);
-                gm.playerInfo.setArmor(new Soldier_Armor());
+                gm.playerInfo.setArmor(gm.context.getBean("sarmor",Soldier_Armor.class));
                 gm.playerInfo.setModfifiedDEF(gm.playerInfo.getDEF()+gm.playerInfo.getArmor().getModifier());
                 
                 gm.ui.addPlayerInfo();
@@ -137,7 +137,7 @@ public class WeaponChoiceHandler implements ActionListener {
                 
                 gm.ui.messageText.setText("Equipped <KATANA>!");
                 gm.ui.messageText.setForeground(Color.LIGHT_GRAY);
-                gm.playerInfo.setWeapon(new Katana());
+                gm.playerInfo.setWeapon(gm.context.getBean("katana",Katana.class));
                 gm.playerInfo.setModifiedATK(gm.playerInfo.getATK()+gm.playerInfo.getWeapon().getModifier());
                 
                 gm.ui.addPlayerInfo();
@@ -156,7 +156,7 @@ public class WeaponChoiceHandler implements ActionListener {
                 
                 gm.ui.messageText.setText("Equipped <DEMONSBANE>!");
                 gm.ui.messageText.setForeground(Color.LIGHT_GRAY);
-                gm.playerInfo.setWeapon(new Demonsbane());
+                gm.playerInfo.setWeapon(gm.context.getBean("demonsbane",Demonsbane.class));
                 gm.playerInfo.setModifiedATK(gm.playerInfo.getATK()+gm.playerInfo.getWeapon().getModifier());
                 
                 gm.ui.addPlayerInfo();
@@ -175,7 +175,7 @@ public class WeaponChoiceHandler implements ActionListener {
                 
                 gm.ui.messageText.setText("Equipped <KNIGHT ARMOR>!");
                 gm.ui.messageText.setForeground(Color.LIGHT_GRAY);
-                gm.playerInfo.setArmor(new Knight_Armor());
+                gm.playerInfo.setArmor(gm.context.getBean("karmor",Knight_Armor.class));
                 gm.playerInfo.setModfifiedDEF(gm.playerInfo.getDEF()+gm.playerInfo.getArmor().getModifier());
                 
                 gm.ui.addPlayerInfo();
@@ -194,7 +194,7 @@ public class WeaponChoiceHandler implements ActionListener {
                 
                 gm.ui.messageText.setText("Equipped <SPECIAL ARMOR>!");
                 gm.ui.messageText.setForeground(Color.LIGHT_GRAY);
-                gm.playerInfo.setArmor(new Saiyan_Armor());
+                gm.playerInfo.setArmor(gm.context.getBean("sparmor",Saiyan_Armor.class));
                 gm.playerInfo.setModfifiedDEF(gm.playerInfo.getDEF()+gm.playerInfo.getArmor().getModifier());
                 
                 gm.ui.addPlayerInfo();

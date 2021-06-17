@@ -11,14 +11,23 @@ package Main.monsters;
  */
 public class Bear extends Monster {
     
-    int health = 160;
+    int health;
+    int exp;
+    String name;
+    int gold;
+    
+    int ATK;
+    int DEF;
+    int SPD;
+    
+    /*int health = 160;
     int exp = 300;
     String name = "Bear";
     int gold = 0;
     
     int ATK = 12;
     int DEF = 4;
-    int SPD = 4;
+    int SPD = 4;*/
 
     public Bear() {
     }
@@ -83,10 +92,12 @@ public class Bear extends Monster {
         this.name = name;
     }
 
+    @Override
     public int getGold() {
         return gold;
     }
 
+    @Override
     public void setGold(int gold) {
         this.gold = gold;
     }

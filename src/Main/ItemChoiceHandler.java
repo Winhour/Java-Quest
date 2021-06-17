@@ -234,6 +234,9 @@ public class ItemChoiceHandler implements ActionListener{
                     gm.ui.messageText.setText("Your mana is full!");
                 }
                 else {
+                    
+                    se.setFile(System.getProperty("user.dir") + "/src/res/sound/heal_sound_s.wav");
+                    se.play();
                 
                     gm.playerInfo.setMana(gm.playerInfo.getMana()+10);
 
@@ -264,6 +267,9 @@ public class ItemChoiceHandler implements ActionListener{
                     gm.ui.messageText.setText("Your mana is full!");
                 }
                 else {
+                    
+                    se.setFile(System.getProperty("user.dir") + "/src/res/sound/heal_sound_s.wav");
+                    se.play();
                 
                     gm.playerInfo.setMana(gm.playerInfo.getMana()+10);
 
@@ -292,6 +298,9 @@ public class ItemChoiceHandler implements ActionListener{
                     gm.ui.messageText.setText("Your mana is full!");
                 }
                 else {
+                    
+                    se.setFile(System.getProperty("user.dir") + "/src/res/sound/heal_sound_s.wav");
+                    se.play();
                 
                     gm.playerInfo.setMana(gm.playerInfo.getMana()+20);
 
@@ -322,6 +331,9 @@ public class ItemChoiceHandler implements ActionListener{
                     gm.ui.messageText.setText("Your mana is full!");
                 }
                 else {
+                    
+                    se.setFile(System.getProperty("user.dir") + "/src/res/sound/heal_sound_s.wav");
+                    se.play();
                 
                     gm.playerInfo.setMana(gm.playerInfo.getMana()+20);
 
@@ -350,6 +362,9 @@ public class ItemChoiceHandler implements ActionListener{
                     gm.ui.messageText.setText("Your mana is full!");
                 }
                 else {
+                    
+                    se.setFile(System.getProperty("user.dir") + "/src/res/sound/heal_sound_s.wav");
+                    se.play();
                 
                     gm.playerInfo.setMana(gm.playerInfo.getMaxmana());
 
@@ -380,6 +395,9 @@ public class ItemChoiceHandler implements ActionListener{
                     gm.ui.messageText.setText("Your mana is full!");
                 }
                 else {
+                    
+                    se.setFile(System.getProperty("user.dir") + "/src/res/sound/heal_sound_s.wav");
+                    se.play();
                 
                     gm.playerInfo.setMana(gm.playerInfo.getMaxmana());
 
