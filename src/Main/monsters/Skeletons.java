@@ -11,14 +11,14 @@ package Main.monsters;
  */
 public class Skeletons extends Monster {
     
-    int health;
+    /*int health;
     int exp;
     String name;
     int gold;
     
     int ATK;
     int DEF;
-    int SPD;
+    int SPD;*/
     
     /*int health = 330;
     int exp = 200;

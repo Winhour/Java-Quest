@@ -5,10 +5,14 @@
  */
 package weapons;
 
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author Marcin
  */
+
+@Component("broadsword")
 public class Broadsword extends Weapon {
     
     String name = "Broadsword";

@@ -5,10 +5,14 @@
  */
 package weapons;
 
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author Marcin
  */
+
+@Component("larmor")
 public class Leather_Armor extends Weapon{
     
     String name = "Leather Armor";

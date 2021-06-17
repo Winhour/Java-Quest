@@ -11,14 +11,14 @@ package Main.monsters;
  */
 public class Zombie extends Monster {
     
-    int health;
+    /*int health;
     int exp;
     String name;
     int gold;
     
     int ATK;
     int DEF;
-    int SPD;
+    int SPD;*/
     
     /*int health = 220;
     int exp = 120;

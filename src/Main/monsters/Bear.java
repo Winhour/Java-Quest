@@ -11,14 +11,14 @@ package Main.monsters;
  */
 public class Bear extends Monster {
     
-    int health;
+    /*int health;
     int exp;
     String name;
     int gold;
     
     int ATK;
     int DEF;
-    int SPD;
+    int SPD;*/
     
     /*int health = 160;
     int exp = 300;

@@ -13,14 +13,14 @@ import Main.monsters.Monster;
  */
 public class Goblin extends Monster{
     
-    int health;
+    /*int health;
     int exp;
     String name;
     int gold;
     
     int ATK;
     int DEF;
-    int SPD;
+    int SPD;*/
 
     /*int health = 50;
     int exp = 100;

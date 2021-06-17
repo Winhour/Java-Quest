@@ -6,8 +6,9 @@
 package Main;
 
 import items.GameItem;
-import weapons.Broadsword;
-import weapons.Leather_Armor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import weapons.Weapon;
 
 
@@ -17,25 +18,36 @@ import weapons.Weapon;
  */
 public class PlayerInfo {
     
-    public int health;
-    public int mana;
-    public Weapon weapon;
-    public Weapon armor;
-    public int level;
-    public int maxhealth;
-    public int exp;
-    public int nextlevelexp;
-    public int cash;
-    
-    public int ATK;
-    public int DEF;
-    public int MAG;
-    public int SPD;
-    
-    public int modifiedATK;
-    public int modfifiedDEF;
 
-    public int maxmana;
+    @Value("${playerInfo.health}")
+    private int health;
+    
+    @Value("${playerInfo.mana}")
+    private int mana;
+    
+    @Autowired
+    @Qualifier("broadsword")
+    private Weapon weapon;
+    
+    @Autowired
+    @Qualifier("larmor")
+    private Weapon armor;
+    
+    private int level;
+    private int maxhealth;
+    private int exp;
+    private int nextlevelexp;
+    private int cash;
+    
+    private int ATK;
+    private int DEF;
+    private int MAG;
+    private int SPD;
+    
+    private int modifiedATK;
+    private int modfifiedDEF;
+
+    private int maxmana;
   
     /*public int health = 100;
     public int mana = 20;

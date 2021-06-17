@@ -1117,7 +1117,7 @@ public class DialogChoiceHandler implements ActionListener{
 
                     for (int i=0;i<9;i++){
                             if (gm.itemlist[i] == null){
-                                gm.itemlist[i] = new SmallHealthPotion();
+                                gm.itemlist[i] = gm.context.getBean("spotion",SmallHealthPotion.class);
                                 break;
                             }
                         }
@@ -1160,7 +1160,7 @@ public class DialogChoiceHandler implements ActionListener{
 
                     for (int i=0;i<9;i++){
                             if (gm.itemlist[i] == null){
-                                gm.itemlist[i] = new MediumHealthPotion();
+                                gm.itemlist[i] = gm.context.getBean("mpotion",MediumHealthPotion.class);
                                 break;
                             }
                         }
@@ -1202,7 +1202,7 @@ public class DialogChoiceHandler implements ActionListener{
 
                     for (int i=0;i<9;i++){
                             if (gm.itemlist[i] == null){
-                                gm.itemlist[i] = new LargeHealthPotion();
+                                gm.itemlist[i] = gm.context.getBean("lpotion",LargeHealthPotion.class);
                                 break;
                             }
                         }
@@ -1243,7 +1243,7 @@ public class DialogChoiceHandler implements ActionListener{
 
                     for (int i=0;i<9;i++){
                             if (gm.itemlist[i] == null){
-                                gm.itemlist[i] = new SmallElixir();
+                                gm.itemlist[i] = gm.context.getBean("selixir",SmallElixir.class);
                                 break;
                             }
                         }
@@ -1285,7 +1285,7 @@ public class DialogChoiceHandler implements ActionListener{
 
                     for (int i=0;i<9;i++){
                             if (gm.itemlist[i] == null){
-                                gm.itemlist[i] = new MediumElixir();
+                                gm.itemlist[i] = gm.context.getBean("melixir",MediumElixir.class);
                                 break;
                             }
                         }
@@ -1327,7 +1327,7 @@ public class DialogChoiceHandler implements ActionListener{
 
                     for (int i=0;i<9;i++){
                             if (gm.itemlist[i] == null){
-                                gm.itemlist[i] = new LargeElixir();
+                                gm.itemlist[i] = gm.context.getBean("lelixir",LargeElixir.class);
                                 break;
                             }
                         }
@@ -2300,7 +2300,7 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 for (int i=0;i<9;i++){
                         if (gm.itemlist[i] == null){
-                            gm.itemlist[i] = new LargeHealthPotion();
+                            gm.itemlist[i] = gm.context.getBean("lpotion",LargeHealthPotion.class);;
                             gm.ui.bgPanel[12].remove(0);
                             break;
                         }
