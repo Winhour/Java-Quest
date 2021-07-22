@@ -33,10 +33,19 @@ public class PlayerInfo {
     @Qualifier("larmor")
     private Weapon armor;
     
+    @Value("${playerInfo.level}")
     private int level;
+    
+    @Value("${playerInfo.maxhealth}")
     private int maxhealth;
+    
+    @Value("${playerInfo.exp}")
     private int exp;
+    
+    @Value("${playerInfo.nextlevelexp}")
     private int nextlevelexp;
+    
+    @Value("${playerInfo.cash}")
     private int cash;
     
     private int ATK;

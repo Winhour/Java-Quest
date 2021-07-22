@@ -25,11 +25,6 @@
     
     <bean id="playerInfo" class="Main.PlayerInfo">
         
-        <property name="level" value = "${playerInfo.level}"/>
-        <property name="maxhealth" value = "${playerInfo.maxhealth}"/>
-        <property name="exp" value = "${playerInfo.exp}"/>
-        <property name="nextlevelexp" value = "${playerInfo.nextlevelexp}"/>
-        <property name="cash" value = "${playerInfo.cash}"/>
         <property name="ATK" value = "${playerInfo.ATK}"/>
         <property name="DEF" value = "${playerInfo.DEF}"/>
         <property name="MAG" value = "${playerInfo.MAG}"/>
