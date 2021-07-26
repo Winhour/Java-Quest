@@ -989,6 +989,7 @@ public class UI {
         
         
         /* The way these labels get added to the Jpanel makes no sense to me, so this part of the code is a huge mess currently */
+        /* Will fix it at some point to just have one method for all of these and just use it in a loop */
         
         j1x1 = new JLabel();
         //j1x1.setBounds(0,0,100,100);

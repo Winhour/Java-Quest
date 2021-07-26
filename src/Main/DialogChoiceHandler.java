@@ -2230,6 +2230,8 @@ public class DialogChoiceHandler implements ActionListener{
 
                 break;    
                 
+            /* Ore in Dungeon Mine */    
+                
             case "examine_ore":
                 gm.ui.messageText.setText("A majestic ore glinting with the shine of moonlight");
                 gm.ui.messageText.setForeground(Color.white);
@@ -2285,6 +2287,7 @@ public class DialogChoiceHandler implements ActionListener{
                      
                     break;    
                     
+            /* Secret large potion hidden in Dungeon Sideroom */
                     
             case "examine_secsid":
                 
@@ -2311,6 +2314,8 @@ public class DialogChoiceHandler implements ActionListener{
                     }
 
                 break;
+                
+            /* Examine things on Town Screen */    
                 
             case "examine_smiths":   
                 
@@ -2362,6 +2367,8 @@ public class DialogChoiceHandler implements ActionListener{
 
                 break;   
                 
+            /* Examine things in Goblin Room */    
+                
             case "examine_gsword":
                 
                 gm.ui.messageText.setText("I would consider taking it, but I already have a sword of better quality.");
@@ -2381,7 +2388,9 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setText("Empty...");
                 gm.ui.messageText.setForeground(Color.yellow);
                 
-                break;    
+                break; 
+                
+            /* Interaction in the Armory Room */    
                 
             case "examine_key":
                 
@@ -2448,6 +2457,8 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setForeground(Color.yellow); 
                 
                 break;
+                
+            /* Interaction in the Treasure Room */    
                   
             case "examine_gold":    
                 
@@ -2588,6 +2599,8 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 break;
                 
+            /* D Knight interaction, potential secret boss later? */    
+                
             case "look_dknight":
                 
                 gm.ui.messageText.setText("\"This guy seems like trouble...\"");
@@ -2609,6 +2622,10 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setForeground(Color.white);
                 
                 break;
+                
+            case "examine_dragon":
+                
+                break;    
             
                 
             case "nothing":
@@ -2625,6 +2642,9 @@ public class DialogChoiceHandler implements ActionListener{
                 se.play();
                 
                 break;   
+                
+           
+                
             
         }
         
