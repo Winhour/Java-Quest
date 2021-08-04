@@ -38,6 +38,7 @@
     <bean id="goblin" class="Main.monsters.Goblin">
         
         <property name="health" value = "50"/>
+        <property name="maxhealth" value = "50"/>
         <property name="exp" value = "100"/>
         <property name="name" value = "Goblin"/>
         <property name="gold" value = "10"/>
@@ -50,6 +51,7 @@
     <bean id="skeletons" class="Main.monsters.Skeletons">
         
         <property name="health" value = "210"/>
+        <property name="maxhealth" value = "210"/>
         <property name="exp" value = "200"/>
         <property name="name" value = "Skeletons"/>
         <property name="gold" value = "30"/>
@@ -62,6 +64,7 @@
     <bean id="bear" class="Main.monsters.Bear">
         
         <property name="health" value = "160"/>
+        <property name="maxhealth" value = "160"/>
         <property name="exp" value = "300"/>
         <property name="name" value = "Bear"/>
         <property name="gold" value = "0"/>
@@ -74,6 +77,7 @@
     <bean id="zombie" class="Main.monsters.Zombie">
         
         <property name="health" value = "220"/>
+        <property name="maxhealth" value = "220"/>
         <property name="exp" value = "120"/>
         <property name="name" value = "Zombie"/>
         <property name="gold" value = "30"/>
@@ -86,6 +90,7 @@
     <bean id="dlord" class="Main.monsters.LichLord">
         
         <property name="health" value = "666"/>
+        <property name="maxhealth" value = "666"/>
         <property name="exp" value = "200"/>
         <property name="name" value = "Demon Lord"/>
         <property name="gold" value = "150"/>

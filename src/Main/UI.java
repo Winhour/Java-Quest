@@ -9,6 +9,7 @@ import items.GameItem;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -119,6 +120,8 @@ public class UI {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setBackground(Color.BLACK);
         window.setLayout(null);
+        window.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/res/sword_shield_icon.jpg")));
+
         
         titleNamePanel = new JPanel();
         titleNamePanel.setBounds(128,128,768,192);
@@ -296,8 +299,8 @@ public class UI {
         
         createBackground(4, "/res/town.jpg");
         bgPanel[4].add(bgLabel[4]);
-        createObjectInteractable(4,30,180,100,100,"/res/blank.png", "Examine", "", "", "examine_thall", "", "");
-        createObjectInteractable(4,330,280,100,100,"/res/blank.png", "Examine", "", "", "examine_smiths", "", "");
+        createObjectInteractable(4,30,180,100,100,"/res/blank.png", "Examine", "Interact", "", "examine_thall", "move_twnhall", "");
+        createObjectInteractable(4,330,280,100,100,"/res/blank.png", "Examine", "Interact", "", "examine_smiths", "move_smith", "");
         createObjectInteractable(4,675,390,50,50,"/res/blank.png", "Examine", "Interact", "", "examine_barrels", "interact_barrels", "");
         
         
@@ -374,6 +377,7 @@ public class UI {
         
         createBackground(16, "/res/armory.jpg");
         createObjectInteractable(16, 500,210,100,200,"/res/blank.png","Grab","Examine","","grab_karmor","examine_karmor","");
+        createObjectInteractable(16, 50,210,200,120,"/res/blank.png","Examine","Interact","","examine_desk","interact_desk","");
         bgPanel[16].add(bgLabel[16]);
         
         
@@ -382,6 +386,8 @@ public class UI {
         createBackground(17, "/res/desk.jpg");
         createObjectInteractable(17, 660,210,100,65,"/res/key_object.png","Grab","Examine","","grab_key","examine_key","");
         createObjectInteractable(17, 320,210,200,100,"/res/blank.png","Examine","","","examine_book","","");
+        createObjectInteractable(17, 50,100,100,100,"/res/blank.png","Examine","","","examine_letter","","");
+        createObjectInteractable(17, 50,210,100,100,"/res/blank.png","Examine","","","examine_stack","","");
         bgPanel[17].add(bgLabel[17]);
         
         //SCENE 18  Hub
@@ -2133,6 +2139,37 @@ public class UI {
         public void actionPerformed(ActionEvent e) {
             
             gm.playerInfo = gm.context.getBean("playerInfo", PlayerInfo.class);
+            gm.playerInfo.setLevel(1);
+            gm.playerInfo.setMaxhealth(100);
+            gm.playerInfo.setMaxmana(20);
+            gm.playerInfo.setATK(5);
+            gm.playerInfo.setDEF(1);
+            gm.playerInfo.setMAG(0);
+            gm.playerInfo.setSPD(5);
+            gm.playerInfo.setExp(0);
+            gm.playerInfo.setNextlevelexp(150);
+            gm.playerInfo.setCash(90);
+            gm.playerInfo.setModifiedATK(8);
+            gm.playerInfo.setModfifiedDEF(3);
+            
+            gm.playerInfo.setHealth(gm.playerInfo.getMaxhealth());
+            gm.playerInfo.setMana(gm.playerInfo.getMaxmana());
+            
+            /*playerInfo.health = 100
+            playerInfo.mana = 20
+            playerInfo.level = 1
+            playerInfo.maxhealth = 100
+            playerInfo.exp = 0
+            playerInfo.nextlevelexp = 150
+            playerInfo.cash = 90
+            playerInfo.ATK = 5
+            playerInfo.DEF = 1
+            playerInfo.MAG = 0
+            playerInfo.SPD = 5
+            playerInfo.modifiedATK = 8
+            playerInfo.modfifiedDEF = 3
+            playerInfo.maxmana = 20*/
+
             gm.itemlist = new GameItem[9];
             gm.itemlist[0] = gm.potion;
             gm.itemlist[1] = gm.potion2;

@@ -283,6 +283,7 @@ public class DialogChoiceHandler implements ActionListener{
                 if(gm.ui.bearFlag){
                     gm.ui.combatFlag = true;
                     gm.monster = gm.context.getBean("bear", Bear.class);
+                    gm.monster.setHealth(gm.monster.getMaxhealth());
                     gm.music.stop();
                     gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/Fight.wav");
                     gm.music.play_low();
@@ -353,6 +354,7 @@ public class DialogChoiceHandler implements ActionListener{
                     gm.ui.bgPanel[3].getComponent(2).setVisible(false);
                     gm.ui.combatFlag = true;
                     gm.monster = gm.context.getBean("goblin", Goblin.class);
+                    gm.monster.setHealth(gm.monster.getMaxhealth());
                     gm.music.stop();
                     gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/Fight.wav");
                     gm.music.play_low();
@@ -378,6 +380,7 @@ public class DialogChoiceHandler implements ActionListener{
                 if(gm.ui.skeleFlag){
                     gm.ui.combatFlag = true;
                     gm.monster = gm.context.getBean("skeletons", Skeletons.class);
+                    gm.monster.setHealth(gm.monster.getMaxhealth());
                     gm.music.stop();
                     gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/Fight.wav");
                     gm.music.play_low();
@@ -407,6 +410,7 @@ public class DialogChoiceHandler implements ActionListener{
                 if(gm.ui.zombieFlag){
                     gm.ui.combatFlag = true;
                     gm.monster = gm.context.getBean("zombie", Zombie.class);
+                    gm.monster.setHealth(gm.monster.getMaxhealth());
                     gm.music.stop();
                     gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/Fight.wav");
                     gm.music.play_low();
@@ -458,6 +462,7 @@ public class DialogChoiceHandler implements ActionListener{
                 if(gm.ui.demonFlag){
                     gm.ui.combatFlag = true;
                     gm.monster = gm.context.getBean("dlord", LichLord.class);
+                    gm.monster.setHealth(gm.monster.getMaxhealth());
                     gm.music.stop();
                     gm.music.setFile(System.getProperty("user.dir") + "/src/res/sound/Boss.wav");
                     gm.music.play_low();
@@ -2331,7 +2336,7 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setForeground(Color.yellow);
                 
                 break;
-                
+                 
             case "examine_barrels":   
                 
                 if (gm.ui.barrelgoldFlag){
@@ -2394,7 +2399,7 @@ public class DialogChoiceHandler implements ActionListener{
                 
             case "examine_key":
                 
-                gm.ui.messageText.setText("A gold key lies on the table. Might be useful?");
+                gm.ui.messageText.setText("A golden key lies on the table. Might be useful?");
                 gm.ui.messageText.setForeground(Color.yellow);
                 
                 break;  
@@ -2457,6 +2462,22 @@ public class DialogChoiceHandler implements ActionListener{
                 gm.ui.messageText.setForeground(Color.yellow); 
                 
                 break;
+                
+            case "examine_stack":
+                
+                gm.ui.messageText.setText("These tomes seem to deal with alchemy and black magic.");
+                gm.ui.messageText.setForeground(Color.yellow); 
+                
+                break;
+                
+                
+            case "examine_letter":
+                
+                gm.ui.messageText.setText("Nothing too important in there.");
+                gm.ui.messageText.setForeground(Color.yellow); 
+                
+                break;
+                
                 
             /* Interaction in the Treasure Room */    
                   
@@ -2541,13 +2562,15 @@ public class DialogChoiceHandler implements ActionListener{
                 break;
                 
                 
+            /* Armory Interaction */       
+                
             case "examine_karmor":
                 
                 gm.ui.messageText.setText("A suit of armor worthy of the greatest knights.");
                 gm.ui.messageText.setForeground(Color.white); 
                 
                 break;
-                
+                            
             case "grab_karmor":
                 
                 JMenuItem menuItem11[] = new JMenuItem[2];
@@ -2599,6 +2622,24 @@ public class DialogChoiceHandler implements ActionListener{
                 
                 break;
                 
+            case "examine_desk":
+                
+                gm.ui.messageText.setText("I should check if there is anything of importance there.");
+                gm.ui.messageText.setForeground(Color.yellow);
+                
+                break;
+                
+            case "interact_desk":
+                
+                gm.sceneChanger.showScreen17();
+                gm.ui.messageText.setText("You notice various items scattered on the desk.");
+                gm.ui.messageText.setForeground(Color.white);
+                gm.ui.addInteractMenu();
+                
+                break;   
+                
+  
+                
             /* D Knight interaction, potential secret boss later? */    
                 
             case "look_dknight":
@@ -2617,16 +2658,137 @@ public class DialogChoiceHandler implements ActionListener{
                 
             case "talk_dknight":
                 
-                gm.ui.addTalkMenu("Option 1", "Option 2", "Option 3", "", "", "");
+                gm.ui.addTalkMenu("Dungeon", "Himself", "Anything Else?", "dknight_dungeon", "dknight_himself", "dknight_else");
                 gm.ui.messageText.setText("Ask about: ");
                 gm.ui.messageText.setForeground(Color.white);
                 
                 break;
                 
+             /* Asking D Knight about Dungeon */   
+                
+            case "dknight_dungeon":
+                
+                talk_first("\"Do you know anything about this place?\"", "dknight_dungeon2", Color.yellow);
+                
+                break;        
+                
+            case "dknight_dungeon2":     
+                
+                talk_next("\"This place is where your dreams can come true... he.. he..\"", "dknight_dungeon3", Color.blue);
+                
+                break;     
+                
+            case "dknight_dungeon3":     
+                
+                talk_next("\"Treasures... Fame... Power... Many look for these things... he.. he..\"", "dknight_dungeon4", Color.blue);
+                
+                break;     
+                
+            case "dknight_dungeon4":     
+                
+                talk_next("\"A lot of them can never stop seeking... Even in death... he.. he..\"", "dknight_dungeon5", Color.blue);
+                
+                break;     
+                
+            case "dknight_dungeon5":     
+                
+                talk_next("\"I'm close to finding what I'm looking for... he.. he..\"", "dknight_dungeon6", Color.blue);
+                
+                break;      
+                
+            case "dknight_dungeon6":
+                
+                talk_next("\"...\"", "nothing", Color.yellow);
+                
+                break;
+                
+            /* Asking D Knight about himself */    
+                
+            case "dknight_himself":
+                
+                talk_first("\"Who are you, headless, uh, friend?\"", "dknight_himself2", Color.yellow);
+                
+                break;
+                
+            case "dknight_himself2":     
+                
+                talk_next("\"I've been know by many names... he.. he..\"", "dknight_himself3", Color.blue);
+                
+                break;     
+               
+            case "dknight_himself3":     
+                
+                talk_next("\"None of them are important anymore... he.. he..\"", "dknight_himself4", Color.blue);
+                
+                break;        
+                
+            case "dknight_himself4":     
+                
+                talk_next("\"I'm trapped in this place forever now... he.. he..\"", "dknight_himself5", Color.blue);
+                
+                break;      
+                
+            case "dknight_himself5":     
+                
+                talk_next("\"But my former skill have not left me... he.. he..\"", "dknight_himself6", Color.blue);
+                
+                break;        
+                
+            case "dknight_himself6":     
+                
+                talk_next("\"Maybe you can support me in my quest then?\"", "dknight_himself7", Color.yellow);
+                
+                break;       
+                
+            case "dknight_himself7":     
+                
+                talk_next("\"I cannot leave this chapel... Until the time arrives..\"", "nothing", Color.blue);
+                
+                break;       
+
+                
+            /* Asking D Knight about other stuff */     
+                
+            case "dknight_else":
+                
+                talk_first("\"Do you know anything else that can help me out?\"", "dknight_else2", Color.yellow);
+                
+                break;
+                
+            case "dknight_else2":
+                
+                talk_next("\"When the Demon Lord falls... he.. he..\"", "dknight_else3", Color.blue);
+                
+                break;    
+                
+            case "dknight_else3":
+                
+                talk_next("\"Bring his dark orb to me... he.. he..\"", "dknight_else4", Color.blue);
+                
+                break;    
+                
+            case "dknight_else4":
+                
+                talk_next("\"Everything will return to where it should be... he.. he..\"", "dknight_else5", Color.blue);
+                
+                break;        
+                
+            case "dknight_else5":
+                
+                talk_next("\"Seems sketch, but I'll consider it.\"", "nothing", Color.yellow);
+                
+                break;      
+                
+                
+            /* Potential Dragon Interaction */    
+                
             case "examine_dragon":
                 
                 break;    
-            
+                
+                
+                
+            /* 'Nothing' case */
                 
             case "nothing":
                 

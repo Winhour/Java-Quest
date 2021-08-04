@@ -12,6 +12,7 @@ package Main.monsters;
 public class Monster {
     
     int health;
+    int maxhealth;
     int exp;
     String name;
     
@@ -27,6 +28,15 @@ public class Monster {
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public void setMaxhealth(int maxhealth) {
+        this.maxhealth = maxhealth;
+    }
+
+    
+    public int getMaxhealth() {
+        return maxhealth;
     }
 
     public int getExp() {
